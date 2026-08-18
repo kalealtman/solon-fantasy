@@ -1,0 +1,6 @@
+yahoo_fantasy_api
+yahoo_oauth
+pandas
+joblib
+python-dotenv
+tqdm

@@ -5,12 +5,10 @@ API-level pulls are cached individually (keyed on league key / week / team
 key, never on the live `gm`/`yfa.Game` session object) so an interrupted
 scrape can be re-run and will only re-fetch what it hasn't already pulled.
 """
-import csv
 import logging
 import warnings
 from functools import lru_cache
-from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 
 import objectpath
 import pandas as pd
@@ -23,44 +21,44 @@ logger = logging.getLogger(__name__)
 TRANSACTION_TYPES = "add,drop,commish,trade"
 
 
-def load_owner_map(path: Path) -> Dict[str, str]:
-    owner_map = {}
-    with open(path, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            owner_map[row["team_name"]] = row["owner"]
-    return owner_map
+def resolve_owner(
+    guid: Optional[str],
+    nickname: Optional[str],
+    team_name: str,
+    owners_map: Dict[str, str],
+    legacy_owner_map: Dict[str, str],
+) -> str:
+    """Resolve a team to a human owner name, preferring the stable manager
+    GUID over anything name-based (team names change every season; nicknames
+    can too; a GUID is the same person forever).
 
-
-def load_league_ids(path: Path) -> Set[str]:
-    with open(path, encoding="utf-8") as f:
-        return {line.strip() for line in f if line.strip()}
-
-
-def owner_from_name(name: str, manager_data: Optional[Dict[str, str]], owner_map: Dict[str, str]) -> str:
-    """Prefer Yahoo's manager nickname (stable across years); fall back to the
-    static team-name -> owner map for seasons where manager data is thin."""
-    if manager_data and manager_data.get("nickname"):
-        return manager_data["nickname"]
-    if name in owner_map:
-        return owner_map[name]
-    warnings.warn(f"No owner mapped for team_name: {name!r}")
-    return name
+    `owners_map` (guid -> display_name) is mutated in place: an unseen GUID
+    gets auto-added using whatever nickname Yahoo gave us, so it only needs a
+    manual fix (editing the display_name) if that nickname is bad -- and a
+    GUID already present is never overwritten by a later live nickname, so a
+    manual fix sticks across future runs.
+    """
+    if guid and guid in owners_map:
+        return owners_map[guid]
+    if nickname:
+        if guid:
+            owners_map[guid] = nickname
+        return nickname
+    if team_name in legacy_owner_map:
+        return legacy_owner_map[team_name]
+    warnings.warn(f"No owner resolvable for team_name: {team_name!r}")
+    return team_name
 
 
 @lru_cache(maxsize=None)
-def _to_league(gm: yfa.Game, lkey: str) -> yfa.League:
+def to_league(gm: yfa.Game, lkey: str) -> yfa.League:
     return gm.to_league(lkey)
-
-
-@CACHE.cache(ignore=["gm"])
-def league_ids_for_year(gm: yfa.Game, yr: int) -> List[str]:
-    return gm.league_ids(year=yr) or []
 
 
 @CACHE.cache(ignore=["gm"])
 def fetch_manager_data(gm: yfa.Game, lkey: str) -> Dict[str, Dict[str, str]]:
     """Manager GUID + nickname per team_key, for stable owner identity across years."""
-    lg = _to_league(gm, lkey)
+    lg = to_league(gm, lkey)
     manager_map = {}
     for team_key, team_data in lg.teams().items():
         managers = team_data.get("managers") or []
@@ -75,27 +73,27 @@ def fetch_manager_data(gm: yfa.Game, lkey: str) -> Dict[str, Dict[str, str]]:
 
 @CACHE.cache(ignore=["gm"])
 def fetch_standings(gm: yfa.Game, lkey: str) -> List[dict]:
-    return _to_league(gm, lkey).standings()
+    return to_league(gm, lkey).standings()
 
 
 @CACHE.cache(ignore=["gm"])
 def fetch_draft(gm: yfa.Game, lkey: str) -> List[dict]:
-    return _to_league(gm, lkey).draft_results()
+    return to_league(gm, lkey).draft_results()
 
 
 @CACHE.cache(ignore=["gm"])
 def fetch_transactions(gm: yfa.Game, lkey: str) -> List[dict]:
-    return _to_league(gm, lkey).transactions(TRANSACTION_TYPES, "")
+    return to_league(gm, lkey).transactions(TRANSACTION_TYPES, "")
 
 
 @CACHE.cache(ignore=["gm"])
 def fetch_matchups_raw(gm: yfa.Game, lkey: str, week: int) -> dict:
-    return _to_league(gm, lkey).matchups(week)
+    return to_league(gm, lkey).matchups(week)
 
 
 @CACHE.cache(ignore=["gm"])
 def fetch_roster(gm: yfa.Game, lkey: str, team_key: str, week: int) -> List[dict]:
-    return _to_league(gm, lkey).to_team(team_key).roster(week=week)
+    return to_league(gm, lkey).to_team(team_key).roster(week=week)
 
 
 def _parse_matchup_teams(raw_scoreboard: dict) -> List[List[dict]]:
@@ -135,9 +133,19 @@ def _parse_matchup_teams(raw_scoreboard: dict) -> List[List[dict]]:
     return matchups
 
 
-def scrape_league_season(gm: yfa.Game, lkey: str, season: int, owner_map: Dict[str, str]) -> Dict[str, pd.DataFrame]:
-    """Pull standings/draft/managers/matchups/transactions/rosters for a single league-season."""
-    lg = _to_league(gm, lkey)
+def scrape_league_season(
+    gm: yfa.Game,
+    lkey: str,
+    season: int,
+    owners_map: Dict[str, str],
+    legacy_owner_map: Dict[str, str],
+) -> Dict[str, pd.DataFrame]:
+    """Pull standings/draft/managers/matchups/transactions/rosters for a single league-season.
+
+    `owners_map` (guid -> display_name) is mutated in place as new managers
+    are discovered -- callers should persist it once after the full scrape.
+    """
+    lg = to_league(gm, lkey)
 
     manager_map = fetch_manager_data(gm, lkey)
 
@@ -149,7 +157,13 @@ def scrape_league_season(gm: yfa.Game, lkey: str, season: int, owner_map: Dict[s
 
     tn_col = "name" if "name" in standings_df.columns else "team_name"
     standings_df["owner"] = standings_df.apply(
-        lambda row: owner_from_name(row[tn_col], manager_map.get(row["team_key"]), owner_map),
+        lambda row: resolve_owner(
+            manager_map.get(row["team_key"], {}).get("guid"),
+            manager_map.get(row["team_key"], {}).get("nickname"),
+            row[tn_col],
+            owners_map,
+            legacy_owner_map,
+        ),
         axis=1,
     )
     standings_df["manager_guid"] = standings_df["team_key"].map(lambda k: manager_map.get(k, {}).get("guid", ""))

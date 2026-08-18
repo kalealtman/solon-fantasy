@@ -2,7 +2,14 @@
 """CLI entry point: scrape Solon league history from Yahoo and write clean CSVs.
 
 Usage:
-    python scripts/run_scrape.py [--start-year 2014] [--end-year 2026]
+    python scripts/run_scrape.py [--league-name Solon] [--start-year 2014] [--end-year 2026]
+
+League-seasons are discovered automatically by walking Yahoo's renew chain
+backward from the most recent season matching --league-name -- see
+src/solon_fantasy/league_discovery.py. No yearly config edits needed; a
+brand-new season is picked up the moment it exists on Yahoo. If the chain
+can't reach a season (e.g. the league's first-ever year), add it manually to
+config/league_id_overrides.txt.
 
 First run will open a browser for the interactive Yahoo OAuth flow (paste the
 verifier code it gives you back into the terminal). The resulting token is
@@ -13,7 +20,6 @@ import logging
 import sys
 import time
 from collections import defaultdict
-from datetime import date
 from pathlib import Path
 
 import pandas as pd
@@ -24,9 +30,9 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 import yahoo_fantasy_api as yfa  # noqa: E402
 
-from solon_fantasy import auth, scrape  # noqa: E402
+from solon_fantasy import auth, config_io, league_discovery, scrape  # noqa: E402
 
-START_YEAR_DEFAULT = 2014
+LEAGUE_NAME_DEFAULT = "Solon"
 CONFIG_DIR = REPO_ROOT / "config"
 DATA_DIR = REPO_ROOT / "data" / "processed"
 
@@ -35,9 +41,10 @@ logger = logging.getLogger(__name__)
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--start-year", type=int, default=START_YEAR_DEFAULT)
-    parser.add_argument("--end-year", type=int, default=date.today().year)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--league-name", default=LEAGUE_NAME_DEFAULT, help="Substring to match the league name on")
+    parser.add_argument("--start-year", type=int, default=None, help="Restrict to seasons >= this year")
+    parser.add_argument("--end-year", type=int, default=None, help="Restrict to seasons <= this year")
     parser.add_argument("--config-dir", type=Path, default=CONFIG_DIR)
     parser.add_argument("--output-dir", type=Path, default=DATA_DIR)
     return parser.parse_args()
@@ -46,36 +53,43 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
 
-    league_ids = scrape.load_league_ids(args.config_dir / "league_ids.txt")
-    owner_map = scrape.load_owner_map(args.config_dir / "owner_map.csv")
+    legacy_owner_map = config_io.load_owner_map(args.config_dir / "owner_map.csv")
+    owners_path = args.config_dir / "owners.csv"
+    owners_map = config_io.load_owners_map(owners_path)
+    overrides = config_io.load_league_overrides(args.config_dir / "league_id_overrides.txt")
 
     session = auth.get_session()
     gm = yfa.Game(session, "nfl")
 
-    all_dfs = defaultdict(list)
-    for yr in tqdm(range(args.start_year, args.end_year + 1), desc="Seasons"):
-        try:
-            year_keys = scrape.league_ids_for_year(gm, yr)
-        except Exception:
-            logger.warning("No league found for %s (league may not exist yet)", yr, exc_info=True)
-            continue
+    chain = league_discovery.discover_league_chain(gm, args.league_name)
+    chain.update(overrides)  # overrides fill gaps the renew chain can't reach
 
-        solon_keys = [k for k in year_keys if k.split(".")[-1] in league_ids]
-        for lkey in solon_keys:
-            # A full scrape can run well past the ~1hr token lifetime; refresh
-            # proactively at each league-season boundary rather than dying mid-run.
-            if not session.token_is_valid():
-                session.refresh_access_token()
-            logger.info("Scraping %s for %s", lkey, yr)
-            try:
-                data = scrape.scrape_league_season(gm, lkey, yr, owner_map)
-            except Exception:
-                logger.error("Failed to scrape %s for %s", lkey, yr, exc_info=True)
-                continue
-            for name, df in data.items():
-                if df is not None and not df.empty:
-                    all_dfs[name].append(df)
-            time.sleep(0.5)  # be polite to Yahoo's rate limits
+    seasons = sorted(chain)
+    if args.start_year is not None:
+        seasons = [s for s in seasons if s >= args.start_year]
+    if args.end_year is not None:
+        seasons = [s for s in seasons if s <= args.end_year]
+    logger.info("Discovered %d season(s): %s", len(seasons), seasons)
+
+    all_dfs = defaultdict(list)
+    for season in tqdm(seasons, desc="Seasons"):
+        lkey = chain[season]
+        # A full scrape can run well past the ~1hr token lifetime; refresh
+        # proactively at each league-season boundary rather than dying mid-run.
+        if not session.token_is_valid():
+            session.refresh_access_token()
+        logger.info("Scraping %s for %s", lkey, season)
+        try:
+            data = scrape.scrape_league_season(gm, lkey, season, owners_map, legacy_owner_map)
+        except Exception:
+            logger.error("Failed to scrape %s for %s", lkey, season, exc_info=True)
+            continue
+        for name, df in data.items():
+            if df is not None and not df.empty:
+                all_dfs[name].append(df)
+        time.sleep(0.5)  # be polite to Yahoo's rate limits
+
+    config_io.save_owners_map(owners_path, owners_map)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     for name, frames in all_dfs.items():

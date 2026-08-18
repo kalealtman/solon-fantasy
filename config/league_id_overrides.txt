@@ -1,0 +1,12 @@
+# Manual season -> league_key entries for seasons the renew-chain walk
+# (src/solon_fantasy/league_discovery.py) can't reach on its own -- i.e. a
+# season with no `renew` link back to it, most likely the league's first
+# ever year on Yahoo.
+#
+# Format: season=league_key   (league_key is "<game_id>.l.<league_id>")
+#
+# 2014 may need an entry here -- the league might have been created fresh
+# that year rather than renewed from an earlier one, in which case the
+# chain will stop at 2015 and 2014 needs to be added by hand once we know
+# its league_id. Example:
+# 2014=331.l.492644

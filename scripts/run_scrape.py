@@ -47,7 +47,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--end-year", type=int, default=None, help="Restrict to seasons <= this year")
     parser.add_argument("--config-dir", type=Path, default=CONFIG_DIR)
     parser.add_argument("--output-dir", type=Path, default=DATA_DIR)
-    return parser.parse_args()
+    args, unknown = parser.parse_known_args()
+    if unknown:
+        # Running under a Jupyter/IPython kernel injects its own args (e.g.
+        # --f=...kernel-...json) into sys.argv; ignore those rather than
+        # dying, but still surface anything that looks like a real typo.
+        logger.warning("Ignoring unrecognized arguments: %s", unknown)
+    return args
 
 
 def main() -> None:

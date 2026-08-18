@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Secrets / credentials
+.env
+oauth2.json
+
+# Cache
+.cache/
+
+# Data — raw pulls are regenerable and gitignored, processed CSVs are committed
+data/raw/
+
+# OS
+.DS_Store
+Thumbs.db

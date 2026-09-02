@@ -83,7 +83,14 @@ def cache_path(key: str) -> Path:
 
 
 def _looks_denied(html: str) -> bool:
-    return "Request denied" in html or len(html) < 500
+    # "Request denied" is Yahoo's bot-detection/rate-limit stub. The
+    # "Will be right back" sad-panda page is a separate, generic Yahoo
+    # server-error page (transient 5xx/overload) that doesn't match either
+    # of the other signals -- it's plausible-length, valid HTML with no
+    # error text obviously related to being blocked, but it's still not the
+    # real page and must not be treated (or cached) as a successful, truly-
+    # empty result.
+    return "Request denied" in html or "Will be right back" in html or len(html) < 500
 
 
 def fetch(page, url: str, cache_key: str) -> str:

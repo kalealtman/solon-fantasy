@@ -1,0 +1,1791 @@
+round,pick,overall_pick,player_name,player_id,team_name,season
+1,1,1,Eddie Lacy,26684.0,Lambeau Leapers,2015
+1,2,2,Marshawn Lynch,8266.0,manning bros,2015
+1,3,3,Adrian Peterson,8261.0,A Boy Named Suh,2015
+1,4,4,Jamaal Charles,8850.0,The Benchwarmers,2015
+1,5,5,Le'Veon Bell,26671.0,Joe Buck Yourself,2015
+1,6,6,Antonio Brown,24171.0,The Roethlisburger s,2015
+1,7,7,Matt Forte,8821.0,The Thunder Cats,2015
+1,8,8,Dez Bryant,23999.0,Hyde your wife,2015
+2,1,9,Rob Gronkowski,24017.0,Hyde your wife,2015
+2,2,10,Odell Beckham Jr.,27540.0,The Thunder Cats,2015
+2,3,11,Demaryius Thomas,23997.0,The Roethlisburger s,2015
+2,4,12,Calvin Johnson,8256.0,Joe Buck Yourself,2015
+2,5,13,Jeremy Hill,27583.0,The Benchwarmers,2015
+2,6,14,Jordy Nelson,8813.0,A Boy Named Suh,2015
+2,7,15,LeSean McCoy,9317.0,manning bros,2015
+2,8,16,Aaron Rodgers,7200.0,Lambeau Leapers,2015
+3,1,17,Randall Cobb,24851.0,Lambeau Leapers,2015
+3,2,18,A.J. Green,24791.0,manning bros,2015
+3,3,19,Andrew Luck,25711.0,A Boy Named Suh,2015
+3,4,20,Russell Wilson,25785.0,The Benchwarmers,2015
+3,5,21,DeMarco Murray,24858.0,Joe Buck Yourself,2015
+3,6,22,C.J. Anderson,26878.0,The Roethlisburger s,2015
+3,7,23,Julio Jones,24793.0,The Thunder Cats,2015
+3,8,24,Justin Forsett,9010.0,Hyde your wife,2015
+4,1,25,Alshon Jeffery,25755.0,Hyde your wife,2015
+4,2,26,Drew Brees,5479.0,The Thunder Cats,2015
+4,3,27,Mike Evans,27535.0,The Roethlisburger s,2015
+4,4,28,Matthew Stafford,9265.0,Joe Buck Yourself,2015
+4,5,29,T.Y. Hilton,25802.0,The Benchwarmers,2015
+4,6,30,Melvin Gordon III,28403.0,A Boy Named Suh,2015
+4,7,31,Jimmy Graham,24070.0,manning bros,2015
+4,8,32,Emmanuel Sanders,24057.0,Lambeau Leapers,2015
+5,1,33,Greg Olsen,8285.0,Lambeau Leapers,2015
+5,2,34,Peyton Manning,4256.0,manning bros,2015
+5,3,35,Andre Johnson,6339.0,A Boy Named Suh,2015
+5,4,36,Brandin Cooks,27548.0,The Benchwarmers,2015
+5,5,37,DeAndre Hopkins,26650.0,Joe Buck Yourself,2015
+5,6,38,Ben Roethlisberger,6770.0,The Roethlisburger s,2015
+5,7,39,Lamar Miller,25807.0,The Thunder Cats,2015
+5,8,40,Frank Gore,7241.0,Hyde your wife,2015
+6,1,41,Jordan Matthews,27570.0,Hyde your wife,2015
+6,2,42,Julian Edelman,9496.0,The Thunder Cats,2015
+6,3,43,DeSean Jackson,8826.0,The Roethlisburger s,2015
+6,4,44,Martellus Bennett,8838.0,Joe Buck Yourself,2015
+6,5,45,Brandon Marshall,7868.0,The Benchwarmers,2015
+6,6,46,Travis Kelce,26686.0,A Boy Named Suh,2015
+6,7,47,Sammy Watkins,27532.0,manning bros,2015
+6,8,48,Andre Ellington,26810.0,Lambeau Leapers,2015
+7,1,49,Golden Tate,24035.0,Lambeau Leapers,2015
+7,2,50,Amari Cooper,28392.0,manning bros,2015
+7,3,51,Martavis Bryant,27646.0,A Boy Named Suh,2015
+7,4,52,Tony Romo,6624.0,The Benchwarmers,2015
+7,5,53,Kelvin Benjamin,27556.0,Joe Buck Yourself,2015
+7,6,54,Jason Witten,6405.0,The Roethlisburger s,2015
+7,7,55,Teddy Bridgewater,27560.0,The Thunder Cats,2015
+7,8,56,Matt Ryan,8780.0,Hyde your wife,2015
+8,1,57,Seahawks,,Hyde your wife,2015
+8,2,58,Kyle Rudolph,24830.0,The Thunder Cats,2015
+8,3,59,Todd Gurley,28398.0,The Roethlisburger s,2015
+8,4,60,Mark Ingram II,24815.0,Joe Buck Yourself,2015
+8,5,61,Zach Ertz,26658.0,The Benchwarmers,2015
+8,6,62,Ameer Abdullah,28442.0,A Boy Named Suh,2015
+8,7,63,Joseph Randle,26774.0,manning bros,2015
+8,8,64,Keenan Allen,26699.0,Lambeau Leapers,2015
+9,1,65,Larry Fitzgerald,6762.0,Lambeau Leapers,2015
+9,2,66,Jeremy Maclin,9283.0,manning bros,2015
+9,3,67,Mike Wallace,9348.0,A Boy Named Suh,2015
+9,4,68,Latavius Murray,26804.0,The Benchwarmers,2015
+9,5,69,Julius Thomas,24916.0,Joe Buck Yourself,2015
+9,6,70,Philip Rivers,6763.0,The Roethlisburger s,2015
+9,7,71,Alfred Morris,25883.0,The Thunder Cats,2015
+9,8,72,Connor Barth,9219.0,Hyde your wife,2015
+10,1,73,Carlos Hyde,27585.0,Hyde your wife,2015
+10,2,74,Steve Smith,5521.0,The Thunder Cats,2015
+10,3,75,Roddy White,7203.0,The Roethlisburger s,2015
+10,4,76,Tom Brady,5228.0,Joe Buck Yourself,2015
+10,5,77,Allen Robinson,27589.0,The Benchwarmers,2015
+10,6,78,Cam Newton,24788.0,A Boy Named Suh,2015
+10,7,79,Eli Manning,6760.0,manning bros,2015
+10,8,80,Bills,,Lambeau Leapers,2015
+11,1,81,Jonathan Stewart,8790.0,Lambeau Leapers,2015
+11,2,82,Anquan Boldin,6390.0,manning bros,2015
+11,3,83,Rams,,A Boy Named Suh,2015
+11,4,84,Texans,,The Benchwarmers,2015
+11,5,85,Eagles,,Joe Buck Yourself,2015
+11,6,86,Cole Beasley,26060.0,The Roethlisburger s,2015
+11,7,87,Delanie Walker,7924.0,The Thunder Cats,2015
+11,8,88,Vincent Jackson,7237.0,Hyde your wife,2015
+12,1,89,Eric Decker,24062.0,Hyde your wife,2015
+12,2,90,Cardinals,,The Thunder Cats,2015
+12,3,91,LeGarrette Blount,24318.0,The Roethlisburger s,2015
+12,4,92,Victor Cruz,24553.0,Joe Buck Yourself,2015
+12,5,93,Stephen Gostkowski,7867.0,The Benchwarmers,2015
+12,6,94,Marques Colston,8001.0,A Boy Named Suh,2015
+12,7,95,Patriots,,manning bros,2015
+12,8,96,Percy Harvin,9286.0,Lambeau Leapers,2015
+13,1,97,Davante Adams,27581.0,Lambeau Leapers,2015
+13,2,98,Dwayne Allen,25774.0,manning bros,2015
+13,3,99,Giovani Bernard,26660.0,A Boy Named Suh,2015
+13,4,100,Ravens,,The Benchwarmers,2015
+13,5,101,Adam Vinatieri,3727.0,Joe Buck Yourself,2015
+13,6,102,Dolphins,,The Roethlisburger s,2015
+13,7,103,Chiefs,,The Thunder Cats,2015
+13,8,104,Ryan Tannehill,25718.0,Hyde your wife,2015
+14,1,105,Jordan Cameron,24889.0,Hyde your wife,2015
+14,2,106,Stephen Hauschka,9066.0,The Thunder Cats,2015
+14,3,107,Blair Walsh,25885.0,The Roethlisburger s,2015
+14,4,108,Rueben Randle,25773.0,Joe Buck Yourself,2015
+14,5,109,Owen Daniels,7847.0,The Benchwarmers,2015
+14,6,110,Jarvis Landry,27591.0,A Boy Named Suh,2015
+14,7,111,Dan Bailey,25427.0,manning bros,2015
+14,8,112,Vernon Davis,7755.0,Lambeau Leapers,2015
+15,1,113,Dan Carpenter,9032.0,Lambeau Leapers,2015
+15,2,114,Tim Tebow,24000.0,manning bros,2015
+15,3,115,Mason Crosby,8447.0,A Boy Named Suh,2015
+15,4,116,Justin Tucker,26534.0,The Benchwarmers,2015
+15,5,117,Doug Martin,25741.0,Joe Buck Yourself,2015
+15,6,118,Denard Robinson,26758.0,The Roethlisburger s,2015
+15,7,119,Matt Bryant,6243.0,The Thunder Cats,2015
+15,8,120,Packers,,Hyde your wife,2015
+1,1,1,Rob Gronkowski,24017.0,Lambeau Leapers,2016
+1,2,2,Antonio Brown,24171.0,The Thunder Cats,2016
+1,3,3,Adrian Peterson,8261.0,Joe Buck Yourself,2016
+1,4,4,Odell Beckham Jr.,27540.0,The Roethlisburger s,2016
+1,5,5,David Johnson,28474.0,The Benchwarmers,2016
+1,6,6,Julio Jones,24793.0,manning bros,2016
+1,7,7,Lamar Miller,25807.0,Hyde your wife,2016
+1,8,8,Todd Gurley,28398.0,Hingle McCringlebery,2016
+2,1,9,DeAndre Hopkins,26650.0,Hingle McCringlebery,2016
+2,2,10,A.J. Green,24791.0,Hyde your wife,2016
+2,3,11,Dez Bryant,23999.0,manning bros,2016
+2,4,12,LeSean McCoy,9317.0,The Benchwarmers,2016
+2,5,13,Cam Newton,24788.0,The Roethlisburger s,2016
+2,6,14,Brandon Marshall,7868.0,Joe Buck Yourself,2016
+2,7,15,Alshon Jeffery,25755.0,The Thunder Cats,2016
+2,8,16,Demaryius Thomas,23997.0,Lambeau Leapers,2016
+3,1,17,Le'Veon Bell,26671.0,Lambeau Leapers,2016
+3,2,18,Devonta Freeman,27631.0,The Thunder Cats,2016
+3,3,19,Mike Evans,27535.0,Joe Buck Yourself,2016
+3,4,20,Jordy Nelson,8813.0,The Roethlisburger s,2016
+3,5,21,Allen Robinson,27589.0,The Benchwarmers,2016
+3,6,22,Aaron Rodgers,7200.0,manning bros,2016
+3,7,23,Doug Martin,25741.0,Hyde your wife,2016
+3,8,24,Ezekiel Elliott,29238.0,Hingle McCringlebery,2016
+4,1,25,Amari Cooper,28392.0,Hingle McCringlebery,2016
+4,2,26,Sammy Watkins,27532.0,Hyde your wife,2016
+4,3,27,T.Y. Hilton,25802.0,manning bros,2016
+4,4,28,Brandin Cooks,27548.0,The Benchwarmers,2016
+4,5,29,DeAngelo Williams,7776.0,The Roethlisburger s,2016
+4,6,30,Jamaal Charles,8850.0,Joe Buck Yourself,2016
+4,7,31,Latavius Murray,26804.0,The Thunder Cats,2016
+4,8,32,Randall Cobb,24851.0,Lambeau Leapers,2016
+5,1,33,C.J. Anderson,26878.0,Lambeau Leapers,2016
+5,2,34,Jarvis Landry,27591.0,The Thunder Cats,2016
+5,3,35,Keenan Allen,26699.0,Joe Buck Yourself,2016
+5,4,36,Julian Edelman,9496.0,The Roethlisburger s,2016
+5,5,37,Golden Tate,24035.0,The Benchwarmers,2016
+5,6,38,Carlos Hyde,27585.0,manning bros,2016
+5,7,39,Greg Olsen,8285.0,Hyde your wife,2016
+5,8,40,Eric Decker,24062.0,Hingle McCringlebery,2016
+6,1,41,Jordan Reed,26708.0,Hingle McCringlebery,2016
+6,2,42,Andrew Luck,25711.0,Hyde your wife,2016
+6,3,43,Delanie Walker,7924.0,manning bros,2016
+6,4,44,Russell Wilson,25785.0,The Benchwarmers,2016
+6,5,45,Eddie Lacy,26684.0,The Roethlisburger s,2016
+6,6,46,Travis Kelce,26686.0,Joe Buck Yourself,2016
+6,7,47,Carson Palmer,6337.0,The Thunder Cats,2016
+6,8,48,Tom Brady,5228.0,Lambeau Leapers,2016
+7,1,49,Michael Floyd,25723.0,Lambeau Leapers,2016
+7,2,50,Antonio Gates,6663.0,The Thunder Cats,2016
+7,3,51,Kelvin Benjamin,27556.0,Joe Buck Yourself,2016
+7,4,52,Martellus Bennett,8838.0,The Roethlisburger s,2016
+7,5,53,Zach Ertz,26658.0,The Benchwarmers,2016
+7,6,54,Mark Ingram II,24815.0,manning bros,2016
+7,7,55,Doug Baldwin,25105.0,Hyde your wife,2016
+7,8,56,DeMarco Murray,24858.0,Hingle McCringlebery,2016
+8,1,57,Ben Roethlisberger,6770.0,Hingle McCringlebery,2016
+8,2,58,Thomas Rawls,28714.0,Hyde your wife,2016
+8,3,59,John Brown,27619.0,manning bros,2016
+8,4,60,Larry Fitzgerald,6762.0,The Benchwarmers,2016
+8,5,61,Jimmy Graham,24070.0,The Roethlisburger s,2016
+8,6,62,Melvin Gordon III,28403.0,Joe Buck Yourself,2016
+8,7,63,Drew Brees,5479.0,The Thunder Cats,2016
+8,8,64,Josh Gordon,26561.0,Lambeau Leapers,2016
+9,1,65,Broncos,,Lambeau Leapers,2016
+9,2,66,Rashad Jennings,9514.0,The Thunder Cats,2016
+9,3,67,Derek Carr,27564.0,Joe Buck Yourself,2016
+9,4,68,Jeremy Hill,27583.0,The Roethlisburger s,2016
+9,5,69,Donte Moncrief,27618.0,The Benchwarmers,2016
+9,6,70,Jonathan Stewart,8790.0,manning bros,2016
+9,7,71,Jordan Matthews,27570.0,Hyde your wife,2016
+9,8,72,Matt Forte,8821.0,Hingle McCringlebery,2016
+10,1,73,Jeremy Maclin,9283.0,Hingle McCringlebery,2016
+10,2,74,Allen Hurns,27874.0,Hyde your wife,2016
+10,3,75,Arian Foster,9527.0,manning bros,2016
+10,4,76,Ryan Mathews,23987.0,The Benchwarmers,2016
+10,5,77,DeSean Jackson,8826.0,The Roethlisburger s,2016
+10,6,78,Tavon Austin,26631.0,Joe Buck Yourself,2016
+10,7,79,DeVante Parker,28402.0,The Thunder Cats,2016
+10,8,80,Michael Crabtree,9274.0,Lambeau Leapers,2016
+11,1,81,Jeremy Langford,28494.0,Lambeau Leapers,2016
+11,2,82,Stefon Diggs,28534.0,The Thunder Cats,2016
+11,3,83,Cardinals,,Joe Buck Yourself,2016
+11,4,84,Sammie Coates,28475.0,The Roethlisburger s,2016
+11,5,85,Coby Fleener,25744.0,The Benchwarmers,2016
+11,6,86,Sterling Shepard,29274.0,manning bros,2016
+11,7,87,Seahawks,,Hyde your wife,2016
+11,8,88,Emmanuel Sanders,24057.0,Hingle McCringlebery,2016
+12,1,89,Laquon Treadwell,29257.0,Hingle McCringlebery,2016
+12,2,90,Chris Ivory,24400.0,Hyde your wife,2016
+12,3,91,Panthers,,manning bros,2016
+12,4,92,Texans,,The Benchwarmers,2016
+12,5,93,Patriots,,The Roethlisburger s,2016
+12,6,94,Stephen Gostkowski,7867.0,Joe Buck Yourself,2016
+12,7,95,Chiefs,,The Thunder Cats,2016
+12,8,96,Kevin White,28395.0,Lambeau Leapers,2016
+13,1,97,Eli Manning,6760.0,Lambeau Leapers,2016
+13,2,98,Julius Thomas,24916.0,The Thunder Cats,2016
+13,3,99,Jared Cook,9353.0,Joe Buck Yourself,2016
+13,4,100,Andy Dalton,24822.0,The Roethlisburger s,2016
+13,5,101,Justin Tucker,26534.0,The Benchwarmers,2016
+13,6,102,Jason Witten,6405.0,manning bros,2016
+13,7,103,Graham Gano,9526.0,Hyde your wife,2016
+13,8,104,Vikings,,Hingle McCringlebery,2016
+14,1,105,Marshall Koehn,29834.0,Hingle McCringlebery,2016
+14,2,106,Philip Rivers,6763.0,Hyde your wife,2016
+14,3,107,Stephen Hauschka,9066.0,manning bros,2016
+14,4,108,Rams,,The Benchwarmers,2016
+14,5,109,Blair Walsh,25885.0,The Roethlisburger s,2016
+14,6,110,Duke Johnson,28465.0,Joe Buck Yourself,2016
+14,7,111,Matt Bryant,6243.0,The Thunder Cats,2016
+14,8,112,Adam Vinatieri,3727.0,Lambeau Leapers,2016
+15,1,113,Derrick Henry,29279.0,Lambeau Leapers,2016
+15,2,114,Tyler Lockett,28457.0,The Thunder Cats,2016
+15,3,115,Packers,,Joe Buck Yourself,2016
+15,4,116,Travis Benjamin,25810.0,The Roethlisburger s,2016
+15,5,117,Matthew Stafford,9265.0,The Benchwarmers,2016
+15,6,118,Robert Griffin III,25712.0,manning bros,2016
+15,7,119,Mark Sanchez,9269.0,Hyde your wife,2016
+15,8,120,Tyrod Taylor,24967.0,Hingle McCringlebery,2016
+1,1,1,David Johnson,28474.0,Hingle McCringlebery,2017
+1,2,2,Le'Veon Bell,26671.0,Starting Defense,2017
+1,3,3,Antonio Brown,24171.0,Joe Buck Yourself,2017
+1,4,4,Julio Jones,24793.0,Thunder Cats,2017
+1,5,5,Odell Beckham Jr.,27540.0,Jackson's Team,2017
+1,6,6,Jay Ajayi,28537.0,Talladega Knights,2017
+1,7,7,Devonta Freeman,27631.0,King of the Hill,2017
+1,8,8,Aaron Rodgers,7200.0,Lambeau Leapers,2017
+1,9,9,Melvin Gordon III,28403.0,Frank The Tank,2017
+1,10,10,Mike Evans,27535.0,The Roethlisburger s,2017
+2,1,11,Jordan Howard,29384.0,The Roethlisburger s,2017
+2,2,12,A.J. Green,24791.0,Frank The Tank,2017
+2,3,13,Rob Gronkowski,24017.0,Lambeau Leapers,2017
+2,4,14,Jordy Nelson,8813.0,King of the Hill,2017
+2,5,15,T.Y. Hilton,25802.0,Talladega Knights,2017
+2,6,16,LeSean McCoy,9317.0,Jackson's Team,2017
+2,7,17,Michael Thomas,29281.0,Thunder Cats,2017
+2,8,18,DeMarco Murray,24858.0,Joe Buck Yourself,2017
+2,9,19,Dez Bryant,23999.0,Starting Defense,2017
+2,10,20,Leonard Fournette,30117.0,Hingle McCringlebery,2017
+3,1,21,Amari Cooper,28392.0,Hingle McCringlebery,2017
+3,2,22,Brandin Cooks,27548.0,Starting Defense,2017
+3,3,23,Todd Gurley,28398.0,Joe Buck Yourself,2017
+3,4,24,Lamar Miller,25807.0,Thunder Cats,2017
+3,5,25,DeAndre Hopkins,26650.0,Jackson's Team,2017
+3,6,26,Carlos Hyde,27585.0,Talladega Knights,2017
+3,7,27,Christian McCaffrey,30121.0,King of the Hill,2017
+3,8,28,Adrian Peterson,8261.0,Lambeau Leapers,2017
+3,9,29,Terrelle Pryor Sr.,25681.0,Frank The Tank,2017
+3,10,30,Ezekiel Elliott,29238.0,The Roethlisburger s,2017
+4,1,31,Doug Baldwin,25105.0,The Roethlisburger s,2017
+4,2,32,Isaiah Crowell,28014.0,Frank The Tank,2017
+4,3,33,Julian Edelman,9496.0,Lambeau Leapers,2017
+4,4,34,Matt Ryan,8780.0,King of the Hill,2017
+4,5,35,Tom Brady,5228.0,Talladega Knights,2017
+4,6,36,Marshawn Lynch,8266.0,Jackson's Team,2017
+4,7,37,Dalvin Cook,30154.0,Thunder Cats,2017
+4,8,38,Travis Kelce,26686.0,Joe Buck Yourself,2017
+4,9,39,Ty Montgomery II,28482.0,Starting Defense,2017
+4,10,40,Tyreek Hill,29399.0,Hingle McCringlebery,2017
+5,1,41,Drew Brees,5479.0,Hingle McCringlebery,2017
+5,2,42,Demaryius Thomas,23997.0,Starting Defense,2017
+5,3,43,Allen Robinson,27589.0,Joe Buck Yourself,2017
+5,4,44,Dak Prescott,29369.0,Thunder Cats,2017
+5,5,45,Greg Olsen,8285.0,Jackson's Team,2017
+5,6,46,Jimmy Graham,24070.0,Talladega Knights,2017
+5,7,47,Alshon Jeffery,25755.0,King of the Hill,2017
+5,8,48,Davante Adams,27581.0,Lambeau Leapers,2017
+5,9,49,Sammy Watkins,27532.0,Frank The Tank,2017
+5,10,50,Spencer Ware,26817.0,The Roethlisburger s,2017
+6,1,51,Keenan Allen,26699.0,The Roethlisburger s,2017
+6,2,52,Delanie Walker,7924.0,Frank The Tank,2017
+6,3,53,Michael Crabtree,9274.0,Lambeau Leapers,2017
+6,4,54,Ameer Abdullah,28442.0,King of the Hill,2017
+6,5,55,Emmanuel Sanders,24057.0,Talladega Knights,2017
+6,6,56,Larry Fitzgerald,6762.0,Jackson's Team,2017
+6,7,57,Martavis Bryant,27646.0,Thunder Cats,2017
+6,8,58,Eddie Lacy,26684.0,Joe Buck Yourself,2017
+6,9,59,Russell Wilson,25785.0,Starting Defense,2017
+6,10,60,Jordan Reed,26708.0,Hingle McCringlebery,2017
+7,1,61,Jamison Crowder,28493.0,Hingle McCringlebery,2017
+7,2,62,Tyler Eifert,26644.0,Starting Defense,2017
+7,3,63,Kirk Cousins,25812.0,Joe Buck Yourself,2017
+7,4,64,Kyle Rudolph,24830.0,Thunder Cats,2017
+7,5,65,LeGarrette Blount,24318.0,Jackson's Team,2017
+7,6,66,Randall Cobb,24851.0,Talladega Knights,2017
+7,7,67,Tyrell Williams,28691.0,King of the Hill,2017
+7,8,68,C.J. Anderson,26878.0,Lambeau Leapers,2017
+7,9,69,Jameis Winston,28389.0,Frank The Tank,2017
+7,10,70,Ben Roethlisberger,6770.0,The Roethlisburger s,2017
+8,1,71,Brandon Marshall,7868.0,The Roethlisburger s,2017
+8,2,72,Jarvis Landry,27591.0,Frank The Tank,2017
+8,3,73,Kelvin Benjamin,27556.0,Lambeau Leapers,2017
+8,4,74,Jeremy Maclin,9283.0,King of the Hill,2017
+8,5,75,Stefon Diggs,28534.0,Talladega Knights,2017
+8,6,76,DeSean Jackson,8826.0,Jackson's Team,2017
+8,7,77,Golden Tate,24035.0,Thunder Cats,2017
+8,8,78,Cameron Meredith,28697.0,Joe Buck Yourself,2017
+8,9,79,Donte Moncrief,27618.0,Starting Defense,2017
+8,10,80,Joe Mixon,30161.0,Hingle McCringlebery,2017
+9,1,81,Willie Snead IV,28026.0,Hingle McCringlebery,2017
+9,2,82,Broncos,,Starting Defense,2017
+9,3,83,Mike Gillislee,26787.0,Joe Buck Yourself,2017
+9,4,84,Frank Gore,7241.0,Thunder Cats,2017
+9,5,85,Marcus Mariota,28390.0,Jackson's Team,2017
+9,6,86,Jordan Matthews,27570.0,Talladega Knights,2017
+9,7,87,Eric Ebron,27538.0,King of the Hill,2017
+9,8,88,Patriots,,Lambeau Leapers,2017
+9,9,89,Paul Perkins,29383.0,Frank The Tank,2017
+9,10,90,Martellus Bennett,8838.0,The Roethlisburger s,2017
+10,1,91,Pierre Garcon,8982.0,The Roethlisburger s,2017
+10,2,92,Texans,,Frank The Tank,2017
+10,3,93,Darren McFadden,8781.0,Lambeau Leapers,2017
+10,4,94,Seahawks,,King of the Hill,2017
+10,5,95,Steelers,,Talladega Knights,2017
+10,6,96,Chiefs,,Jackson's Team,2017
+10,7,97,Zach Ertz,26658.0,Thunder Cats,2017
+10,8,98,Falcons,,Joe Buck Yourself,2017
+10,9,99,Mark Ingram II,24815.0,Starting Defense,2017
+10,10,100,Eric Decker,24062.0,Hingle McCringlebery,2017
+11,1,101,Vikings,,Hingle McCringlebery,2017
+11,2,102,Coby Fleener,25744.0,Starting Defense,2017
+11,3,103,DeVante Parker,28402.0,Joe Buck Yourself,2017
+11,4,104,Cardinals,,Thunder Cats,2017
+11,5,105,Kenny Britt,9294.0,Jackson's Team,2017
+11,6,106,Theo Riddick,26822.0,Talladega Knights,2017
+11,7,107,Tyler Lockett,28457.0,King of the Hill,2017
+11,8,108,Jonathan Stewart,8790.0,Lambeau Leapers,2017
+11,9,109,Tevin Coleman,28461.0,Frank The Tank,2017
+11,10,110,Stephen Gostkowski,7867.0,The Roethlisburger s,2017
+12,1,111,Giants,,The Roethlisburger s,2017
+12,2,112,Justin Tucker,26534.0,Frank The Tank,2017
+12,3,113,Dan Bailey,25427.0,Lambeau Leapers,2017
+12,4,114,Derek Carr,27564.0,King of the Hill,2017
+12,5,115,Adam Vinatieri,3727.0,Talladega Knights,2017
+12,6,116,Cole Beasley,26060.0,Jackson's Team,2017
+12,7,117,Adam Thielen,27277.0,Thunder Cats,2017
+12,8,118,Matt Bryant,6243.0,Joe Buck Yourself,2017
+12,9,119,Sebastian Janikowski,5046.0,Starting Defense,2017
+12,10,120,Matt Forte,8821.0,Hingle McCringlebery,2017
+13,1,121,Marvin Jones Jr.,25876.0,Hingle McCringlebery,2017
+13,2,122,Andrew Luck,25711.0,Starting Defense,2017
+13,3,123,Kenny Stills,26767.0,Joe Buck Yourself,2017
+13,4,124,Mason Crosby,8447.0,Thunder Cats,2017
+13,5,125,Doug Martin,25741.0,Jackson's Team,2017
+13,6,126,Julius Thomas,24916.0,Talladega Knights,2017
+13,7,127,Hunter Henry,29269.0,King of the Hill,2017
+13,8,128,Jamaal Williams,30247.0,Lambeau Leapers,2017
+13,9,129,Zay Jones,30150.0,Frank The Tank,2017
+13,10,130,Derrick Henry,29279.0,The Roethlisburger s,2017
+14,1,131,Danny Woodhead,9560.0,The Roethlisburger s,2017
+14,2,132,John Ross,30122.0,Frank The Tank,2017
+14,3,133,Sterling Shepard,29274.0,Lambeau Leapers,2017
+14,4,134,Stephen Hauschka,9066.0,King of the Hill,2017
+14,5,135,James White,27658.0,Talladega Knights,2017
+14,6,136,Antonio Gates,6663.0,Jackson's Team,2017
+14,7,137,Cam Newton,24788.0,Thunder Cats,2017
+14,8,138,Rob Kelley,29694.0,Joe Buck Yourself,2017
+14,9,139,Matthew Stafford,9265.0,Starting Defense,2017
+14,10,140,Eli Manning,6760.0,Hingle McCringlebery,2017
+15,1,141,John Brown,27619.0,Hingle McCringlebery,2017
+15,2,142,Rishard Matthews,25937.0,Starting Defense,2017
+15,3,143,Corey Coleman,29249.0,Joe Buck Yourself,2017
+15,4,144,Panthers,,Thunder Cats,2017
+15,5,145,Josh Lambo,28685.0,Jackson's Team,2017
+15,6,146,Mike Wallace,9348.0,Talladega Knights,2017
+15,7,147,C.J. Prosise,29324.0,King of the Hill,2017
+15,8,148,Kevin White,28395.0,Lambeau Leapers,2017
+15,9,149,C.J. Fiedorowicz,27593.0,Frank The Tank,2017
+15,10,150,C.J. Beathard,30217.0,The Roethlisburger s,2017
+1,1,1,Le'Veon Bell,26671.0,Starting Defense,2018
+1,2,2,Todd Gurley,28398.0,Hingle McCringlebery,2018
+1,3,3,David Johnson,28474.0,The Roethlisburger s,2018
+1,4,4,Antonio Brown,24171.0,Thunder Cats,2018
+1,5,5,Ezekiel Elliott,29238.0,Brokaw's Bums,2018
+1,6,6,Alvin Kamara,30180.0,Talladega Knights,2018
+1,7,7,Saquon Barkley,30972.0,King of the Hill,2018
+1,8,8,Davante Adams,27581.0,Lambeau Leapers,2018
+1,9,9,DeAndre Hopkins,26650.0,Hingle Handlers,2018
+1,10,10,Odell Beckham Jr.,27540.0,Joe Buck Yourself,2018
+2,1,11,Kareem Hunt,30199.0,Joe Buck Yourself,2018
+2,2,12,Melvin Gordon III,28403.0,Hingle Handlers,2018
+2,3,13,Rob Gronkowski,24017.0,Lambeau Leapers,2018
+2,4,14,Leonard Fournette,30117.0,King of the Hill,2018
+2,5,15,Julio Jones,24793.0,Talladega Knights,2018
+2,6,16,A.J. Green,24791.0,Brokaw's Bums,2018
+2,7,17,Dalvin Cook,30154.0,Thunder Cats,2018
+2,8,18,Michael Thomas,29281.0,The Roethlisburger s,2018
+2,9,19,Keenan Allen,26699.0,Hingle McCringlebery,2018
+2,10,20,Adam Thielen,27277.0,Starting Defense,2018
+3,1,21,Devonta Freeman,27631.0,Starting Defense,2018
+3,2,22,Jordan Howard,29384.0,Hingle McCringlebery,2018
+3,3,23,Travis Kelce,26686.0,The Roethlisburger s,2018
+3,4,24,Stefon Diggs,28534.0,Thunder Cats,2018
+3,5,25,Jerick McKinnon,27624.0,Brokaw's Bums,2018
+3,6,26,Christian McCaffrey,30121.0,Talladega Knights,2018
+3,7,27,Mike Evans,27535.0,King of the Hill,2018
+3,8,28,Joe Mixon,30161.0,Lambeau Leapers,2018
+3,9,29,Larry Fitzgerald,6762.0,Hingle Handlers,2018
+3,10,30,LeSean McCoy,9317.0,Joe Buck Yourself,2018
+4,1,31,Zach Ertz,26658.0,Joe Buck Yourself,2018
+4,2,32,Jarvis Landry,27591.0,Hingle Handlers,2018
+4,3,33,Aaron Rodgers,7200.0,Lambeau Leapers,2018
+4,4,34,T.Y. Hilton,25802.0,King of the Hill,2018
+4,5,35,Tyreek Hill,29399.0,Talladega Knights,2018
+4,6,36,Amari Cooper,28392.0,Brokaw's Bums,2018
+4,7,37,Lamar Miller,25807.0,Thunder Cats,2018
+4,8,38,Kenyan Drake,29307.0,The Roethlisburger s,2018
+4,9,39,Deshaun Watson,30125.0,Hingle McCringlebery,2018
+4,10,40,Doug Baldwin,25105.0,Starting Defense,2018
+5,1,41,Evan Engram,30136.0,Starting Defense,2018
+5,2,42,Josh Gordon,26561.0,Hingle McCringlebery,2018
+5,3,43,JuJu Smith-Schuster,30175.0,The Roethlisburger s,2018
+5,4,44,Greg Olsen,8285.0,Thunder Cats,2018
+5,5,45,Jimmy Graham,24070.0,Brokaw's Bums,2018
+5,6,46,Kyle Rudolph,24830.0,Talladega Knights,2018
+5,7,47,Brandin Cooks,27548.0,King of the Hill,2018
+5,8,48,Jay Ajayi,28537.0,Lambeau Leapers,2018
+5,9,49,Delanie Walker,7924.0,Hingle Handlers,2018
+5,10,50,Mark Ingram II,24815.0,Joe Buck Yourself,2018
+6,1,51,Golden Tate,24035.0,Joe Buck Yourself,2018
+6,2,52,Chris Hogan,25178.0,Hingle Handlers,2018
+6,3,53,Nelson Agholor,28408.0,Lambeau Leapers,2018
+6,4,54,Alex Collins,29405.0,King of the Hill,2018
+6,5,55,Tom Brady,5228.0,Talladega Knights,2018
+6,6,56,Allen Robinson,27589.0,Brokaw's Bums,2018
+6,7,57,Russell Wilson,25785.0,Thunder Cats,2018
+6,8,58,Carson Wentz,29236.0,The Roethlisburger s,2018
+6,9,59,Derrick Henry,29279.0,Hingle McCringlebery,2018
+6,10,60,Royce Freeman,31041.0,Starting Defense,2018
+7,1,61,Cam Newton,24788.0,Starting Defense,2018
+7,2,62,Will Fuller V,29255.0,Hingle McCringlebery,2018
+7,3,63,Jordy Nelson,8813.0,The Roethlisburger s,2018
+7,4,64,Kirk Cousins,25812.0,Thunder Cats,2018
+7,5,65,Marvin Jones Jr.,25876.0,Brokaw's Bums,2018
+7,6,66,Dion Lewis,24936.0,Talladega Knights,2018
+7,7,67,Kenny Stills,26767.0,King of the Hill,2018
+7,8,68,Demaryius Thomas,23997.0,Lambeau Leapers,2018
+7,9,69,Drew Brees,5479.0,Hingle Handlers,2018
+7,10,70,Jaguars,,Joe Buck Yourself,2018
+8,1,71,Robert Woods,26664.0,Joe Buck Yourself,2018
+8,2,72,Marshawn Lynch,8266.0,Hingle Handlers,2018
+8,3,73,Rams,,Lambeau Leapers,2018
+8,4,74,Vikings,,King of the Hill,2018
+8,5,75,Eagles,,Talladega Knights,2018
+8,6,76,Texans,,Brokaw's Bums,2018
+8,7,77,Michael Crabtree,9274.0,Thunder Cats,2018
+8,8,78,Tevin Coleman,28461.0,The Roethlisburger s,2018
+8,9,79,Saints,,Hingle McCringlebery,2018
+8,10,80,Sammy Watkins,27532.0,Starting Defense,2018
+9,1,81,Broncos,,Starting Defense,2018
+9,2,82,Sony Michel,31001.0,Hingle McCringlebery,2018
+9,3,83,Chargers,,The Roethlisburger s,2018
+9,4,84,Ravens,,Thunder Cats,2018
+9,5,85,Kerryon Johnson,31013.0,Brokaw's Bums,2018
+9,6,86,Devin Funchess,28429.0,Talladega Knights,2018
+9,7,87,Jared Goff,29235.0,King of the Hill,2018
+9,8,88,Julian Edelman,9496.0,Lambeau Leapers,2018
+9,9,89,Alshon Jeffery,25755.0,Hingle Handlers,2018
+9,10,90,DJ Moore,30994.0,Joe Buck Yourself,2018
+10,1,91,Calvin Ridley,30996.0,Joe Buck Yourself,2018
+10,2,92,Marqise Lee,27567.0,Hingle Handlers,2018
+10,3,93,Corey Davis,30118.0,Lambeau Leapers,2018
+10,4,94,Jordan Reed,26708.0,King of the Hill,2018
+10,5,95,Greg Zuerlein,25881.0,Talladega Knights,2018
+10,6,96,Kelvin Benjamin,27556.0,Brokaw's Bums,2018
+10,7,97,Rashaad Penny,30997.0,Thunder Cats,2018
+10,8,98,Robbie Chosen,29785.0,The Roethlisburger s,2018
+10,9,99,O.J. Howard,30132.0,Hingle McCringlebery,2018
+10,10,100,Cooper Kupp,30182.0,Starting Defense,2018
+11,1,101,Justin Tucker,26534.0,Starting Defense,2018
+11,2,102,Andrew Luck,25711.0,Hingle McCringlebery,2018
+11,3,103,Marquise Goodwin,26701.0,The Roethlisburger s,2018
+11,4,104,Jamison Crowder,28493.0,Thunder Cats,2018
+11,5,105,Matt Ryan,8780.0,Brokaw's Bums,2018
+11,6,106,Tarik Cohen,30232.0,Talladega Knights,2018
+11,7,107,Ronald Jones,31008.0,King of the Hill,2018
+11,8,108,Jamaal Williams,30247.0,Lambeau Leapers,2018
+11,9,109,Philip Rivers,6763.0,Hingle Handlers,2018
+11,10,110,Jimmy Garoppolo,27590.0,Joe Buck Yourself,2018
+12,1,111,Chris Thompson,26777.0,Joe Buck Yourself,2018
+12,2,112,Rex Burkhead,26813.0,Hingle Handlers,2018
+12,3,113,Sterling Shepard,29274.0,Lambeau Leapers,2018
+12,4,114,Matthew Stafford,9265.0,King of the Hill,2018
+12,5,115,David Njoku,30142.0,Talladega Knights,2018
+12,6,116,Marlon Mack,30256.0,Brokaw's Bums,2018
+12,7,117,Stephen Gostkowski,7867.0,Thunder Cats,2018
+12,8,118,Ty Montgomery II,28482.0,The Roethlisburger s,2018
+12,9,119,DeVante Parker,28402.0,Hingle McCringlebery,2018
+12,10,120,Aaron Jones Sr.,30295.0,Starting Defense,2018
+13,1,121,George Kittle,30259.0,Starting Defense,2018
+13,2,122,Randall Cobb,24851.0,Hingle McCringlebery,2018
+13,3,123,Chris Boswell,28188.0,The Roethlisburger s,2018
+13,4,124,Pierre Garcon,8982.0,Thunder Cats,2018
+13,5,125,Matt Bryant,6243.0,Brokaw's Bums,2018
+13,6,126,Ben Roethlisberger,6770.0,Talladega Knights,2018
+13,7,127,Kenny Golladay,30209.0,King of the Hill,2018
+13,8,128,Danny Amendola,9037.0,Lambeau Leapers,2018
+13,9,129,LeGarrette Blount,24318.0,Hingle Handlers,2018
+13,10,130,Dez Bryant,23999.0,Joe Buck Yourself,2018
+14,1,131,Wil Lutz,29754.0,Joe Buck Yourself,2018
+14,2,132,Panthers,,Hingle Handlers,2018
+14,3,133,Cole Beasley,26060.0,Lambeau Leapers,2018
+14,4,134,Matt Prater,8565.0,King of the Hill,2018
+14,5,135,Harrison Butker,30346.0,Talladega Knights,2018
+14,6,136,Mohamed Sanu,25793.0,Brokaw's Bums,2018
+14,7,137,Carlos Hyde,27585.0,Thunder Cats,2018
+14,8,138,Emmanuel Sanders,24057.0,The Roethlisburger s,2018
+14,9,139,Tyler Lockett,28457.0,Hingle McCringlebery,2018
+14,10,140,Baker Mayfield,30971.0,Starting Defense,2018
+15,1,141,DeSean Jackson,8826.0,Starting Defense,2018
+15,2,142,Donte Moncrief,27618.0,Hingle McCringlebery,2018
+15,3,143,Marcus Mariota,28390.0,The Roethlisburger s,2018
+15,4,144,Trey Burton,27789.0,Thunder Cats,2018
+15,5,145,Michael Gallup,31051.0,Brokaw's Bums,2018
+15,6,146,Mike Williams,30120.0,Talladega Knights,2018
+15,7,147,Jared Cook,9353.0,King of the Hill,2018
+15,8,148,Dan Bailey,25427.0,Lambeau Leapers,2018
+15,9,149,Jake Elliott,30266.0,Hingle Handlers,2018
+15,10,150,Isaiah Crowell,28014.0,Joe Buck Yourself,2018
+1,1,1,Christian McCaffrey,30121.0,Lambeau Leapers,2019
+1,2,2,Saquon Barkley,30972.0,Patrick Mahomes,2019
+1,3,3,Alvin Kamara,30180.0,The Roethlisburger s,2019
+1,4,4,Ezekiel Elliott,29238.0,Hingle McCringlebery,2019
+1,5,5,DeAndre Hopkins,26650.0,Jackson's Team,2019
+1,6,6,David Johnson,28474.0,Starting Defense,2019
+1,7,7,Le'Veon Bell,26671.0,Brokaw's Bums,2019
+1,8,8,Davante Adams,27581.0,Talladega Knights,2019
+1,9,9,James Conner,30218.0,Joe Buck Yourself,2019
+1,10,10,Todd Gurley,28398.0,The Cousin Lovers,2019
+2,1,11,Michael Thomas,29281.0,The Cousin Lovers,2019
+2,2,12,Julio Jones,24793.0,Joe Buck Yourself,2019
+2,3,13,Joe Mixon,30161.0,Talladega Knights,2019
+2,4,14,Odell Beckham Jr.,27540.0,Brokaw's Bums,2019
+2,5,15,JuJu Smith-Schuster,30175.0,Starting Defense,2019
+2,6,16,Nick Chubb,31005.0,Jackson's Team,2019
+2,7,17,Tyreek Hill,29399.0,Hingle McCringlebery,2019
+2,8,18,Mike Evans,27535.0,The Roethlisburger s,2019
+2,9,19,Travis Kelce,26686.0,Patrick Mahomes,2019
+2,10,20,Antonio Brown,24171.0,Lambeau Leapers,2019
+3,1,21,Melvin Gordon III,28403.0,Lambeau Leapers,2019
+3,2,22,Dalvin Cook,30154.0,Patrick Mahomes,2019
+3,3,23,Keenan Allen,26699.0,The Roethlisburger s,2019
+3,4,24,Damien Williams,28115.0,Hingle McCringlebery,2019
+3,5,25,Marlon Mack,30256.0,Jackson's Team,2019
+3,6,26,George Kittle,30259.0,Starting Defense,2019
+3,7,27,Amari Cooper,28392.0,Brokaw's Bums,2019
+3,8,28,Stefon Diggs,28534.0,Talladega Knights,2019
+3,9,29,Adam Thielen,27277.0,Joe Buck Yourself,2019
+3,10,30,Zach Ertz,26658.0,The Cousin Lovers,2019
+4,1,31,Robert Woods,26664.0,The Cousin Lovers,2019
+4,2,32,Leonard Fournette,30117.0,Joe Buck Yourself,2019
+4,3,33,Devonta Freeman,27631.0,Talladega Knights,2019
+4,4,34,Kerryon Johnson,31013.0,Brokaw's Bums,2019
+4,5,35,Aaron Jones Sr.,30295.0,Starting Defense,2019
+4,6,36,Patrick Mahomes,30123.0,Jackson's Team,2019
+4,7,37,Julian Edelman,9496.0,Hingle McCringlebery,2019
+4,8,38,Mark Ingram II,24815.0,The Roethlisburger s,2019
+4,9,39,T.Y. Hilton,25802.0,Patrick Mahomes,2019
+4,10,40,Aaron Rodgers,7200.0,Lambeau Leapers,2019
+5,1,41,Kenny Golladay,30209.0,Lambeau Leapers,2019
+5,2,42,Chris Godwin Jr.,30197.0,Patrick Mahomes,2019
+5,3,43,Brandin Cooks,27548.0,The Roethlisburger s,2019
+5,4,44,David Montgomery,31905.0,Hingle McCringlebery,2019
+5,5,45,Derrick Henry,29279.0,Jackson's Team,2019
+5,6,46,Jarvis Landry,27591.0,Starting Defense,2019
+5,7,47,Tyler Boyd,29288.0,Brokaw's Bums,2019
+5,8,48,Josh Jacobs,31856.0,Talladega Knights,2019
+5,9,49,O.J. Howard,30132.0,Joe Buck Yourself,2019
+5,10,50,Deshaun Watson,30125.0,The Cousin Lovers,2019
+6,1,51,Phillip Lindsay,31379.0,The Cousin Lovers,2019
+6,2,52,Russell Wilson,25785.0,Joe Buck Yourself,2019
+6,3,53,Evan Engram,30136.0,Talladega Knights,2019
+6,4,54,Sony Michel,31001.0,Brokaw's Bums,2019
+6,5,55,Tarik Cohen,30232.0,Starting Defense,2019
+6,6,56,Tyler Lockett,28457.0,Jackson's Team,2019
+6,7,57,Chris Carson,30362.0,Hingle McCringlebery,2019
+6,8,58,James White,27658.0,The Roethlisburger s,2019
+6,9,59,Calvin Ridley,30996.0,Patrick Mahomes,2019
+6,10,60,Jared Cook,9353.0,Lambeau Leapers,2019
+7,1,61,Kenyan Drake,29307.0,Lambeau Leapers,2019
+7,2,62,Tevin Coleman,28461.0,Patrick Mahomes,2019
+7,3,63,Hunter Henry,29269.0,The Roethlisburger s,2019
+7,4,64,DJ Moore,30994.0,Hingle McCringlebery,2019
+7,5,65,Bears,,Jackson's Team,2019
+7,6,66,Baker Mayfield,30971.0,Starting Defense,2019
+7,7,67,Matt Ryan,8780.0,Brokaw's Bums,2019
+7,8,68,Drew Brees,5479.0,Talladega Knights,2019
+7,9,69,Mike Williams,30120.0,Joe Buck Yourself,2019
+7,10,70,Allen Robinson,27589.0,The Cousin Lovers,2019
+8,1,71,Miles Sanders,31885.0,The Cousin Lovers,2019
+8,2,72,A.J. Green,24791.0,Joe Buck Yourself,2019
+8,3,73,Rams,,Talladega Knights,2019
+8,4,74,Eric Ebron,27538.0,Brokaw's Bums,2019
+8,5,75,Cooper Kupp,30182.0,Starting Defense,2019
+8,6,76,Vance McDonald,26678.0,Jackson's Team,2019
+8,7,77,Kyler Murray,31833.0,Hingle McCringlebery,2019
+8,8,78,Will Fuller V,29255.0,The Roethlisburger s,2019
+8,9,79,Cam Newton,24788.0,Patrick Mahomes,2019
+8,10,80,Alshon Jeffery,25755.0,Lambeau Leapers,2019
+9,1,81,Curtis Samuel,30153.0,Lambeau Leapers,2019
+9,2,82,Lamar Miller,25807.0,Patrick Mahomes,2019
+9,3,83,Andrew Luck,25711.0,The Roethlisburger s,2019
+9,4,84,Robbie Chosen,29785.0,Hingle McCringlebery,2019
+9,5,85,Greg Zuerlein,25881.0,Jackson's Team,2019
+9,6,86,Austin Ekeler,30423.0,Starting Defense,2019
+9,7,87,Christian Kirk,31017.0,Brokaw's Bums,2019
+9,8,88,Sammy Watkins,27532.0,Talladega Knights,2019
+9,9,89,Ravens,,Joe Buck Yourself,2019
+9,10,90,Vikings,,The Cousin Lovers,2019
+10,1,91,Corey Davis,30118.0,The Cousin Lovers,2019
+10,2,92,Latavius Murray,26804.0,Joe Buck Yourself,2019
+10,3,93,Harrison Butker,30346.0,Talladega Knights,2019
+10,4,94,Jaguars,,Brokaw's Bums,2019
+10,5,95,Justin Tucker,26534.0,Starting Defense,2019
+10,6,96,Darrell Henderson Jr.,31902.0,Jackson's Team,2019
+10,7,97,Golden Tate,24035.0,Hingle McCringlebery,2019
+10,8,98,Adrian Peterson,8261.0,The Roethlisburger s,2019
+10,9,99,Dante Pettis,31014.0,Patrick Mahomes,2019
+10,10,100,Sterling Shepard,29274.0,Lambeau Leapers,2019
+11,1,101,Matt Breida,30552.0,Lambeau Leapers,2019
+11,2,102,Chargers,,Patrick Mahomes,2019
+11,3,103,Browns,,The Roethlisburger s,2019
+11,4,104,Jordan Howard,29384.0,Hingle McCringlebery,2019
+11,5,105,Kareem Hunt,30199.0,Jackson's Team,2019
+11,6,106,Mohamed Sanu,25793.0,Starting Defense,2019
+11,7,107,Dede Westbrook,30223.0,Brokaw's Bums,2019
+11,8,108,Devin Funchess,28429.0,Talladega Knights,2019
+11,9,109,Courtland Sutton,31010.0,Joe Buck Yourself,2019
+11,10,110,Larry Fitzgerald,6762.0,The Cousin Lovers,2019
+12,1,111,Stephen Gostkowski,7867.0,The Cousin Lovers,2019
+12,2,112,Wil Lutz,29754.0,Joe Buck Yourself,2019
+12,3,113,Rashaad Penny,30997.0,Talladega Knights,2019
+12,4,114,Derrius Guice,31029.0,Brokaw's Bums,2019
+12,5,115,Texans,,Starting Defense,2019
+12,6,116,Josh Gordon,26561.0,Jackson's Team,2019
+12,7,117,David Njoku,30142.0,Hingle McCringlebery,2019
+12,8,118,Jaylen Samuels,31135.0,The Roethlisburger s,2019
+12,9,119,Ka'imi Fairbairn,29792.0,Patrick Mahomes,2019
+12,10,120,Patriots,,Lambeau Leapers,2019
+13,1,121,Geronimo Allison,29719.0,Lambeau Leapers,2019
+13,2,122,Bills,,Patrick Mahomes,2019
+13,3,123,Marvin Jones Jr.,25876.0,The Roethlisburger s,2019
+13,4,124,Broncos,,Hingle McCringlebery,2019
+13,5,125,Devin Singletary,31906.0,Jackson's Team,2019
+13,6,126,Jordan Reed,26708.0,Starting Defense,2019
+13,7,127,Michael Badgley,31366.0,Brokaw's Bums,2019
+13,8,128,Jimmy Graham,24070.0,Talladega Knights,2019
+13,9,129,N'Keal Harry,31864.0,Joe Buck Yourself,2019
+13,10,130,Jared Goff,29235.0,The Cousin Lovers,2019
+14,1,131,Trey Burton,27789.0,The Cousin Lovers,2019
+14,2,132,Royce Freeman,31041.0,Joe Buck Yourself,2019
+14,3,133,Delanie Walker,7924.0,Talladega Knights,2019
+14,4,134,Ronald Jones,31008.0,Brokaw's Bums,2019
+14,5,135,Donte Moncrief,27618.0,Starting Defense,2019
+14,6,136,Mark Andrews,31056.0,Jackson's Team,2019
+14,7,137,Ben Roethlisberger,6770.0,Hingle McCringlebery,2019
+14,8,138,Tony Pollard,31960.0,The Roethlisburger s,2019
+14,9,139,Carson Wentz,29236.0,Patrick Mahomes,2019
+14,10,140,Emmanuel Sanders,24057.0,Lambeau Leapers,2019
+15,1,141,Mason Crosby,8447.0,Lambeau Leapers,2019
+15,2,142,Austin Hooper,29315.0,Patrick Mahomes,2019
+15,3,143,Jameis Winston,28389.0,The Roethlisburger s,2019
+15,4,144,DeSean Jackson,8826.0,Hingle McCringlebery,2019
+15,5,145,Marquez Valdes-Scantling,31144.0,Jackson's Team,2019
+15,6,146,Chris Thompson,26777.0,Starting Defense,2019
+15,7,147,Keke Coutee,31073.0,Brokaw's Bums,2019
+15,8,148,Nyheim Miller-Hines,31074.0,Talladega Knights,2019
+15,9,149,Duke Johnson,28465.0,Joe Buck Yourself,2019
+15,10,150,Dion Lewis,24936.0,The Cousin Lovers,2019
+1,1,1,Christian McCaffrey,30121.0,The Roethlisberger's,2020
+1,2,2,Saquon Barkley,30972.0,Starting Defense,2020
+1,3,3,Ezekiel Elliott,29238.0,The Cousin Lovers,2020
+1,4,4,Alvin Kamara,30180.0,Joe Buck Yourself,2020
+1,5,5,Dalvin Cook,30154.0,Lambeau Leapers,2020
+1,6,6,Michael Thomas,29281.0,Hingle McCringlebery,2020
+1,7,7,Derrick Henry,29279.0,D Hop,2020
+1,8,8,Davante Adams,27581.0,Talladega Knights,2020
+1,9,9,Joe Mixon,30161.0,Jackson's Team,2020
+1,10,10,Clyde Edwards-Helaire,32702.0,Brokaw's Bums,2020
+2,1,11,Tyreek Hill,29399.0,Brokaw's Bums,2020
+2,2,12,Austin Ekeler,30423.0,Jackson's Team,2020
+2,3,13,Nick Chubb,31005.0,Talladega Knights,2020
+2,4,14,Julio Jones,24793.0,D Hop,2020
+2,5,15,Josh Jacobs,31856.0,Hingle McCringlebery,2020
+2,6,16,Aaron Jones Sr.,30295.0,Lambeau Leapers,2020
+2,7,17,Kenyan Drake,29307.0,Joe Buck Yourself,2020
+2,8,18,George Kittle,30259.0,The Cousin Lovers,2020
+2,9,19,DeAndre Hopkins,26650.0,Starting Defense,2020
+2,10,20,Miles Sanders,31885.0,The Roethlisberger's,2020
+3,1,21,Chris Godwin Jr.,30197.0,The Roethlisberger's,2020
+3,2,22,Travis Kelce,26686.0,Starting Defense,2020
+3,3,23,Kenny Golladay,30209.0,The Cousin Lovers,2020
+3,4,24,Odell Beckham Jr.,27540.0,Joe Buck Yourself,2020
+3,5,25,Lamar Jackson,31002.0,Lambeau Leapers,2020
+3,6,26,Chris Carson,30362.0,Hingle McCringlebery,2020
+3,7,27,James Conner,30218.0,D Hop,2020
+3,8,28,Amari Cooper,28392.0,Talladega Knights,2020
+3,9,29,Patrick Mahomes,30123.0,Jackson's Team,2020
+3,10,30,Adam Thielen,27277.0,Brokaw's Bums,2020
+4,1,31,Melvin Gordon III,28403.0,Brokaw's Bums,2020
+4,2,32,Allen Robinson,27589.0,Jackson's Team,2020
+4,3,33,Russell Wilson,25785.0,Talladega Knights,2020
+4,4,34,Todd Gurley,28398.0,D Hop,2020
+4,5,35,Mike Evans,27535.0,Hingle McCringlebery,2020
+4,6,36,DJ Moore,30994.0,Lambeau Leapers,2020
+4,7,37,JuJu Smith-Schuster,30175.0,Joe Buck Yourself,2020
+4,8,38,Jonathan Taylor,32711.0,The Cousin Lovers,2020
+4,9,39,Mark Ingram II,24815.0,Starting Defense,2020
+4,10,40,Cooper Kupp,30182.0,The Roethlisberger's,2020
+5,1,41,David Johnson,28474.0,The Roethlisberger's,2020
+5,2,42,A.J. Brown,31883.0,Starting Defense,2020
+5,3,43,Tyler Lockett,28457.0,The Cousin Lovers,2020
+5,4,44,Le'Veon Bell,26671.0,Joe Buck Yourself,2020
+5,5,45,Raheem Mostert,28654.0,Lambeau Leapers,2020
+5,6,46,Cam Akers,32722.0,Hingle McCringlebery,2020
+5,7,47,Zach Ertz,26658.0,D Hop,2020
+5,8,48,Leonard Fournette,30117.0,Talladega Knights,2020
+5,9,49,Mark Andrews,31056.0,Jackson's Team,2020
+5,10,50,Kyler Murray,31833.0,Brokaw's Bums,2020
+6,1,51,D'Andre Swift,32705.0,Brokaw's Bums,2020
+6,2,52,DK Metcalf,31896.0,Jackson's Team,2020
+6,3,53,Keenan Allen,26699.0,Talladega Knights,2020
+6,4,54,Hollywood Brown,31857.0,D Hop,2020
+6,5,55,Terry McLaurin,31908.0,Hingle McCringlebery,2020
+6,6,56,Calvin Ridley,30996.0,Lambeau Leapers,2020
+6,7,57,Darren Waller,28592.0,Joe Buck Yourself,2020
+6,8,58,Deshaun Watson,30125.0,The Cousin Lovers,2020
+6,9,59,DJ Chark,31031.0,Starting Defense,2020
+6,10,60,Stefon Diggs,28534.0,The Roethlisberger's,2020
+7,1,61,Kareem Hunt,30199.0,The Roethlisberger's,2020
+7,2,62,Ronald Jones,31008.0,Starting Defense,2020
+7,3,63,Robert Woods,26664.0,The Cousin Lovers,2020
+7,4,64,DeVante Parker,28402.0,Joe Buck Yourself,2020
+7,5,65,T.Y. Hilton,25802.0,Lambeau Leapers,2020
+7,6,66,J.K. Dobbins,32725.0,Hingle McCringlebery,2020
+7,7,67,Tyler Boyd,29288.0,D Hop,2020
+7,8,68,Evan Engram,30136.0,Talladega Knights,2020
+7,9,69,Courtland Sutton,31010.0,Jackson's Team,2020
+7,10,70,Tyler Higbee,29344.0,Brokaw's Bums,2020
+8,1,71,Michael Gallup,31051.0,Brokaw's Bums,2020
+8,2,72,Devin Singletary,31906.0,Jackson's Team,2020
+8,3,73,David Montgomery,31905.0,Talladega Knights,2020
+8,4,74,James White,27658.0,D Hop,2020
+8,5,75,Dak Prescott,29369.0,Hingle McCringlebery,2020
+8,6,76,Will Fuller V,29255.0,Lambeau Leapers,2020
+8,7,77,A.J. Green,24791.0,Joe Buck Yourself,2020
+8,8,78,Jordan Howard,29384.0,The Cousin Lovers,2020
+8,9,79,Matt Ryan,8780.0,Starting Defense,2020
+8,10,80,Josh Allen,30977.0,The Roethlisberger's,2020
+9,1,81,Hunter Henry,29269.0,The Roethlisberger's,2020
+9,2,82,Jarvis Landry,27591.0,Starting Defense,2020
+9,3,83,Deebo Samuel Sr.,31868.0,The Cousin Lovers,2020
+9,4,84,Julian Edelman,9496.0,Joe Buck Yourself,2020
+9,5,85,Phillip Lindsay,31379.0,Lambeau Leapers,2020
+9,6,86,Brandin Cooks,27548.0,Hingle McCringlebery,2020
+9,7,87,Marvin Jones Jr.,25876.0,D Hop,2020
+9,8,88,49ers,,Talladega Knights,2020
+9,9,89,Ravens,,Jackson's Team,2020
+9,10,90,Zack Moss,32756.0,Brokaw's Bums,2020
+10,1,91,Diontae Johnson,31898.0,Brokaw's Bums,2020
+10,2,92,Justin Tucker,26534.0,Jackson's Team,2020
+10,3,93,Henry Ruggs III,32682.0,Talladega Knights,2020
+10,4,94,Latavius Murray,26804.0,D Hop,2020
+10,5,95,CeeDee Lamb,32687.0,Hingle McCringlebery,2020
+10,6,96,Rob Gronkowski,24017.0,Lambeau Leapers,2020
+10,7,97,Antonio Gibson,32736.0,Joe Buck Yourself,2020
+10,8,98,Sterling Shepard,29274.0,The Cousin Lovers,2020
+10,9,99,Tarik Cohen,30232.0,Starting Defense,2020
+10,10,100,Steelers,,The Roethlisberger's,2020
+11,1,101,Mecole Hardman Jr.,31888.0,The Roethlisberger's,2020
+11,2,102,Harrison Butker,30346.0,Starting Defense,2020
+11,3,103,Wil Lutz,29754.0,The Cousin Lovers,2020
+11,4,104,Emmanuel Sanders,24057.0,Joe Buck Yourself,2020
+11,5,105,Jared Cook,9353.0,Lambeau Leapers,2020
+11,6,106,Hayden Hurst,30995.0,Hingle McCringlebery,2020
+11,7,107,Drew Brees,5479.0,D Hop,2020
+11,8,108,Robbie Gould,7520.0,Talladega Knights,2020
+11,9,109,Preston Williams,32447.0,Jackson's Team,2020
+11,10,110,Matt Breida,30552.0,Brokaw's Bums,2020
+12,1,111,Bears,,Brokaw's Bums,2020
+12,2,112,Duke Johnson,28465.0,Jackson's Team,2020
+12,3,113,Mike Williams,30120.0,Talladega Knights,2020
+12,4,114,Bills,,D Hop,2020
+12,5,115,Vikings,,Hingle McCringlebery,2020
+12,6,116,Aaron Rodgers,7200.0,Lambeau Leapers,2020
+12,7,117,Carson Wentz,29236.0,Joe Buck Yourself,2020
+12,8,118,Saints,,The Cousin Lovers,2020
+12,9,119,Kerryon Johnson,31013.0,Starting Defense,2020
+12,10,120,Austin Hooper,29315.0,The Roethlisberger's,2020
+13,1,121,Marlon Mack,30256.0,The Roethlisberger's,2020
+13,2,122,T.J. Hockenson,31840.0,Starting Defense,2020
+13,3,123,Cam Newton,24788.0,The Cousin Lovers,2020
+13,4,124,Damien Williams,28115.0,Joe Buck Yourself,2020
+13,5,125,Chiefs,,Lambeau Leapers,2020
+13,6,126,Noah Fant,31852.0,Hingle McCringlebery,2020
+13,7,127,Mike Gesicki,31012.0,D Hop,2020
+13,8,128,Sony Michel,31001.0,Talladega Knights,2020
+13,9,129,Darrel Williams,31500.0,Jackson's Team,2020
+13,10,130,Jamison Crowder,28493.0,Brokaw's Bums,2020
+14,1,131,Darius Slayton,32003.0,Brokaw's Bums,2020
+14,2,132,Devonta Freeman,27631.0,Jackson's Team,2020
+14,3,133,Tevin Coleman,28461.0,Talladega Knights,2020
+14,4,134,Ben Roethlisberger,6770.0,D Hop,2020
+14,5,135,Chris Thompson,26777.0,Hingle McCringlebery,2020
+14,6,136,Tony Pollard,31960.0,Lambeau Leapers,2020
+14,7,137,Greg Zuerlein,25881.0,Joe Buck Yourself,2020
+14,8,138,John Brown,27619.0,The Cousin Lovers,2020
+14,9,139,Patriots,,Starting Defense,2020
+14,10,140,Justin Jefferson,32692.0,The Roethlisberger's,2020
+15,1,141,Chris Boswell,28188.0,The Roethlisberger's,2020
+15,2,142,Jerry Jeudy,32685.0,Starting Defense,2020
+15,3,143,Darrell Henderson Jr.,31902.0,The Cousin Lovers,2020
+15,4,144,Matthew Stafford,9265.0,Joe Buck Yourself,2020
+15,5,145,Allen Lazard,31268.0,Lambeau Leapers,2020
+15,6,146,Matt Prater,8565.0,Hingle McCringlebery,2020
+15,7,147,Jake Elliott,30266.0,D Hop,2020
+15,8,148,Jack Doyle,27299.0,Talladega Knights,2020
+15,9,149,Bryce Love,31944.0,Jackson's Team,2020
+15,10,150,Zane Gonzalez,30337.0,Brokaw's Bums,2020
+1,1,1,Christian McCaffrey,30121.0,Starting Defense,2021
+1,2,2,Dalvin Cook,30154.0,Hingle McCringlebery,2021
+1,3,3,Alvin Kamara,30180.0,Simps Squad,2021
+1,4,4,Austin Ekeler,30423.0,Jackson's Team,2021
+1,5,5,Ezekiel Elliott,29238.0,Lambeau Leapers,2021
+1,6,6,Derrick Henry,29279.0,Talladega Knights,2021
+1,7,7,Tyreek Hill,29399.0,The Cousin Lovers,2021
+1,8,8,Aaron Jones Sr.,30295.0,The Roethlisberger's,2021
+1,9,9,Davante Adams,27581.0,Joe Buck Yourself,2021
+1,10,10,Nick Chubb,31005.0,Brokaw's Bums,2021
+2,1,11,Stefon Diggs,28534.0,Brokaw's Bums,2021
+2,2,12,Jonathan Taylor,32711.0,Joe Buck Yourself,2021
+2,3,13,Travis Kelce,26686.0,The Roethlisberger's,2021
+2,4,14,Saquon Barkley,30972.0,The Cousin Lovers,2021
+2,5,15,DeAndre Hopkins,26650.0,Talladega Knights,2021
+2,6,16,Antonio Gibson,32736.0,Lambeau Leapers,2021
+2,7,17,Najee Harris,33412.0,Jackson's Team,2021
+2,8,18,Calvin Ridley,30996.0,Simps Squad,2021
+2,9,19,Clyde Edwards-Helaire,32702.0,Hingle McCringlebery,2021
+2,10,20,DK Metcalf,31896.0,Starting Defense,2021
+3,1,21,Justin Jefferson,32692.0,Starting Defense,2021
+3,2,22,George Kittle,30259.0,Hingle McCringlebery,2021
+3,3,23,Josh Jacobs,31856.0,Simps Squad,2021
+3,4,24,Joe Mixon,30161.0,Jackson's Team,2021
+3,5,25,Darren Waller,28592.0,Lambeau Leapers,2021
+3,6,26,Chris Carson,30362.0,Talladega Knights,2021
+3,7,27,Patrick Mahomes,30123.0,The Cousin Lovers,2021
+3,8,28,Keenan Allen,26699.0,The Roethlisberger's,2021
+3,9,29,James Robinson,33138.0,Joe Buck Yourself,2021
+3,10,30,CeeDee Lamb,32687.0,Brokaw's Bums,2021
+4,1,31,Terry McLaurin,31908.0,Brokaw's Bums,2021
+4,2,32,A.J. Brown,31883.0,Joe Buck Yourself,2021
+4,3,33,David Montgomery,31905.0,The Roethlisberger's,2021
+4,4,34,Chris Godwin Jr.,30197.0,The Cousin Lovers,2021
+4,5,35,Josh Allen,30977.0,Talladega Knights,2021
+4,6,36,Allen Robinson,27589.0,Lambeau Leapers,2021
+4,7,37,Kyle Pitts Sr.,33392.0,Jackson's Team,2021
+4,8,38,Dak Prescott,29369.0,Simps Squad,2021
+4,9,39,Amari Cooper,28392.0,Hingle McCringlebery,2021
+4,10,40,Lamar Jackson,31002.0,Starting Defense,2021
+5,1,41,Gus Edwards,31424.0,Starting Defense,2021
+5,2,42,Robert Woods,26664.0,Hingle McCringlebery,2021
+5,3,43,Mark Andrews,31056.0,Simps Squad,2021
+5,4,44,Kyler Murray,31833.0,Jackson's Team,2021
+5,5,45,D'Andre Swift,32705.0,Lambeau Leapers,2021
+5,6,46,T.J. Hockenson,31840.0,Talladega Knights,2021
+5,7,47,Miles Sanders,31885.0,The Cousin Lovers,2021
+5,8,48,Justin Herbert,32676.0,The Roethlisberger's,2021
+5,9,49,Russell Wilson,25785.0,Joe Buck Yourself,2021
+5,10,50,Damien Harris,31919.0,Brokaw's Bums,2021
+6,1,51,Tyler Lockett,28457.0,Brokaw's Bums,2021
+6,2,52,Cooper Kupp,30182.0,Joe Buck Yourself,2021
+6,3,53,Diontae Johnson,31898.0,The Roethlisberger's,2021
+6,4,54,Adam Thielen,27277.0,The Cousin Lovers,2021
+6,5,55,Mike Evans,27535.0,Talladega Knights,2021
+6,6,56,Julio Jones,24793.0,Lambeau Leapers,2021
+6,7,57,DJ Moore,30994.0,Jackson's Team,2021
+6,8,58,Chase Claypool,32719.0,Simps Squad,2021
+6,9,59,Brandon Aiyuk,32695.0,Hingle McCringlebery,2021
+6,10,60,Dallas Goedert,31019.0,Starting Defense,2021
+7,1,61,Jerry Jeudy,32685.0,Starting Defense,2021
+7,2,62,Kareem Hunt,30199.0,Hingle McCringlebery,2021
+7,3,63,Odell Beckham Jr.,27540.0,Simps Squad,2021
+7,4,64,Tee Higgins,32703.0,Jackson's Team,2021
+7,5,65,Myles Gaskin,32066.0,Lambeau Leapers,2021
+7,6,66,Robbie Chosen,29785.0,Talladega Knights,2021
+7,7,67,Raheem Mostert,28654.0,The Cousin Lovers,2021
+7,8,68,Mike Davis,28514.0,The Roethlisberger's,2021
+7,9,69,Logan Thomas,27648.0,Joe Buck Yourself,2021
+7,10,70,Chase Edmonds,31104.0,Brokaw's Bums,2021
+8,1,71,Aaron Rodgers,7200.0,Brokaw's Bums,2021
+8,2,72,Darrell Henderson Jr.,31902.0,Joe Buck Yourself,2021
+8,3,73,Ronald Jones,31008.0,The Roethlisberger's,2021
+8,4,74,Tyler Higbee,29344.0,The Cousin Lovers,2021
+8,5,75,Javonte Williams,33423.0,Talladega Knights,2021
+8,6,76,Antonio Brown,24171.0,Lambeau Leapers,2021
+8,7,77,Trey Sermon,33476.0,Jackson's Team,2021
+8,8,78,Kenny Golladay,30209.0,Simps Squad,2021
+8,9,79,Tom Brady,5228.0,Hingle McCringlebery,2021
+8,10,80,JuJu Smith-Schuster,30175.0,Starting Defense,2021
+9,1,81,AJ Dillon,32732.0,Starting Defense,2021
+9,2,82,Michael Thomas,29281.0,Hingle McCringlebery,2021
+9,3,83,Rams,,Simps Squad,2021
+9,4,84,DeVonta Smith,33398.0,Jackson's Team,2021
+9,5,85,Steelers,,Lambeau Leapers,2021
+9,6,86,Buccaneers,,Talladega Knights,2021
+9,7,87,Deebo Samuel Sr.,31868.0,The Cousin Lovers,2021
+9,8,88,Commanders,,The Roethlisberger's,2021
+9,9,89,Browns,,Joe Buck Yourself,2021
+9,10,90,Noah Fant,31852.0,Brokaw's Bums,2021
+10,1,91,Leonard Fournette,30117.0,Brokaw's Bums,2021
+10,2,92,Tyler Boyd,29288.0,Joe Buck Yourself,2021
+10,3,93,Corey Davis,30118.0,The Roethlisberger's,2021
+10,4,94,Robert Tonyan,30777.0,The Cousin Lovers,2021
+10,5,95,Jarvis Landry,27591.0,Talladega Knights,2021
+10,6,96,Ryan Tannehill,25718.0,Lambeau Leapers,2021
+10,7,97,Justin Tucker,26534.0,Jackson's Team,2021
+10,8,98,Harrison Butker,30346.0,Simps Squad,2021
+10,9,99,Laviska Shenault Jr.,32712.0,Hingle McCringlebery,2021
+10,10,100,Jalen Hurts,32723.0,Starting Defense,2021
+11,1,101,Brandin Cooks,27548.0,Starting Defense,2021
+11,2,102,Ja'Marr Chase,33393.0,Hingle McCringlebery,2021
+11,3,103,Courtland Sutton,31010.0,Simps Squad,2021
+11,4,104,Marquez Callaway,33109.0,Jackson's Team,2021
+11,5,105,Will Fuller V,29255.0,Lambeau Leapers,2021
+11,6,106,James Conner,30218.0,Talladega Knights,2021
+11,7,107,DJ Chark,31031.0,The Cousin Lovers,2021
+11,8,108,Michael Pittman Jr.,32704.0,The Roethlisberger's,2021
+11,9,109,Melvin Gordon III,28403.0,Joe Buck Yourself,2021
+11,10,110,49ers,,Brokaw's Bums,2021
+12,1,111,Zack Moss,32756.0,Brokaw's Bums,2021
+12,2,112,Michael Gallup,31051.0,Joe Buck Yourself,2021
+12,3,113,Younghoe Koo,30426.0,The Roethlisberger's,2021
+12,4,114,Devin Singletary,31906.0,The Cousin Lovers,2021
+12,5,115,Hollywood Brown,31857.0,Talladega Knights,2021
+12,6,116,Tony Pollard,31960.0,Lambeau Leapers,2021
+12,7,117,Broncos,,Jackson's Team,2021
+12,8,118,Sony Michel,31001.0,Simps Squad,2021
+12,9,119,Mike Williams,30120.0,Hingle McCringlebery,2021
+12,10,120,Jamaal Williams,30247.0,Starting Defense,2021
+13,1,121,Ryan Succop,9520.0,Starting Defense,2021
+13,2,122,Matthew Stafford,9265.0,Hingle McCringlebery,2021
+13,3,123,Gerald Everett,30157.0,Simps Squad,2021
+13,4,124,Darnell Mooney,32843.0,Jackson's Team,2021
+13,5,125,Alexander Mattison,31934.0,Lambeau Leapers,2021
+13,6,126,Tyler Bass,32858.0,Talladega Knights,2021
+13,7,127,Matt Gay,31977.0,The Cousin Lovers,2021
+13,8,128,Jaylen Waddle,33394.0,The Roethlisberger's,2021
+13,9,129,Rodrigo Blankenship,33211.0,Joe Buck Yourself,2021
+13,10,130,Cole Beasley,26060.0,Brokaw's Bums,2021
+14,1,131,Robbie Gould,7520.0,Brokaw's Bums,2021
+14,2,132,Michael Carter,33495.0,Joe Buck Yourself,2021
+14,3,133,J.D. McKissic,29650.0,The Roethlisberger's,2021
+14,4,134,Ravens,,The Cousin Lovers,2021
+14,5,135,Marvin Jones Jr.,25876.0,Talladega Knights,2021
+14,6,136,Latavius Murray,26804.0,Lambeau Leapers,2021
+14,7,137,Jake Funk,33621.0,Jackson's Team,2021
+14,8,138,DeVante Parker,28402.0,Simps Squad,2021
+14,9,139,Patriots,,Hingle McCringlebery,2021
+14,10,140,Chiefs,,Starting Defense,2021
+15,1,141,Phillip Lindsay,31379.0,Starting Defense,2021
+15,2,142,Greg Zuerlein,25881.0,Hingle McCringlebery,2021
+15,3,143,Curtis Samuel,30153.0,Simps Squad,2021
+15,4,144,Jakobi Meyers,32231.0,Jackson's Team,2021
+15,5,145,Mason Crosby,8447.0,Lambeau Leapers,2021
+15,6,146,Nyheim Miller-Hines,31074.0,Talladega Knights,2021
+15,7,147,Sterling Shepard,29274.0,The Cousin Lovers,2021
+15,8,148,Mecole Hardman Jr.,31888.0,The Roethlisberger's,2021
+15,9,149,Mike Gesicki,31012.0,Joe Buck Yourself,2021
+15,10,150,Adam Trautman,32775.0,Brokaw's Bums,2021
+1,1,1,Jonathan Taylor,32711.0,Starting Defense,2022
+1,2,2,Christian McCaffrey,30121.0,The Roethlisberger's,2022
+1,3,3,Justin Jefferson,32692.0,Hingle McCringlebery,2022
+1,4,4,Austin Ekeler,30423.0,Simps Squad,2022
+1,5,5,Derrick Henry,29279.0,Lambeau Leapers,2022
+1,6,6,Dalvin Cook,30154.0,Talladega Knights,2022
+1,7,7,Cooper Kupp,30182.0,The Cousin Lovers,2022
+1,8,8,Ja'Marr Chase,33393.0,Jackson's Team,2022
+1,9,9,Najee Harris,33412.0,Joe Buck Yourself,2022
+1,10,10,Travis Kelce,26686.0,Brokaw's Bums,2022
+2,1,11,Alvin Kamara,30180.0,Brokaw's Bums,2022
+2,2,12,Stefon Diggs,28534.0,Joe Buck Yourself,2022
+2,3,13,CeeDee Lamb,32687.0,Jackson's Team,2022
+2,4,14,Joe Mixon,30161.0,The Cousin Lovers,2022
+2,5,15,Davante Adams,27581.0,Talladega Knights,2022
+2,6,16,Aaron Jones Sr.,30295.0,Lambeau Leapers,2022
+2,7,17,D'Andre Swift,32705.0,Simps Squad,2022
+2,8,18,Saquon Barkley,30972.0,Hingle McCringlebery,2022
+2,9,19,Nick Chubb,31005.0,The Roethlisberger's,2022
+2,10,20,Tyreek Hill,29399.0,Starting Defense,2022
+3,1,21,Javonte Williams,33423.0,Starting Defense,2022
+3,2,22,Mike Evans,27535.0,The Roethlisberger's,2022
+3,3,23,Deebo Samuel Sr.,31868.0,Hingle McCringlebery,2022
+3,4,24,A.J. Brown,31883.0,Simps Squad,2022
+3,5,25,Keenan Allen,26699.0,Lambeau Leapers,2022
+3,6,26,Leonard Fournette,30117.0,Talladega Knights,2022
+3,7,27,Ezekiel Elliott,29238.0,The Cousin Lovers,2022
+3,8,28,Mark Andrews,31056.0,Jackson's Team,2022
+3,9,29,Michael Pittman Jr.,32704.0,Joe Buck Yourself,2022
+3,10,30,DJ Moore,30994.0,Brokaw's Bums,2022
+4,1,31,James Conner,30218.0,Brokaw's Bums,2022
+4,2,32,Kyle Pitts Sr.,33392.0,Joe Buck Yourself,2022
+4,3,33,Cam Akers,32722.0,Jackson's Team,2022
+4,4,34,Elijah Mitchell,33582.0,The Cousin Lovers,2022
+4,5,35,Mike Williams,30120.0,Talladega Knights,2022
+4,6,36,Tee Higgins,32703.0,Lambeau Leapers,2022
+4,7,37,Terry McLaurin,31908.0,Simps Squad,2022
+4,8,38,Jaylen Waddle,33394.0,Hingle McCringlebery,2022
+4,9,39,Josh Allen,30977.0,The Roethlisberger's,2022
+4,10,40,Lamar Jackson,31002.0,Starting Defense,2022
+5,1,41,George Kittle,30259.0,Starting Defense,2022
+5,2,42,Breece Hall,33991.0,The Roethlisberger's,2022
+5,3,43,AJ Dillon,32732.0,Hingle McCringlebery,2022
+5,4,44,T.J. Hockenson,31840.0,Simps Squad,2022
+5,5,45,David Montgomery,31905.0,Lambeau Leapers,2022
+5,6,46,Dallas Goedert,31019.0,Talladega Knights,2022
+5,7,47,Justin Herbert,32676.0,The Cousin Lovers,2022
+5,8,48,Patrick Mahomes,30123.0,Jackson's Team,2022
+5,9,49,Travis Etienne Jr.,33413.0,Joe Buck Yourself,2022
+5,10,50,Josh Jacobs,31856.0,Brokaw's Bums,2022
+6,1,51,Allen Robinson,27589.0,Brokaw's Bums,2022
+6,2,52,Courtland Sutton,31010.0,Joe Buck Yourself,2022
+6,3,53,Darren Waller,28592.0,Jackson's Team,2022
+6,4,54,Gabe Davis,32798.0,The Cousin Lovers,2022
+6,5,55,Joe Burrow,32671.0,Talladega Knights,2022
+6,6,56,Diontae Johnson,31898.0,Lambeau Leapers,2022
+6,7,57,Kyler Murray,31833.0,Simps Squad,2022
+6,8,58,Amon-Ra St. Brown,33500.0,Hingle McCringlebery,2022
+6,9,59,Dalton Schultz,31107.0,The Roethlisberger's,2022
+6,10,60,Brandin Cooks,27548.0,Starting Defense,2022
+7,1,61,Clyde Edwards-Helaire,32702.0,Starting Defense,2022
+7,2,62,DK Metcalf,31896.0,The Roethlisberger's,2022
+7,3,63,JuJu Smith-Schuster,30175.0,Hingle McCringlebery,2022
+7,4,64,Hollywood Brown,31857.0,Simps Squad,2022
+7,5,65,Jerry Jeudy,32685.0,Lambeau Leapers,2022
+7,6,66,Amari Cooper,28392.0,Talladega Knights,2022
+7,7,67,Adam Thielen,27277.0,The Cousin Lovers,2022
+7,8,68,Antonio Gibson,32736.0,Jackson's Team,2022
+7,9,69,J.K. Dobbins,32725.0,Joe Buck Yourself,2022
+7,10,70,Michael Thomas,29281.0,Brokaw's Bums,2022
+8,1,71,Rashaad Penny,30997.0,Brokaw's Bums,2022
+8,2,72,Chris Godwin Jr.,30197.0,Joe Buck Yourself,2022
+8,3,73,Damien Harris,31919.0,Jackson's Team,2022
+8,4,74,Chase Edmonds,31104.0,The Cousin Lovers,2022
+8,5,75,Rhamondre Stevenson,33508.0,Talladega Knights,2022
+8,6,76,Jalen Hurts,32723.0,Lambeau Leapers,2022
+8,7,77,Tony Pollard,31960.0,Simps Squad,2022
+8,8,78,Elijah Moore,33422.0,Hingle McCringlebery,2022
+8,9,79,Darnell Mooney,32843.0,The Roethlisberger's,2022
+8,10,80,Devin Singletary,31906.0,Starting Defense,2022
+9,1,81,Brandon Aiyuk,32695.0,Starting Defense,2022
+9,2,82,Miles Sanders,31885.0,The Roethlisberger's,2022
+9,3,83,Dameon Pierce,34063.0,Hingle McCringlebery,2022
+9,4,84,Allen Lazard,31268.0,Simps Squad,2022
+9,5,85,Rashod Bateman,33415.0,Lambeau Leapers,2022
+9,6,86,Robert Woods,26664.0,Talladega Knights,2022
+9,7,87,Zach Ertz,26658.0,The Cousin Lovers,2022
+9,8,88,DeAndre Hopkins,26650.0,Jackson's Team,2022
+9,9,89,Russell Wilson,25785.0,Joe Buck Yourself,2022
+9,10,90,Hunter Renfrow,31981.0,Brokaw's Bums,2022
+10,1,91,Tom Brady,5228.0,Brokaw's Bums,2022
+10,2,92,Kareem Hunt,30199.0,Joe Buck Yourself,2022
+10,3,93,DeVonta Smith,33398.0,Jackson's Team,2022
+10,4,94,Christian Kirk,31017.0,The Cousin Lovers,2022
+10,5,95,Bills,,Talladega Knights,2022
+10,6,96,Dawson Knox,31928.0,Lambeau Leapers,2022
+10,7,97,Chase Claypool,32719.0,Simps Squad,2022
+10,8,98,James Cook III,34019.0,Hingle McCringlebery,2022
+10,9,99,Trey Lance,33391.0,The Roethlisberger's,2022
+10,10,100,Russell Gage Jr.,31164.0,Starting Defense,2022
+11,1,101,Tyler Lockett,28457.0,Starting Defense,2022
+11,2,102,Kenneth Walker III,33996.0,The Roethlisberger's,2022
+11,3,103,Brian Robinson,34054.0,Hingle McCringlebery,2022
+11,4,104,Packers,,Simps Squad,2022
+11,5,105,Melvin Gordon III,28403.0,Lambeau Leapers,2022
+11,6,106,Nyheim Miller-Hines,31074.0,Talladega Knights,2022
+11,7,107,Dak Prescott,29369.0,The Cousin Lovers,2022
+11,8,108,Cordarrelle Patterson,26652.0,Jackson's Team,2022
+11,9,109,Drake London,33963.0,Joe Buck Yourself,2022
+11,10,110,Kadarius Toney,33408.0,Brokaw's Bums,2022
+12,1,111,Chris Olave,33966.0,Brokaw's Bums,2022
+12,2,112,George Pickens,34007.0,Joe Buck Yourself,2022
+12,3,113,Justin Tucker,26534.0,Jackson's Team,2022
+12,4,114,Buccaneers,,The Cousin Lovers,2022
+12,5,115,Isaiah McKenzie,30285.0,Talladega Knights,2022
+12,6,116,Aaron Rodgers,7200.0,Lambeau Leapers,2022
+12,7,117,Treylon Burks,33973.0,Simps Squad,2022
+12,8,118,Kirk Cousins,25812.0,Hingle McCringlebery,2022
+12,9,119,Jamaal Williams,30247.0,The Roethlisberger's,2022
+12,10,120,Tyler Boyd,29288.0,Starting Defense,2022
+13,1,121,Matthew Stafford,9265.0,Starting Defense,2022
+13,2,122,James Robinson,33138.0,The Roethlisberger's,2022
+13,3,123,Michael Carter,33495.0,Hingle McCringlebery,2022
+13,4,124,Kenny Gainwell,33538.0,Simps Squad,2022
+13,5,125,Alexander Mattison,31934.0,Lambeau Leapers,2022
+13,6,126,Isiah Pacheco,34207.0,Talladega Knights,2022
+13,7,127,Irv Smith Jr.,31882.0,The Cousin Lovers,2022
+13,8,128,Deshaun Watson,30125.0,Jackson's Team,2022
+13,9,129,Julio Jones,24793.0,Joe Buck Yourself,2022
+13,10,130,Albert Okwuegbunam Jr.,32788.0,Brokaw's Bums,2022
+14,1,131,Jakobi Meyers,32231.0,Brokaw's Bums,2022
+14,2,132,Ronald Jones,31008.0,Joe Buck Yourself,2022
+14,3,133,Raheem Mostert,28654.0,Jackson's Team,2022
+14,4,134,Marquez Valdes-Scantling,31144.0,The Cousin Lovers,2022
+14,5,135,Evan McPherson,33537.0,Talladega Knights,2022
+14,6,136,Darrell Henderson Jr.,31902.0,Lambeau Leapers,2022
+14,7,137,Garrett Wilson,33965.0,Simps Squad,2022
+14,8,138,Pat Freiermuth,33443.0,Hingle McCringlebery,2022
+14,9,139,DJ Chark,31031.0,The Roethlisberger's,2022
+14,10,140,Jarvis Landry,27591.0,Starting Defense,2022
+15,1,141,Daniel Carlson,31137.0,Starting Defense,2022
+15,2,142,Harrison Butker,30346.0,The Roethlisberger's,2022
+15,3,143,Wan'Dale Robinson,33998.0,Hingle McCringlebery,2022
+15,4,144,Matt Gay,31977.0,Simps Squad,2022
+15,5,145,Greg Joseph,31538.0,Lambeau Leapers,2022
+15,6,146,Nico Collins,33477.0,Talladega Knights,2022
+15,7,147,Tyler Bass,32858.0,The Cousin Lovers,2022
+15,8,148,Rams,,Jackson's Team,2022
+15,9,149,Romeo Doubs,34088.0,Joe Buck Yourself,2022
+15,10,150,Rachaad White,34047.0,Brokaw's Bums,2022
+16,1,151,Jalen Tolbert,34044.0,Brokaw's Bums,2022
+16,2,152,49ers,,Joe Buck Yourself,2022
+16,3,153,Antonio Brown,24171.0,Jackson's Team,2022
+16,4,154,DeVante Parker,28402.0,The Cousin Lovers,2022
+16,5,155,Robert Tonyan,30777.0,Talladega Knights,2022
+16,6,156,Chargers,,Lambeau Leapers,2022
+16,7,157,Sammy Watkins,27532.0,Simps Squad,2022
+16,8,158,Broncos,,Hingle McCringlebery,2022
+16,9,159,Skyy Moore,34009.0,The Roethlisberger's,2022
+16,10,160,Austin Hooper,29315.0,Starting Defense,2022
+17,1,161,Chiefs,,Starting Defense,2022
+17,2,162,Steelers,,The Roethlisberger's,2022
+17,3,163,Younghoe Koo,30426.0,Hingle McCringlebery,2022
+17,4,164,Mike Gesicki,31012.0,Simps Squad,2022
+17,5,165,Blake Bortles,27531.0,Lambeau Leapers,2022
+17,6,166,Alec Pierce,34008.0,Talladega Knights,2022
+17,7,167,Robbie Chosen,29785.0,The Cousin Lovers,2022
+17,8,168,Calvin Ridley,30996.0,Jackson's Team,2022
+17,9,169,Nick Folk,8432.0,Joe Buck Yourself,2022
+17,10,170,Colts,,Brokaw's Bums,2022
+1,1,1,Justin Jefferson,32692.0,Hingle McCringlebery,2023
+1,2,2,Ja'Marr Chase,33393.0,Brokaw's Bums,2023
+1,3,3,Christian McCaffrey,30121.0,The Roethlisberger's,2023
+1,4,4,Austin Ekeler,30423.0,Simps Squad,2023
+1,5,5,Tyreek Hill,29399.0,Starting Defense,2023
+1,6,6,Nick Chubb,31005.0,Talladega Knights,2023
+1,7,7,Bijan Robinson,40055.0,Joe Buck Yourself,2023
+1,8,8,Saquon Barkley,30972.0,Jackson's Team,2023
+1,9,9,Derrick Henry,29279.0,The Cousin Lovers,2023
+1,10,10,Cooper Kupp,30182.0,Lambeau Leapers,2023
+2,1,11,Tony Pollard,31960.0,Lambeau Leapers,2023
+2,2,12,Stefon Diggs,28534.0,The Cousin Lovers,2023
+2,3,13,CeeDee Lamb,32687.0,Jackson's Team,2023
+2,4,14,Travis Kelce,26686.0,Joe Buck Yourself,2023
+2,5,15,Davante Adams,27581.0,Talladega Knights,2023
+2,6,16,Garrett Wilson,33965.0,Starting Defense,2023
+2,7,17,A.J. Brown,31883.0,Simps Squad,2023
+2,8,18,Josh Jacobs,31856.0,The Roethlisberger's,2023
+2,9,19,Amon-Ra St. Brown,33500.0,Brokaw's Bums,2023
+2,10,20,Jahmyr Gibbs,40059.0,Hingle McCringlebery,2023
+3,1,21,Jonathan Taylor,32711.0,Hingle McCringlebery,2023
+3,2,22,Travis Etienne Jr.,33413.0,Brokaw's Bums,2023
+3,3,23,Najee Harris,33412.0,The Roethlisberger's,2023
+3,4,24,Jaylen Waddle,33394.0,Simps Squad,2023
+3,5,25,Patrick Mahomes,30123.0,Starting Defense,2023
+3,6,26,Aaron Jones Sr.,30295.0,Talladega Knights,2023
+3,7,27,Chris Olave,33966.0,Joe Buck Yourself,2023
+3,8,28,Jalen Hurts,32723.0,Jackson's Team,2023
+3,9,29,Joe Mixon,30161.0,The Cousin Lovers,2023
+3,10,30,DeVonta Smith,33398.0,Lambeau Leapers,2023
+4,1,31,Breece Hall,33991.0,Lambeau Leapers,2023
+4,2,32,Josh Allen,30977.0,The Cousin Lovers,2023
+4,3,33,Rhamondre Stevenson,33508.0,Jackson's Team,2023
+4,4,34,Lamar Jackson,31002.0,Joe Buck Yourself,2023
+4,5,35,Tee Higgins,32703.0,Talladega Knights,2023
+4,6,36,J.K. Dobbins,32725.0,Starting Defense,2023
+4,7,37,Mark Andrews,31056.0,Simps Squad,2023
+4,8,38,Amari Cooper,28392.0,The Roethlisberger's,2023
+4,9,39,Calvin Ridley,30996.0,Brokaw's Bums,2023
+4,10,40,Deebo Samuel Sr.,31868.0,Hingle McCringlebery,2023
+5,1,41,Keenan Allen,26699.0,Hingle McCringlebery,2023
+5,2,42,Kenneth Walker III,33996.0,Brokaw's Bums,2023
+5,3,43,Justin Fields,33399.0,The Roethlisberger's,2023
+5,4,44,Dameon Pierce,34063.0,Simps Squad,2023
+5,5,45,Cam Akers,32722.0,Starting Defense,2023
+5,6,46,Alexander Mattison,31934.0,Talladega Knights,2023
+5,7,47,DK Metcalf,31896.0,Joe Buck Yourself,2023
+5,8,48,James Conner,30218.0,Jackson's Team,2023
+5,9,49,T.J. Hockenson,31840.0,The Cousin Lovers,2023
+5,10,50,George Kittle,30259.0,Lambeau Leapers,2023
+6,1,51,Christian Watson,33989.0,Lambeau Leapers,2023
+6,2,52,Terry McLaurin,31908.0,The Cousin Lovers,2023
+6,3,53,DeAndre Hopkins,26650.0,Jackson's Team,2023
+6,4,54,DJ Moore,30994.0,Joe Buck Yourself,2023
+6,5,55,Justin Herbert,32676.0,Talladega Knights,2023
+6,6,56,Dallas Goedert,31019.0,Starting Defense,2023
+6,7,57,Tyler Lockett,28457.0,Simps Squad,2023
+6,8,58,Drake London,33963.0,The Roethlisberger's,2023
+6,9,59,James Cook III,34019.0,Brokaw's Bums,2023
+6,10,60,Mike Evans,27535.0,Hingle McCringlebery,2023
+7,1,61,Alvin Kamara,30180.0,Hingle McCringlebery,2023
+7,2,62,Joe Burrow,32671.0,Brokaw's Bums,2023
+7,3,63,Miles Sanders,31885.0,The Roethlisberger's,2023
+7,4,64,Trevor Lawrence,33389.0,Simps Squad,2023
+7,5,65,Brandon Aiyuk,32695.0,Starting Defense,2023
+7,6,66,Diontae Johnson,31898.0,Talladega Knights,2023
+7,7,67,D'Andre Swift,32705.0,Joe Buck Yourself,2023
+7,8,68,Jerry Jeudy,32685.0,Jackson's Team,2023
+7,9,69,Chris Godwin Jr.,30197.0,The Cousin Lovers,2023
+7,10,70,Isiah Pacheco,34207.0,Lambeau Leapers,2023
+8,1,71,AJ Dillon,32732.0,Lambeau Leapers,2023
+8,2,72,Javonte Williams,33423.0,The Cousin Lovers,2023
+8,3,73,Darren Waller,28592.0,Jackson's Team,2023
+8,4,74,Dalvin Cook,30154.0,Joe Buck Yourself,2023
+8,5,75,Mike Williams,30120.0,Talladega Knights,2023
+8,6,76,Rachaad White,34047.0,Starting Defense,2023
+8,7,77,Jahan Dotson,33971.0,Simps Squad,2023
+8,8,78,Michael Pittman Jr.,32704.0,The Roethlisberger's,2023
+8,9,79,Jaxon Smith-Njigba,40041.0,Brokaw's Bums,2023
+8,10,80,Kyle Pitts Sr.,33392.0,Hingle McCringlebery,2023
+9,1,81,Hollywood Brown,31857.0,Hingle McCringlebery,2023
+9,2,82,George Pickens,34007.0,Brokaw's Bums,2023
+9,3,83,Evan Engram,30136.0,The Roethlisberger's,2023
+9,4,84,David Montgomery,31905.0,Simps Squad,2023
+9,5,85,Christian Kirk,31017.0,Starting Defense,2023
+9,6,86,Brian Robinson,34054.0,Talladega Knights,2023
+9,7,87,Khalil Herbert,33605.0,Joe Buck Yourself,2023
+9,8,88,Michael Thomas,29281.0,Jackson's Team,2023
+9,9,89,Jordan Addison,40042.0,The Cousin Lovers,2023
+9,10,90,Jamaal Williams,30247.0,Lambeau Leapers,2023
+10,1,91,Tua Tagovailoa,32675.0,Lambeau Leapers,2023
+10,2,92,Dak Prescott,29369.0,The Cousin Lovers,2023
+10,3,93,49ers,,Jackson's Team,2023
+10,4,94,Elijah Mitchell,33582.0,Joe Buck Yourself,2023
+10,5,95,Bills,,Talladega Knights,2023
+10,6,96,Pat Freiermuth,33443.0,Starting Defense,2023
+10,7,97,Cowboys,,Simps Squad,2023
+10,8,98,Gabe Davis,32798.0,The Roethlisberger's,2023
+10,9,99,Skyy Moore,34009.0,Brokaw's Bums,2023
+10,10,100,Anthony Richardson Sr.,40040.0,Hingle McCringlebery,2023
+11,1,101,Jerick McKinnon,27624.0,Hingle McCringlebery,2023
+11,2,102,David Njoku,30142.0,Brokaw's Bums,2023
+11,3,103,Justin Tucker,26534.0,The Roethlisberger's,2023
+11,4,104,Treylon Burks,33973.0,Simps Squad,2023
+11,5,105,Antonio Gibson,32736.0,Starting Defense,2023
+11,6,106,Brandin Cooks,27548.0,Talladega Knights,2023
+11,7,107,Zay Flowers,40039.0,Joe Buck Yourself,2023
+11,8,108,Daniel Carlson,31137.0,Jackson's Team,2023
+11,9,109,Damien Harris,31919.0,The Cousin Lovers,2023
+11,10,110,Eagles,,Lambeau Leapers,2023
+12,1,111,Kenny Gainwell,33538.0,Lambeau Leapers,2023
+12,2,112,Jets,,The Cousin Lovers,2023
+12,3,113,Tyler Allgeier,34107.0,Jackson's Team,2023
+12,4,114,De'Von Achane,40118.0,Joe Buck Yourself,2023
+12,5,115,Rashaad Penny,30997.0,Talladega Knights,2023
+12,6,116,JuJu Smith-Schuster,30175.0,Starting Defense,2023
+12,7,117,Elijah Moore,33422.0,Simps Squad,2023
+12,8,118,Ezekiel Elliott,29238.0,The Roethlisberger's,2023
+12,9,119,Aaron Rodgers,7200.0,Brokaw's Bums,2023
+12,10,120,Sam LaPorta,40064.0,Hingle McCringlebery,2023
+13,1,121,Zach Charbonnet,40075.0,Hingle McCringlebery,2023
+13,2,122,Zamir White,34078.0,Brokaw's Bums,2023
+13,3,123,Courtland Sutton,31010.0,The Roethlisberger's,2023
+13,4,124,Evan McPherson,33537.0,Simps Squad,2023
+13,5,125,Samaje Perine,30227.0,Starting Defense,2023
+13,6,126,Dalton Kincaid,40048.0,Talladega Knights,2023
+13,7,127,Tank Bigsby,40095.0,Joe Buck Yourself,2023
+13,8,128,Raheem Mostert,28654.0,Jackson's Team,2023
+13,9,129,Chuba Hubbard,33514.0,The Cousin Lovers,2023
+13,10,130,Odell Beckham Jr.,27540.0,Lambeau Leapers,2023
+14,1,131,Romeo Doubs,34088.0,Lambeau Leapers,2023
+14,2,132,Adam Thielen,27277.0,The Cousin Lovers,2023
+14,3,133,Quentin Johnston,40051.0,Jackson's Team,2023
+14,4,134,Jakobi Meyers,32231.0,Joe Buck Yourself,2023
+14,5,135,Jalin Hyatt,40128.0,Talladega Knights,2023
+14,6,136,D'Onta Foreman,30202.0,Starting Defense,2023
+14,7,137,Chig Okonkwo,34099.0,Simps Squad,2023
+14,8,138,Allen Lazard,31268.0,The Roethlisberger's,2023
+14,9,139,Harrison Butker,30346.0,Brokaw's Bums,2023
+14,10,140,Nico Collins,33477.0,Hingle McCringlebery,2023
+15,1,141,Kadarius Toney,33408.0,Hingle McCringlebery,2023
+15,2,142,Alec Pierce,34008.0,Brokaw's Bums,2023
+15,3,143,Jaylen Warren,34447.0,The Roethlisberger's,2023
+15,4,144,Rashod Bateman,33415.0,Simps Squad,2023
+15,5,145,Tyler Bass,32858.0,Starting Defense,2023
+15,6,146,Jake Elliott,30266.0,Talladega Knights,2023
+15,7,147,Clyde Edwards-Helaire,32702.0,Joe Buck Yourself,2023
+15,8,148,DJ Chark,31031.0,Jackson's Team,2023
+15,9,149,Jason Myers,28378.0,The Cousin Lovers,2023
+15,10,150,Jake Moody,40129.0,Lambeau Leapers,2023
+16,1,151,Jordan Love,32696.0,Lambeau Leapers,2023
+16,2,152,Devin Singletary,31906.0,The Cousin Lovers,2023
+16,3,153,Jeff Wilson Jr.,31394.0,Jackson's Team,2023
+16,4,154,Riley Patterson,33781.0,Joe Buck Yourself,2023
+16,5,155,Deshaun Watson,30125.0,Talladega Knights,2023
+16,6,156,Patriots,,Starting Defense,2023
+16,7,157,Jameson Williams,33967.0,Simps Squad,2023
+16,8,158,Daniel Jones,31838.0,The Roethlisberger's,2023
+16,9,159,Deuce Vaughn,40240.0,Brokaw's Bums,2023
+16,10,160,Leonard Fournette,30117.0,Hingle McCringlebery,2023
+17,1,161,Justyn Ross,34440.0,Hingle McCringlebery,2023
+17,2,162,Luke Musgrave,40074.0,Brokaw's Bums,2023
+17,3,163,Steelers,,The Roethlisberger's,2023
+17,4,164,Cordarrelle Patterson,26652.0,Simps Squad,2023
+17,5,165,Cole Kmet,32713.0,Starting Defense,2023
+17,6,166,Dalton Schultz,31107.0,Talladega Knights,2023
+17,7,167,Ravens,,Joe Buck Yourself,2023
+17,8,168,James Robinson,33138.0,Jackson's Team,2023
+17,9,169,Dawson Knox,31928.0,The Cousin Lovers,2023
+17,10,170,Tyler Higbee,29344.0,Lambeau Leapers,2023
+1,1,1,Christian McCaffrey,30121.0,Hingle McCringlebery,2024
+1,2,2,Tyreek Hill,29399.0,Brokaw's Bums,2024
+1,3,3,CeeDee Lamb,32687.0,Jackson's Team,2024
+1,4,4,Breece Hall,33991.0,Talladega Knights,2024
+1,5,5,Bijan Robinson,40055.0,The Roethlisberger's,2024
+1,6,6,Amon-Ra St. Brown,33500.0,Joe Buck Yourself,2024
+1,7,7,Justin Jefferson,32692.0,Simps Squad,2024
+1,8,8,Garrett Wilson,33965.0,Starting Defense,2024
+1,9,9,A.J. Brown,31883.0,The Cousin Lovers,2024
+1,10,10,Jonathan Taylor,32711.0,Lambeau Leapers,2024
+2,1,11,Ja'Marr Chase,33393.0,Lambeau Leapers,2024
+2,2,12,Saquon Barkley,30972.0,The Cousin Lovers,2024
+2,3,13,Puka Nacua,40168.0,Starting Defense,2024
+2,4,14,Jahmyr Gibbs,40059.0,Simps Squad,2024
+2,5,15,Derrick Henry,29279.0,Joe Buck Yourself,2024
+2,6,16,Marvin Harrison Jr.,40893.0,The Roethlisberger's,2024
+2,7,17,Isiah Pacheco,34207.0,Talladega Knights,2024
+2,8,18,Travis Etienne Jr.,33413.0,Jackson's Team,2024
+2,9,19,Mike Evans,27535.0,Brokaw's Bums,2024
+2,10,20,Cooper Kupp,30182.0,Hingle McCringlebery,2024
+3,1,21,De'Von Achane,40118.0,Hingle McCringlebery,2024
+3,2,22,Kyren Williams,34120.0,Brokaw's Bums,2024
+3,3,23,Josh Allen,30977.0,Jackson's Team,2024
+3,4,24,Drake London,33963.0,Talladega Knights,2024
+3,5,25,Davante Adams,27581.0,The Roethlisberger's,2024
+3,6,26,Nico Collins,33477.0,Joe Buck Yourself,2024
+3,7,27,Travis Kelce,26686.0,Simps Squad,2024
+3,8,28,Josh Jacobs,31856.0,Starting Defense,2024
+3,9,29,Brandon Aiyuk,32695.0,The Cousin Lovers,2024
+3,10,30,DJ Moore,30994.0,Lambeau Leapers,2024
+4,1,31,Alvin Kamara,30180.0,Lambeau Leapers,2024
+4,2,32,Rachaad White,34047.0,The Cousin Lovers,2024
+4,3,33,Sam LaPorta,40064.0,Starting Defense,2024
+4,4,34,Chris Olave,33966.0,Simps Squad,2024
+4,5,35,Michael Pittman Jr.,32704.0,Joe Buck Yourself,2024
+4,6,36,Deebo Samuel Sr.,31868.0,The Roethlisberger's,2024
+4,7,37,Amari Cooper,28392.0,Talladega Knights,2024
+4,8,38,Joe Mixon,30161.0,Jackson's Team,2024
+4,9,39,DK Metcalf,31896.0,Brokaw's Bums,2024
+4,10,40,DeVonta Smith,33398.0,Hingle McCringlebery,2024
+5,1,41,Jalen Hurts,32723.0,Hingle McCringlebery,2024
+5,2,42,Lamar Jackson,31002.0,Brokaw's Bums,2024
+5,3,43,Kenneth Walker III,33996.0,Jackson's Team,2024
+5,4,44,Patrick Mahomes,30123.0,Talladega Knights,2024
+5,5,45,James Cook III,34019.0,The Roethlisberger's,2024
+5,6,46,Jaylen Waddle,33394.0,Joe Buck Yourself,2024
+5,7,47,Zay Flowers,40039.0,Simps Squad,2024
+5,8,48,Malik Nabers,40899.0,Starting Defense,2024
+5,9,49,Stefon Diggs,28534.0,The Cousin Lovers,2024
+5,10,50,Aaron Jones Sr.,30295.0,Lambeau Leapers,2024
+6,1,51,George Kittle,30259.0,Lambeau Leapers,2024
+6,2,52,Mark Andrews,31056.0,The Cousin Lovers,2024
+6,3,53,James Conner,30218.0,Starting Defense,2024
+6,4,54,Zamir White,34078.0,Simps Squad,2024
+6,5,55,Trey McBride,34010.0,Joe Buck Yourself,2024
+6,6,56,George Pickens,34007.0,The Roethlisberger's,2024
+6,7,57,Rhamondre Stevenson,33508.0,Talladega Knights,2024
+6,8,58,Dalton Kincaid,40048.0,Jackson's Team,2024
+6,9,59,D'Andre Swift,32705.0,Brokaw's Bums,2024
+6,10,60,Rashee Rice,40084.0,Hingle McCringlebery,2024
+7,1,61,Tee Higgins,32703.0,Hingle McCringlebery,2024
+7,2,62,Terry McLaurin,31908.0,Brokaw's Bums,2024
+7,3,63,David Montgomery,31905.0,Jackson's Team,2024
+7,4,64,Chris Godwin Jr.,30197.0,Talladega Knights,2024
+7,5,65,Tank Dell,40097.0,The Roethlisberger's,2024
+7,6,66,C.J. Stroud,40030.0,Joe Buck Yourself,2024
+7,7,67,Jayden Reed,40063.0,Simps Squad,2024
+7,8,68,Joe Burrow,32671.0,Starting Defense,2024
+7,9,69,Calvin Ridley,30996.0,The Cousin Lovers,2024
+7,10,70,Jordan Love,32696.0,Lambeau Leapers,2024
+8,1,71,Tony Pollard,31960.0,Lambeau Leapers,2024
+8,2,72,Javonte Williams,33423.0,The Cousin Lovers,2024
+8,3,73,Keenan Allen,26699.0,Starting Defense,2024
+8,4,74,Jaylen Warren,34447.0,Simps Squad,2024
+8,5,75,Raheem Mostert,28654.0,Joe Buck Yourself,2024
+8,6,76,Anthony Richardson Sr.,40040.0,The Roethlisberger's,2024
+8,7,77,Brock Bowers,40878.0,Talladega Knights,2024
+8,8,78,Diontae Johnson,31898.0,Jackson's Team,2024
+8,9,79,Kyle Pitts Sr.,33392.0,Brokaw's Bums,2024
+8,10,80,Rome Odunze,40901.0,Hingle McCringlebery,2024
+9,1,81,Jaxon Smith-Njigba,40041.0,Hingle McCringlebery,2024
+9,2,82,Xavier Worthy,40877.0,Brokaw's Bums,2024
+9,3,83,Ladd McConkey,40908.0,Jackson's Team,2024
+9,4,84,Jordan Addison,40042.0,Talladega Knights,2024
+9,5,85,Evan Engram,30136.0,The Roethlisberger's,2024
+9,6,86,Brian Robinson,34054.0,Joe Buck Yourself,2024
+9,7,87,Christian Kirk,31017.0,Simps Squad,2024
+9,8,88,Najee Harris,33412.0,Starting Defense,2024
+9,9,89,Dak Prescott,29369.0,The Cousin Lovers,2024
+9,10,90,Christian Watson,33989.0,Lambeau Leapers,2024
+10,1,91,Courtland Sutton,31010.0,Lambeau Leapers,2024
+10,2,92,Devin Singletary,31906.0,The Cousin Lovers,2024
+10,3,93,Brian Thomas Jr.,40883.0,Starting Defense,2024
+10,4,94,Chase Brown,40196.0,Simps Squad,2024
+10,5,95,Jerome Ford,34112.0,Joe Buck Yourself,2024
+10,6,96,Jameson Williams,33967.0,The Roethlisberger's,2024
+10,7,97,Joshua Palmer,33465.0,Talladega Knights,2024
+10,8,98,Brandon Aubrey,40819.0,Jackson's Team,2024
+10,9,99,Tyjae Spears,40119.0,Brokaw's Bums,2024
+10,10,100,David Njoku,30142.0,Hingle McCringlebery,2024
+11,1,101,Jonathon Brooks,40926.0,Hingle McCringlebery,2024
+11,2,102,Adonai Mitchell,40915.0,Brokaw's Bums,2024
+11,3,103,49ers,,Jackson's Team,2024
+11,4,104,Justin Tucker,26534.0,Talladega Knights,2024
+11,5,105,Gus Edwards,31424.0,The Roethlisberger's,2024
+11,6,106,Kyler Murray,31833.0,Joe Buck Yourself,2024
+11,7,107,Hollywood Brown,31857.0,Simps Squad,2024
+11,8,108,Zack Moss,32756.0,Starting Defense,2024
+11,9,109,Tyler Lockett,28457.0,The Cousin Lovers,2024
+11,10,110,Ezekiel Elliott,29238.0,Lambeau Leapers,2024
+12,1,111,DeAndre Hopkins,26650.0,Lambeau Leapers,2024
+12,2,112,Nick Chubb,31005.0,The Cousin Lovers,2024
+12,3,113,Caleb Williams,40900.0,Starting Defense,2024
+12,4,114,Tua Tagovailoa,32675.0,Simps Squad,2024
+12,5,115,Blake Corum,40962.0,Joe Buck Yourself,2024
+12,6,116,Austin Ekeler,30423.0,The Roethlisberger's,2024
+12,7,117,Chuba Hubbard,33514.0,Talladega Knights,2024
+12,8,118,Zach Charbonnet,40075.0,Jackson's Team,2024
+12,9,119,Trey Benson,40958.0,Brokaw's Bums,2024
+12,10,120,Rico Dowdle,33100.0,Hingle McCringlebery,2024
+13,1,121,J.K. Dobbins,32725.0,Hingle McCringlebery,2024
+13,2,122,Keon Coleman,40911.0,Brokaw's Bums,2024
+13,3,123,Tyler Allgeier,34107.0,Jackson's Team,2024
+13,4,124,Jaleel McLaughlin,40696.0,Talladega Knights,2024
+13,5,125,Jayden Daniels,40896.0,The Roethlisberger's,2024
+13,6,126,Romeo Doubs,34088.0,Joe Buck Yourself,2024
+13,7,127,Dontayvion Wicks,40201.0,Simps Squad,2024
+13,8,128,Jakobi Meyers,32231.0,Starting Defense,2024
+13,9,129,Jake Ferguson,34085.0,The Cousin Lovers,2024
+13,10,130,Ravens,,Lambeau Leapers,2024
+14,1,131,Luke Musgrave,40074.0,Lambeau Leapers,2024
+14,2,132,T.J. Hockenson,31840.0,The Cousin Lovers,2024
+14,3,133,Dallas Goedert,31019.0,Starting Defense,2024
+14,4,134,Khalil Shakir,34104.0,Simps Squad,2024
+14,5,135,MarShawn Lloyd,40971.0,Joe Buck Yourself,2024
+14,6,136,Mike Williams,30120.0,The Roethlisberger's,2024
+14,7,137,Jets,,Talladega Knights,2024
+14,8,138,Dameon Pierce,34063.0,Jackson's Team,2024
+14,9,139,Dalton Schultz,31107.0,Brokaw's Bums,2024
+14,10,140,Bucky Irving,40993.0,Hingle McCringlebery,2024
+15,1,141,Justin Herbert,32676.0,Hingle McCringlebery,2024
+15,2,142,Browns,,Brokaw's Bums,2024
+15,3,143,Tank Bigsby,40095.0,Jackson's Team,2024
+15,4,144,Josh Downs,40126.0,Talladega Knights,2024
+15,5,145,Harrison Butker,30346.0,The Roethlisberger's,2024
+15,6,146,Cowboys,,Joe Buck Yourself,2024
+15,7,147,Steelers,,Simps Squad,2024
+15,8,148,Chiefs,,Starting Defense,2024
+15,9,149,Vikings,,The Cousin Lovers,2024
+15,10,150,Brandin Cooks,27548.0,Lambeau Leapers,2024
+16,1,151,Jordan Mason,34320.0,Lambeau Leapers,2024
+16,2,152,Jake Elliott,30266.0,The Cousin Lovers,2024
+16,3,153,Jason Sanders,31199.0,Starting Defense,2024
+16,4,154,Ja'Lynn Polk,40914.0,Simps Squad,2024
+16,5,155,Curtis Samuel,30153.0,Joe Buck Yourself,2024
+16,6,156,Cole Kmet,32713.0,The Roethlisberger's,2024
+16,7,157,Ty Chandler,34125.0,Talladega Knights,2024
+16,8,158,Brock Purdy,34218.0,Jackson's Team,2024
+16,9,159,Jerry Jeudy,32685.0,Brokaw's Bums,2024
+16,10,160,Bengals,,Hingle McCringlebery,2024
+17,1,161,Will Reichard,41093.0,Hingle McCringlebery,2024
+17,2,162,Evan McPherson,33537.0,Brokaw's Bums,2024
+17,3,163,Gabe Davis,32798.0,Jackson's Team,2024
+17,4,164,Bo Nix,40875.0,Talladega Knights,2024
+17,5,165,Bills,,The Roethlisberger's,2024
+17,6,166,Younghoe Koo,30426.0,Joe Buck Yourself,2024
+17,7,167,Ka'imi Fairbairn,29792.0,Simps Squad,2024
+17,8,168,Dolphins,,Starting Defense,2024
+17,9,169,Jared Goff,29235.0,The Cousin Lovers,2024
+17,10,170,Jake Moody,40129.0,Lambeau Leapers,2024
+1,1,1,Adrian Peterson,8261.0,Joe Buck Yourself,2014
+1,2,2,LeSean McCoy,9317.0,Lambeau Leapers,2014
+1,3,3,Jamaal Charles,8850.0,clay's Team,2014
+1,4,4,Matt Forte,8821.0,Shock the Nation,2014
+1,5,5,Calvin Johnson,8256.0,Cade's Cool Team,2014
+1,6,6,Eddie Lacy,26684.0,The Football Team,2014
+1,7,7,Arian Foster,9527.0,The Benchwarmers,2014
+1,8,8,Jimmy Graham,24070.0,xXThe Poon KillersXx,2014
+2,1,9,Demaryius Thomas,23997.0,xXThe Poon KillersXx,2014
+2,2,10,Marshawn Lynch,8266.0,The Benchwarmers,2014
+2,3,11,Peyton Manning,4256.0,The Football Team,2014
+2,4,12,Dez Bryant,23999.0,Cade's Cool Team,2014
+2,5,13,A.J. Green,24791.0,Shock the Nation,2014
+2,6,14,Montee Ball,26681.0,clay's Team,2014
+2,7,15,Brandon Marshall,7868.0,Lambeau Leapers,2014
+2,8,16,Aaron Rodgers,7200.0,Joe Buck Yourself,2014
+3,1,17,Jordy Nelson,8813.0,Joe Buck Yourself,2014
+3,2,18,Anquan Boldin,6390.0,Lambeau Leapers,2014
+3,3,19,Drew Brees,5479.0,clay's Team,2014
+3,4,20,DeMarco Murray,24858.0,Shock the Nation,2014
+3,5,21,Giovani Bernard,26660.0,Cade's Cool Team,2014
+3,6,22,Le'Veon Bell,26671.0,The Football Team,2014
+3,7,23,Alshon Jeffery,25755.0,The Benchwarmers,2014
+3,8,24,Randall Cobb,24851.0,xXThe Poon KillersXx,2014
+4,1,25,Carson Palmer,6337.0,xXThe Poon KillersXx,2014
+4,2,26,Julio Jones,24793.0,The Benchwarmers,2014
+4,3,27,Antonio Brown,24171.0,The Football Team,2014
+4,4,28,Andre Ellington,26810.0,Cade's Cool Team,2014
+4,5,29,Victor Cruz,24553.0,Shock the Nation,2014
+4,6,30,Keenan Allen,26699.0,clay's Team,2014
+4,7,31,Julius Thomas,24916.0,Lambeau Leapers,2014
+4,8,32,DeSean Jackson,8826.0,Joe Buck Yourself,2014
+5,1,33,Alfred Morris,25883.0,Joe Buck Yourself,2014
+5,2,34,Frank Gore,7241.0,Lambeau Leapers,2014
+5,3,35,Vincent Jackson,7237.0,clay's Team,2014
+5,4,36,Larry Fitzgerald,6762.0,Shock the Nation,2014
+5,5,37,Roddy White,7203.0,Cade's Cool Team,2014
+5,6,38,Cordarrelle Patterson,26652.0,The Football Team,2014
+5,7,39,Tom Brady,5228.0,The Benchwarmers,2014
+5,8,40,Wes Welker,7027.0,xXThe Poon KillersXx,2014
+6,1,41,Zac Stacy,26783.0,xXThe Poon KillersXx,2014
+6,2,42,Pierre Garcon,8982.0,The Benchwarmers,2014
+6,3,43,Percy Harvin,9286.0,The Football Team,2014
+6,4,44,Rob Gronkowski,24017.0,Cade's Cool Team,2014
+6,5,45,Cam Newton,24788.0,Shock the Nation,2014
+6,6,46,Andre Johnson,6339.0,clay's Team,2014
+6,7,47,Seahawks,,Lambeau Leapers,2014
+6,8,48,Greg Olsen,8285.0,Joe Buck Yourself,2014
+7,1,49,Eric Decker,24062.0,Joe Buck Yourself,2014
+7,2,50,Colin Kaepernick,24823.0,Lambeau Leapers,2014
+7,3,51,Jordan Cameron,24889.0,clay's Team,2014
+7,4,52,Doug Martin,25741.0,Shock the Nation,2014
+7,5,53,Matthew Stafford,9265.0,Cade's Cool Team,2014
+7,6,54,Jason Witten,6405.0,The Football Team,2014
+7,7,55,C.J. Spiller,23984.0,The Benchwarmers,2014
+7,8,56,Vernon Davis,7755.0,xXThe Poon KillersXx,2014
+8,1,57,Trent Richardson,25713.0,xXThe Poon KillersXx,2014
+8,2,58,Kyle Rudolph,24830.0,The Benchwarmers,2014
+8,3,59,Matt Ryan,8780.0,The Football Team,2014
+8,4,60,49ers,,Cade's Cool Team,2014
+8,5,61,Zach Miller,8292.0,Shock the Nation,2014
+8,6,62,Rams,,clay's Team,2014
+8,7,63,Michael Crabtree,9274.0,Lambeau Leapers,2014
+8,8,64,Robert Griffin III,25712.0,Joe Buck Yourself,2014
+9,1,65,Chris Johnson,8801.0,Joe Buck Yourself,2014
+9,2,66,Russell Wilson,25785.0,Lambeau Leapers,2014
+9,3,67,Stephen Gostkowski,7867.0,clay's Team,2014
+9,4,68,Golden Tate,24035.0,Shock the Nation,2014
+9,5,69,Matt Prater,8565.0,Cade's Cool Team,2014
+9,6,70,Rashad Jennings,9514.0,The Football Team,2014
+9,7,71,Jay Cutler,7760.0,The Benchwarmers,2014
+9,8,72,Reggie Bush,7751.0,xXThe Poon KillersXx,2014
+10,1,73,Panthers,,xXThe Poon KillersXx,2014
+10,2,74,Martellus Bennett,8838.0,The Benchwarmers,2014
+10,3,75,Michael Floyd,25723.0,The Football Team,2014
+10,4,76,Toby Gerhart,24026.0,Cade's Cool Team,2014
+10,5,77,Sammy Watkins,27532.0,Shock the Nation,2014
+10,6,78,Ryan Mathews,23987.0,clay's Team,2014
+10,7,79,Greg Jennings,7801.0,Lambeau Leapers,2014
+10,8,80,Jordan Reed,26708.0,Joe Buck Yourself,2014
+11,1,81,Marques Colston,8001.0,Joe Buck Yourself,2014
+11,2,82,Emmanuel Sanders,24057.0,Lambeau Leapers,2014
+11,3,83,Torrey Smith,24845.0,clay's Team,2014
+11,4,84,Philip Rivers,6763.0,Shock the Nation,2014
+11,5,85,Andrew Luck,25711.0,Cade's Cool Team,2014
+11,6,86,Dennis Pitta,24089.0,The Football Team,2014
+11,7,87,Chiefs,,The Benchwarmers,2014
+11,8,88,Adam Vinatieri,3727.0,xXThe Poon KillersXx,2014
+12,1,89,Nick Foles,25798.0,xXThe Poon KillersXx,2014
+12,2,90,Patriots,,The Benchwarmers,2014
+12,3,91,Bengals,,The Football Team,2014
+12,4,92,T.Y. Hilton,25802.0,Cade's Cool Team,2014
+12,5,93,Colts,,Shock the Nation,2014
+12,6,94,Jeremy Maclin,9283.0,clay's Team,2014
+12,7,95,Pierre Thomas,8561.0,Lambeau Leapers,2014
+12,8,96,Packers,,Joe Buck Yourself,2014
+13,1,97,Mike Wallace,9348.0,Joe Buck Yourself,2014
+13,2,98,Doug Baldwin,25105.0,Lambeau Leapers,2014
+13,3,99,Tony Romo,6624.0,clay's Team,2014
+13,4,100,Joique Bell,24262.0,Shock the Nation,2014
+13,5,101,Terrance Williams,26697.0,Cade's Cool Team,2014
+13,6,102,Blair Walsh,25885.0,The Football Team,2014
+13,7,103,Justin Tucker,26534.0,The Benchwarmers,2014
+13,8,104,Saints,,xXThe Poon KillersXx,2014
+14,1,105,Kendall Wright,25730.0,xXThe Poon KillersXx,2014
+14,2,106,Reggie Wayne,5477.0,The Benchwarmers,2014
+14,3,107,Julian Edelman,9496.0,The Football Team,2014
+14,4,108,Zach Ertz,26658.0,Cade's Cool Team,2014
+14,5,109,Bishop Sankey,27582.0,Shock the Nation,2014
+14,6,110,Charles Clay,24961.0,clay's Team,2014
+14,7,111,Dan Bailey,25427.0,Lambeau Leapers,2014
+14,8,112,Mason Crosby,8447.0,Joe Buck Yourself,2014
+15,1,113,Maurice Jones-Drew,7809.0,Joe Buck Yourself,2014
+15,2,114,Ladarius Green,25820.0,Lambeau Leapers,2014
+15,3,115,Cardinals,,clay's Team,2014
+15,4,116,Nick Novak,7505.0,Shock the Nation,2014
+15,5,117,Phil Dawson,4269.0,Cade's Cool Team,2014
+15,6,118,Rueben Randle,25773.0,The Football Team,2014
+15,7,119,Stephen Hauschka,9066.0,The Benchwarmers,2014
+15,8,120,Ryan Succop,9520.0,xXThe Poon KillersXx,2014
+1,1,1,Ja'Marr Chase,33393.0,Starting Defense,2025
+1,2,2,Saquon Barkley,30972.0,The Cousin Lovers,2025
+1,3,3,Bijan Robinson,40055.0,Joe Buck Yourself,2025
+1,4,4,CeeDee Lamb,32687.0,Jackson's Team,2025
+1,5,5,Jahmyr Gibbs,40059.0,Lambeau Leapers,2025
+1,6,6,Justin Jefferson,32692.0,Talladega Knights,2025
+1,7,7,Malik Nabers,40899.0,The Roethlisberger's,2025
+1,8,8,Christian McCaffrey,30121.0,Hingle McCringlebery,2025
+1,9,9,Nico Collins,33477.0,Simps Squad,2025
+1,10,10,Amon-Ra St. Brown,33500.0,Brokaw's Bums,2025
+2,1,11,Puka Nacua,40168.0,Brokaw's Bums,2025
+2,2,12,Drake London,33963.0,Simps Squad,2025
+2,3,13,Derrick Henry,29279.0,Hingle McCringlebery,2025
+2,4,14,Ashton Jeanty,41791.0,The Roethlisberger's,2025
+2,5,15,Josh Jacobs,31856.0,Talladega Knights,2025
+2,6,16,Jonathan Taylor,32711.0,Lambeau Leapers,2025
+2,7,17,Chase Brown,40196.0,Jackson's Team,2025
+2,8,18,Bucky Irving,40993.0,Joe Buck Yourself,2025
+2,9,19,Kyren Williams,34120.0,The Cousin Lovers,2025
+2,10,20,Brian Thomas Jr.,40883.0,Starting Defense,2025
+3,1,21,Josh Allen,30977.0,Starting Defense,2025
+3,2,22,Lamar Jackson,31002.0,The Cousin Lovers,2025
+3,3,23,Brock Bowers,40878.0,Joe Buck Yourself,2025
+3,4,24,De'Von Achane,40118.0,Jackson's Team,2025
+3,5,25,A.J. Brown,31883.0,Lambeau Leapers,2025
+3,6,26,Trey McBride,34010.0,Talladega Knights,2025
+3,7,27,James Cook III,34019.0,The Roethlisberger's,2025
+3,8,28,George Kittle,30259.0,Hingle McCringlebery,2025
+3,9,29,Ladd McConkey,40908.0,Simps Squad,2025
+3,10,30,Omarion Hampton,41807.0,Brokaw's Bums,2025
+4,1,31,Jayden Daniels,40896.0,Brokaw's Bums,2025
+4,2,32,Mike Evans,27535.0,Simps Squad,2025
+4,3,33,Tyreek Hill,29399.0,Hingle McCringlebery,2025
+4,4,34,Marvin Harrison Jr.,40893.0,The Roethlisberger's,2025
+4,5,35,Jalen Hurts,32723.0,Talladega Knights,2025
+4,6,36,Jaxon Smith-Njigba,40041.0,Lambeau Leapers,2025
+4,7,37,Kenneth Walker III,33996.0,Jackson's Team,2025
+4,8,38,Tee Higgins,32703.0,Joe Buck Yourself,2025
+4,9,39,Terry McLaurin,31908.0,The Cousin Lovers,2025
+4,10,40,Chuba Hubbard,33514.0,Starting Defense,2025
+5,1,41,Garrett Wilson,33965.0,Starting Defense,2025
+5,2,42,Alvin Kamara,30180.0,The Cousin Lovers,2025
+5,3,43,TreVeyon Henderson,41823.0,Joe Buck Yourself,2025
+5,4,44,Joe Burrow,32671.0,Jackson's Team,2025
+5,5,45,Breece Hall,33991.0,Lambeau Leapers,2025
+5,6,46,James Conner,30218.0,Talladega Knights,2025
+5,7,47,Sam LaPorta,40064.0,The Roethlisberger's,2025
+5,8,48,Davante Adams,27581.0,Hingle McCringlebery,2025
+5,9,49,RJ Harvey,41845.0,Simps Squad,2025
+5,10,50,DK Metcalf,31896.0,Brokaw's Bums,2025
+6,1,51,T.J. Hockenson,31840.0,Brokaw's Bums,2025
+6,2,52,Kaleb Johnson,41881.0,Simps Squad,2025
+6,3,53,Xavier Worthy,40877.0,Hingle McCringlebery,2025
+6,4,54,George Pickens,34007.0,The Roethlisberger's,2025
+6,5,55,Zay Flowers,40039.0,Talladega Knights,2025
+6,6,56,Courtland Sutton,31010.0,Lambeau Leapers,2025
+6,7,57,DJ Moore,30994.0,Jackson's Team,2025
+6,8,58,DeVonta Smith,33398.0,Joe Buck Yourself,2025
+6,9,59,David Montgomery,31905.0,The Cousin Lovers,2025
+6,10,60,Tony Pollard,31960.0,Starting Defense,2025
+7,1,61,Rome Odunze,40901.0,Starting Defense,2025
+7,2,62,Tetairoa McMillan,41793.0,The Cousin Lovers,2025
+7,3,63,Rashee Rice,40084.0,Joe Buck Yourself,2025
+7,4,64,Mark Andrews,31056.0,Jackson's Team,2025
+7,5,65,Aaron Jones Sr.,30295.0,Lambeau Leapers,2025
+7,6,66,Isiah Pacheco,34207.0,Talladega Knights,2025
+7,7,67,Jaylen Waddle,33394.0,The Roethlisberger's,2025
+7,8,68,Patrick Mahomes,30123.0,Hingle McCringlebery,2025
+7,9,69,D'Andre Swift,32705.0,Simps Squad,2025
+7,10,70,Calvin Ridley,30996.0,Brokaw's Bums,2025
+8,1,71,Tyrone Tracy Jr.,41048.0,Brokaw's Bums,2025
+8,2,72,Stefon Diggs,28534.0,Simps Squad,2025
+8,3,73,Jordan Addison,40042.0,Hingle McCringlebery,2025
+8,4,74,Ricky Pearsall,40892.0,The Roethlisberger's,2025
+8,5,75,Jameson Williams,33967.0,Talladega Knights,2025
+8,6,76,Tucker Kraft,40102.0,Lambeau Leapers,2025
+8,7,77,Emeka Egbuka,41804.0,Jackson's Team,2025
+8,8,78,Joe Mixon,30161.0,Joe Buck Yourself,2025
+8,9,79,Travis Kelce,26686.0,The Cousin Lovers,2025
+8,10,80,Jordan Mason,34320.0,Starting Defense,2025
+9,1,81,Jakobi Meyers,32231.0,Starting Defense,2025
+9,2,82,Jerry Jeudy,32685.0,The Cousin Lovers,2025
+9,3,83,Travis Hunter,41787.0,Joe Buck Yourself,2025
+9,4,84,Broncos,,Jackson's Team,2025
+9,5,85,Chris Olave,33966.0,Lambeau Leapers,2025
+9,6,86,Jaylen Warren,34447.0,Talladega Knights,2025
+9,7,87,Brian Robinson,34054.0,The Roethlisberger's,2025
+9,8,88,Zach Charbonnet,40075.0,Hingle McCringlebery,2025
+9,9,89,Josh Downs,40126.0,Simps Squad,2025
+9,10,90,Travis Etienne Jr.,33413.0,Brokaw's Bums,2025
+10,1,91,Cooper Kupp,30182.0,Brokaw's Bums,2025
+10,2,92,Javonte Williams,33423.0,Simps Squad,2025
+10,3,93,Jauan Jennings,32887.0,Hingle McCringlebery,2025
+10,4,94,Tyler Warren,41799.0,The Roethlisberger's,2025
+10,5,95,Deebo Samuel Sr.,31868.0,Talladega Knights,2025
+10,6,96,Jordan Love,32696.0,Lambeau Leapers,2025
+10,7,97,Brandon Aubrey,40819.0,Jackson's Team,2025
+10,8,98,Baker Mayfield,30971.0,Joe Buck Yourself,2025
+10,9,99,Chris Godwin Jr.,30197.0,The Cousin Lovers,2025
+10,10,100,Dalton Kincaid,40048.0,Starting Defense,2025
+11,1,101,Tank Bigsby,40095.0,Starting Defense,2025
+11,2,102,Khalil Shakir,34104.0,The Cousin Lovers,2025
+11,3,103,Matthew Golden,41808.0,Joe Buck Yourself,2025
+11,4,104,Keon Coleman,40911.0,Jackson's Team,2025
+11,5,105,Jake Ferguson,34085.0,Lambeau Leapers,2025
+11,6,106,Eagles,,Talladega Knights,2025
+11,7,107,Cam Skattebo,41922.0,The Roethlisberger's,2025
+11,8,108,J.K. Dobbins,32725.0,Hingle McCringlebery,2025
+11,9,109,Bo Nix,40875.0,Simps Squad,2025
+11,10,110,Brock Purdy,34218.0,Brokaw's Bums,2025
+12,1,111,Jayden Reed,40063.0,Brokaw's Bums,2025
+12,2,112,David Njoku,30142.0,Simps Squad,2025
+12,3,113,Keenan Allen,26699.0,Hingle McCringlebery,2025
+12,4,114,Drake Maye,40881.0,The Roethlisberger's,2025
+12,5,115,Austin Ekeler,30423.0,Talladega Knights,2025
+12,6,116,Rachaad White,34047.0,Lambeau Leapers,2025
+12,7,117,Trey Benson,40958.0,Jackson's Team,2025
+12,8,118,Jacory Croskey-Merritt,42010.0,Joe Buck Yourself,2025
+12,9,119,Darnell Mooney,32843.0,The Cousin Lovers,2025
+12,10,120,Evan Engram,30136.0,Starting Defense,2025
+13,1,121,Justin Herbert,32676.0,Starting Defense,2025
+13,2,122,Colston Loveland,41795.0,The Cousin Lovers,2025
+13,3,123,Jaydon Blue,41935.0,Joe Buck Yourself,2025
+13,4,124,Isaac Guerendo,40998.0,Jackson's Team,2025
+13,5,125,Braelon Allen,40981.0,Lambeau Leapers,2025
+13,6,126,Cameron Dicker,34344.0,Talladega Knights,2025
+13,7,127,Michael Pittman Jr.,32704.0,The Roethlisberger's,2025
+13,8,128,Quinshon Judkins,41821.0,Hingle McCringlebery,2025
+13,9,129,Steelers,,Simps Squad,2025
+13,10,130,Blake Corum,40962.0,Brokaw's Bums,2025
+14,1,131,Luther Burden III,41824.0,Brokaw's Bums,2025
+14,2,132,Ollie Gordon II,41969.0,Simps Squad,2025
+14,3,133,Bhayshul Tuten,41900.0,Hingle McCringlebery,2025
+14,4,134,Kyler Murray,31833.0,The Roethlisberger's,2025
+14,5,135,C.J. Stroud,40030.0,Talladega Knights,2025
+14,6,136,Ray Davis,40980.0,Lambeau Leapers,2025
+14,7,137,Tyler Allgeier,34107.0,Jackson's Team,2025
+14,8,138,Brandon Aiyuk,32695.0,Joe Buck Yourself,2025
+14,9,139,Vikings,,The Cousin Lovers,2025
+14,10,140,Rhamondre Stevenson,33508.0,Starting Defense,2025
+15,1,141,Jonnu Smith,30213.0,Starting Defense,2025
+15,2,142,Jayden Higgins,41819.0,The Cousin Lovers,2025
+15,3,143,Chris Boswell,28188.0,Joe Buck Yourself,2025
+15,4,144,Christian Kirk,31017.0,Jackson's Team,2025
+15,5,145,Ravens,,Lambeau Leapers,2025
+15,6,146,Marvin Mims Jr.,40090.0,Talladega Knights,2025
+15,7,147,Kyle Pitts Sr.,33392.0,The Roethlisberger's,2025
+15,8,148,Woody Marks,41902.0,Hingle McCringlebery,2025
+15,9,149,DeMario Douglas,40222.0,Simps Squad,2025
+15,10,150,DeAndre Hopkins,26650.0,Brokaw's Bums,2025
+16,1,151,Cam Little,41062.0,Brokaw's Bums,2025
+16,2,152,Ka'imi Fairbairn,29792.0,Simps Squad,2025
+16,3,153,Will Reichard,41093.0,Hingle McCringlebery,2025
+16,4,154,Wil Lutz,29754.0,The Roethlisberger's,2025
+16,5,155,Dallas Goedert,31019.0,Talladega Knights,2025
+16,6,156,Tyjae Spears,40119.0,Lambeau Leapers,2025
+16,7,157,Dak Prescott,29369.0,Jackson's Team,2025
+16,8,158,Dylan Sampson,41907.0,Joe Buck Yourself,2025
+16,9,159,Najee Harris,33412.0,The Cousin Lovers,2025
+16,10,160,Cedric Tillman,40093.0,Starting Defense,2025
+17,1,161,Jake Bates,40835.0,Starting Defense,2025
+17,2,162,Chase McLaughlin,32417.0,The Cousin Lovers,2025
+17,3,163,Texans,,Joe Buck Yourself,2025
+17,4,164,Jaylen Wright,41010.0,Jackson's Team,2025
+17,5,165,Brandon McManus,27120.0,Lambeau Leapers,2025
+17,6,166,Rashid Shaheed,34659.0,Talladega Knights,2025
+17,7,167,Chargers,,The Roethlisberger's,2025
+17,8,168,Lions,,Hingle McCringlebery,2025
+17,9,169,Kyle Williams,41864.0,Simps Squad,2025
+17,10,170,Keaton Mitchell,40641.0,Brokaw's Bums,2025

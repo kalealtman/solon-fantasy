@@ -53,7 +53,7 @@ def main() -> None:
         page = context.pages[0] if context.pages else context.new_page()
 
         home_html = rsb.fetch(page, BASE, f"{SEASON}_home")
-        if "Request denied" in home_html or len(home_html) < 500:
+        if rsb._looks_denied(home_html):
             print(f"Could not load {BASE} -- wrong league_id, or not logged in. Aborting.")
             context.close()
             return

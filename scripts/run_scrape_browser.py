@@ -188,13 +188,25 @@ def scrape_rosters(page, season: int, base: str, team_ids: list, weeks: list) ->
 
 
 def write_csvs(all_rows: dict) -> None:
+    """Merge this run's rows into the on-disk CSVs, replacing only the
+    seasons this run actually touched -- so scoping a run to e.g. just 2025
+    (to backfill a gap) can never wipe out every other already-scraped
+    season, the way a blind overwrite would."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, rows in all_rows.items():
         if not rows:
             continue
         out_path = OUTPUT_DIR / f"{name}.csv"
-        pd.DataFrame(rows).to_csv(out_path, index=False)
-        logger.info("Wrote %s (%d rows)", out_path, len(rows))
+        new_df = pd.DataFrame(rows)
+        if out_path.exists():
+            existing = pd.read_csv(out_path)
+            touched_seasons = set(new_df["season"].unique())
+            existing = existing[~existing["season"].isin(touched_seasons)]
+            combined = pd.concat([existing, new_df], ignore_index=True)
+        else:
+            combined = new_df
+        combined.to_csv(out_path, index=False)
+        logger.info("Wrote %s (%d total rows)", out_path, len(combined))
 
 
 def main() -> None:

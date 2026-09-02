@@ -1,0 +1,227 @@
+<title>Solon Fantasy Football</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #F2F0EA;
+    --surface: #FFFFFF;
+    --surface-2: #EAE7DF;
+    --border: #DAD5C9;
+    --ink: #1D2225;
+    --ink-muted: #5B6168;
+    --ink-faint: #8B9096;
+    --gold: #9C7A1B;
+    --gold-ink: #6E5713;
+    --blue: #1F5C91;
+    --green: #3D8B5C;
+    --red: #8B2F1F;
+    --shadow: 0 1px 2px rgba(29,34,37,0.06), 0 4px 12px rgba(29,34,37,0.05);
+    --radius: 5px;
+    --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+    --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #14181C;
+      --surface: #1E252B;
+      --surface-2: #262E35;
+      --border: #333D45;
+      --ink: #F0EDE6;
+      --ink-muted: #9BA3AC;
+      --ink-faint: #6B747C;
+      --gold: #C99A2E;
+      --gold-ink: #E8C468;
+      --blue: #4E9FDB;
+      --green: #57A87A;
+      --red: #C2603F;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #14181C;
+    --surface: #1E252B;
+    --surface-2: #262E35;
+    --border: #333D45;
+    --ink: #F0EDE6;
+    --ink-muted: #9BA3AC;
+    --ink-faint: #6B747C;
+    --gold: #C99A2E;
+    --gold-ink: #E8C468;
+    --blue: #4E9FDB;
+    --green: #57A87A;
+    --red: #C2603F;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--gold); color: #14181C; }
+
+  a { color: var(--blue); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
+  .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px clamp(16px, 4vw, 40px) 0;
+  }
+  .site-header__top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .site-title { font-size: clamp(28px, 4vw, 40px); line-height: 1; color: var(--ink); }
+  .site-title .accent { color: var(--gold); }
+  .site-tagline { color: var(--ink-muted); font-size: 13px; margin-top: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
+  .ticker {
+    display: flex; gap: clamp(16px, 3vw, 36px); flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted);
+  }
+  .ticker b { color: var(--ink); font-weight: 600; }
+
+  .tabs {
+    display: flex; gap: 4px; overflow-x: auto; margin-top: 18px;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    font-family: var(--font-display); font-weight: 700; font-size: 16px;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    background: none; border: none; color: var(--ink-muted);
+    padding: 10px 16px 12px; cursor: pointer; white-space: nowrap;
+    border-bottom: 3px solid transparent;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .tab.active { color: var(--ink); border-bottom-color: var(--gold); }
+
+  main { max-width: 1180px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 40px) 80px; }
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .grid.cols-4 { grid-template-columns: repeat(2, 1fr); } .grid.cols-3 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .card h3 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-muted); margin-bottom: 10px; }
+  .section-title {
+    font-size: clamp(20px, 3vw, 26px); margin: 36px 0 14px;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .section-title:first-child { margin-top: 0; }
+  .section-sub { color: var(--ink-muted); font-size: 13px; margin: -8px 0 16px; }
+
+  .stat-tile { text-align: left; }
+  .stat-tile .value { font-family: var(--font-mono); font-size: clamp(26px, 4vw, 34px); font-weight: 600; color: var(--ink); line-height: 1.1; }
+  .stat-tile .value.gold { color: var(--gold-ink, var(--gold)); }
+  .stat-tile .label { color: var(--ink-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
+  .stat-tile .sub { color: var(--ink-faint); font-size: 12px; margin-top: 2px; }
+
+  .fact-card { border-left: 3px solid var(--gold); }
+  .fact-card .fact-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-muted); margin-bottom: 8px; }
+  .fact-card .fact-value { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); }
+  .fact-card .fact-detail { font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted); margin-top: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+  th, td { padding: 9px 12px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--border); }
+  thead th {
+    font-family: var(--font-body); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--ink-muted); font-weight: 600; cursor: pointer; user-select: none;
+    position: sticky; top: 0; background: var(--surface-2);
+  }
+  thead th:hover { color: var(--ink); }
+  thead th .arrow { opacity: 0.4; font-size: 10px; margin-left: 3px; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .rank-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    background: var(--surface-2); color: var(--ink-muted);
+  }
+  .rank-badge.gold { background: var(--gold); color: #14181C; }
+
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  select, .btn {
+    font-family: var(--font-body); font-size: 13.5px; color: var(--ink); background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 7px 12px; cursor: pointer;
+  }
+  select:focus-visible, .btn:focus-visible, .tab:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+  label.field-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-muted); margin-right: 6px; }
+
+  .h2h-picker { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+  .h2h-vs { font-family: var(--font-display); font-size: 20px; color: var(--ink-faint); }
+  .h2h-result { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .h2h-score { font-family: var(--font-mono); font-size: 42px; font-weight: 600; }
+  .h2h-name { font-size: 13px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.03em; }
+
+  .chart-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .bar-label { width: 150px; flex-shrink: 0; font-size: 13px; text-align: right; color: var(--ink-muted); }
+  .bar-track { flex: 1; background: var(--surface-2); border-radius: 3px; height: 20px; position: relative; }
+  .bar-fill { background: var(--blue); height: 100%; border-radius: 3px; display: flex; align-items: center; }
+  .bar-value { font-family: var(--font-mono); font-size: 12px; color: var(--ink); padding-left: 8px; white-space: nowrap; }
+  .bar-value.outside { color: var(--ink-muted); padding-left: 0; margin-left: 8px; }
+
+  .draft-round { margin-bottom: 4px; }
+  .draft-round-label { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin: 14px 0 6px; }
+  .draft-pick-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 4px; }
+  .draft-pick { font-size: 12.5px; padding: 4px 8px; border-radius: 3px; background: var(--surface-2); display: flex; justify-content: space-between; gap: 6px; }
+  .draft-pick .pn { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .draft-pick .pt { color: var(--ink-faint); font-family: var(--font-mono); font-size: 11px; }
+
+  .txn-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: baseline; flex-wrap: wrap; }
+  .txn-row:last-child { border-bottom: none; }
+  .txn-icon { font-family: var(--font-mono); font-weight: 700; width: 16px; flex-shrink: 0; }
+  .txn-icon.add { color: var(--green); }
+  .txn-icon.drop { color: var(--red); }
+  .txn-player { font-weight: 600; }
+  .txn-meta { color: var(--ink-faint); font-size: 12px; margin-left: auto; font-family: var(--font-mono); white-space: nowrap; }
+
+  .champ-callout { display: flex; align-items: center; gap: 18px; background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%); }
+  .champ-callout .trophy { font-size: 40px; line-height: 1; }
+  .champ-callout .name { font-family: var(--font-display); font-size: 24px; font-weight: 700; }
+  .champ-callout .record { font-family: var(--font-mono); color: var(--ink-muted); font-size: 13px; margin-top: 2px; }
+
+  footer { text-align: center; color: var(--ink-faint); font-size: 12px; padding: 30px 20px 50px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .view.active { animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<header class="site-header">
+  <div class="site-header__top">
+    <div>
+      <h1 class="site-title">Solon <span class="accent">Fantasy Football</span></h1>
+      <div class="site-tagline">Est. 2014 &middot; The Official Record Book</div>
+    </div>
+    <div class="ticker" id="ticker"></div>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+</header>
+
+<main id="main"></main>
+
+<footer>Built from 12 seasons of scraped Yahoo Fantasy Football data &middot; standings, drafts, matchups, and transactions, 2014&ndash;2025</footer>
+
+<script type="application/json" id="league-data">__LEAGUE_DATA_JSON__</script>
+<script>
+__APP_JS__
+</script>

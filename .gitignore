@@ -16,6 +16,11 @@ oauth2.json
 # Data — raw pulls are regenerable and gitignored, processed CSVs are committed
 data/raw/
 
+# Site build output — regenerated from site/template.html + site/app.js +
+# data/processed/*.csv via scripts/build_site.py; source is committed, the
+# combined/baked file isn't
+site/dist/
+
 # OS
 .DS_Store
 Thumbs.db

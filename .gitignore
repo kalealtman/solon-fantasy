@@ -8,6 +8,7 @@ venv/
 # Secrets / credentials
 .env
 oauth2.json
+.browser_profile/
 
 # Cache
 .cache/

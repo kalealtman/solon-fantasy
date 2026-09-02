@@ -29,8 +29,20 @@ def build_data_json() -> str:
     data = {}
     for name in DATASETS:
         df = pd.read_csv(PROCESSED_DIR / f"{name}.csv")
-        df = df.where(pd.notnull(df), None)
-        data[name] = df.to_dict(orient="records")
+        # df.where(notnull, None) doesn't actually work on numeric columns --
+        # a float64 column can't hold Python None, it silently reverts to
+        # NaN. json.dumps then happily emits a bare `NaN` token (a Python
+        # extension, not valid JSON), which JS's strict JSON.parse() rejects
+        # outright -- crashing the whole script before it renders anything.
+        # Converting to records first and cleaning NaN -> None there (where
+        # the values are plain Python floats, not constrained by a column
+        # dtype) actually works.
+        records = df.to_dict(orient="records")
+        for row in records:
+            for key, value in row.items():
+                if isinstance(value, float) and value != value:  # NaN != NaN
+                    row[key] = None
+        data[name] = records
     return json.dumps(data, separators=(",", ":"))
 
 

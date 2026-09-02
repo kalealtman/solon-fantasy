@@ -44,9 +44,16 @@ PROFILE_DIR = REPO_ROOT / ".browser_profile"
 CACHE_DIR = REPO_ROOT / "data" / "raw" / "browser_cache"
 OUTPUT_DIR = REPO_ROOT / "data" / "processed"
 LEAGUE_SLUG_DEFAULT = "solonfantasyfootball"
-POLITENESS_DELAY_SECONDS = 3.0
-DENIAL_RETRY_BACKOFF_SECONDS = 90
-DENIAL_MAX_RETRIES = 2
+POLITENESS_DELAY_SECONDS = 5.0
+# Denial backoff is exponential (starting at DENIAL_BACKOFF_BASE_SECONDS,
+# doubling each retry, capped at DENIAL_BACKOFF_MAX_SECONDS) so a long
+# unattended run can weather a stretch of throttling and resume right where
+# it left off once Yahoo eases up, rather than give up after a couple of
+# short retries. Worst case across DENIAL_MAX_RETRIES is several hours,
+# which is the point for an overnight run.
+DENIAL_BACKOFF_BASE_SECONDS = 60
+DENIAL_BACKOFF_MAX_SECONDS = 1200
+DENIAL_MAX_RETRIES = 30
 MAX_EMPTY_WEEKS_STREAK = 2
 MAX_WEEK = 18
 
@@ -101,11 +108,12 @@ def fetch(page, url: str, cache_key: str) -> str:
         # Never cache a denial page -- otherwise every future run treats it
         # as a permanent "successful" result for this page.
         if attempt < DENIAL_MAX_RETRIES:
+            backoff = min(DENIAL_BACKOFF_BASE_SECONDS * (2 ** attempt), DENIAL_BACKOFF_MAX_SECONDS)
             logger.warning(
-                "Yahoo denied the request for %s -- backing off %ss before retry %d/%d",
-                url, DENIAL_RETRY_BACKOFF_SECONDS, attempt + 1, DENIAL_MAX_RETRIES,
+                "Yahoo denied the request for %s -- backing off %ds before retry %d/%d",
+                url, backoff, attempt + 1, DENIAL_MAX_RETRIES,
             )
-            time.sleep(DENIAL_RETRY_BACKOFF_SECONDS)
+            time.sleep(backoff)
     raise RequestDeniedError(f"Yahoo kept denying requests for {url} after {DENIAL_MAX_RETRIES} retries")
 
 

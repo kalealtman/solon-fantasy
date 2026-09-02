@@ -44,9 +44,15 @@ PROFILE_DIR = REPO_ROOT / ".browser_profile"
 CACHE_DIR = REPO_ROOT / "data" / "raw" / "browser_cache"
 OUTPUT_DIR = REPO_ROOT / "data" / "processed"
 LEAGUE_SLUG_DEFAULT = "solonfantasyfootball"
-POLITENESS_DELAY_SECONDS = 0.3
+POLITENESS_DELAY_SECONDS = 3.0
+DENIAL_RETRY_BACKOFF_SECONDS = 90
+DENIAL_MAX_RETRIES = 2
 MAX_EMPTY_WEEKS_STREAK = 2
 MAX_WEEK = 18
+
+
+class RequestDeniedError(RuntimeError):
+    """Yahoo returned a bot-detection/rate-limit denial page."""
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -69,17 +75,38 @@ def cache_path(key: str) -> Path:
     return CACHE_DIR / f"{safe}.html"
 
 
+def _looks_denied(html: str) -> bool:
+    return "Request denied" in html or len(html) < 500
+
+
 def fetch(page, url: str, cache_key: str) -> str:
     path = cache_path(cache_key)
     if path.exists():
-        return path.read_text(encoding="utf-8")
-    page.goto(url, wait_until="domcontentloaded", timeout=60000)
-    page.wait_for_timeout(300)
-    html = page.content()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(html, encoding="utf-8")
-    time.sleep(POLITENESS_DELAY_SECONDS)
-    return html
+        cached = path.read_text(encoding="utf-8")
+        if not _looks_denied(cached):
+            return cached
+        # A prior run cached a denial page as if it were real -- don't trust
+        # it, re-fetch instead.
+        path.unlink()
+
+    for attempt in range(DENIAL_MAX_RETRIES + 1):
+        page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        page.wait_for_timeout(300)
+        html = page.content()
+        if not _looks_denied(html):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(html, encoding="utf-8")
+            time.sleep(POLITENESS_DELAY_SECONDS)
+            return html
+        # Never cache a denial page -- otherwise every future run treats it
+        # as a permanent "successful" result for this page.
+        if attempt < DENIAL_MAX_RETRIES:
+            logger.warning(
+                "Yahoo denied the request for %s -- backing off %ss before retry %d/%d",
+                url, DENIAL_RETRY_BACKOFF_SECONDS, attempt + 1, DENIAL_MAX_RETRIES,
+            )
+            time.sleep(DENIAL_RETRY_BACKOFF_SECONDS)
+    raise RequestDeniedError(f"Yahoo kept denying requests for {url} after {DENIAL_MAX_RETRIES} retries")
 
 
 def scrape_season(page, slug: str, season: int) -> dict:
@@ -192,6 +219,13 @@ def main() -> None:
             logger.info("Scraping season %s", season)
             try:
                 result = scrape_season(page, args.league_slug, season)
+            except RequestDeniedError:
+                logger.error(
+                    "Yahoo is denying requests even after backoff -- stopping the whole run here "
+                    "(not just skipping this season) rather than hammer away at the rest while blocked. "
+                    "Wait a while before re-running; already-scraped seasons are saved."
+                )
+                break
             except Exception:
                 logger.error("Failed on season %s", season, exc_info=True)
                 continue
@@ -207,6 +241,11 @@ def main() -> None:
                 try:
                     rosters = scrape_rosters(page, season, result["base"], result["team_ids"], result["weeks"])
                     all_rows["rosters"].extend(rosters)
+                except RequestDeniedError:
+                    logger.error("Yahoo is denying requests during rosters -- stopping the whole run here.")
+                    write_csvs(all_rows)
+                    context.close()
+                    return
                 except Exception:
                     logger.error("Failed on rosters for season %s", season, exc_info=True)
 

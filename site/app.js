@@ -1,6 +1,19 @@
 (function () {
   const DATA = JSON.parse(document.getElementById('league-data').textContent);
-  const { standings, draft, matchups, transactions, trades, owner_career, head_to_head, trophy_case, coaches_poll_rankings, coaches_poll_awards, coaches_poll_meta } = DATA;
+  const {
+    standings,
+    draft,
+    matchups,
+    transactions,
+    trades,
+    owner_career,
+    head_to_head,
+    trophy_case,
+    coaches_poll_rankings,
+    coaches_poll_awards,
+    coaches_poll_meta,
+    coaches_poll_images,
+  } = DATA;
   const isPostseason = (season, week) => (season <= 2020 ? [14, 15, 16] : [15, 16, 17]).includes(week);
   const SHOTGUN_START_SEASON = 2023;
 
@@ -885,27 +898,42 @@
     const rowsHtml = rankings
       .map((r) => {
         const tied = rankCounts[r.rank] > 1;
-        return `<tr>
-          <td class="num"><span class="rank-badge${medalClass(r.rank)}">${tied ? 'T-' : ''}${r.rank}</span></td>
-          <td><span class="owner-hover" data-owner="${r.owner}">${r.owner}</span></td>
-          <td class="num">${fmt(r.points)}</td>
-          <td class="num">${r.avg_rank.toFixed(2)}</td>
-          <td class="num">${r.first_place_votes}</td>
-          <td class="num">${r.highest_rank} / ${r.lowest_rank}</td>
-        </tr>`;
+        return `<div class="ap-poll-row">
+          <div class="ap-rank">${tied ? 'T-' : ''}${r.rank}</div>
+          <div class="ap-body">
+            <div class="ap-name"><span class="owner-hover" data-owner="${r.owner}">${r.owner}</span>${
+          r.first_place_votes > 0 ? `<span class="ap-fpv">(${r.first_place_votes})</span>` : ''
+        }</div>
+            <div class="ap-sub">Avg rank ${r.avg_rank.toFixed(2)} &middot; Best ${r.highest_rank} &middot; Worst ${r.lowest_rank}</div>
+          </div>
+          <div class="ap-points">${fmt(r.points)}<span class="ap-points-label">pts</span></div>
+        </div>`;
       })
       .join('');
 
     const awardsHtml = awards
-      .map(
-        (a) => `
+      .map((a) => {
+        const match = a.award.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+        const name = match ? match[1] : a.award;
+        const subtitle = match ? match[2] : '';
+        const imageUri = coaches_poll_images && coaches_poll_images[a.image_slug];
+        const photo = imageUri ? `<img src="${imageUri}" alt="${name}">` : a.emoji || '🏆';
+        return `
       <div class="card poll-award-card">
-        <div class="award-name">${a.award}</div>
+        <div class="award-photo">${photo}</div>
+        <div class="award-eyebrow">Superlative Award</div>
+        <div>
+          <div class="award-name">${name}</div>
+          ${subtitle ? `<span class="award-subtitle">${subtitle}</span>` : ''}
+        </div>
         <div class="award-desc">${a.description}</div>
-        <div class="award-winner">${a.winner}</div>
-        <div class="award-votes">${a.votes} of ${a.total_votes_cast} votes</div>
-      </div>`
-      )
+        <div class="award-winner-row">
+          <span class="award-winner-label">Winner</span>
+          <span class="award-winner">${a.winner}</span>
+          <div class="award-votes">${a.votes} of ${a.total_votes_cast} votes${a.runner_up_detail ? ` &middot; also got votes: ${a.runner_up_detail}` : ''}</div>
+        </div>
+      </div>`;
+      })
       .join('');
 
     document.getElementById('coaches-poll-content').innerHTML = `
@@ -918,10 +946,7 @@
         </p>
       </div>
       <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Overall Ranking</h3>
-      <div class="table-wrap"><table>
-        <thead><tr><th class="num">#</th><th>Manager</th><th class="num">Points</th><th class="num">Avg Rank</th><th class="num">1st Place Votes</th><th class="num">Best / Worst</th></tr></thead>
-        <tbody>${rowsHtml}</tbody>
-      </table></div>
+      <div class="ap-poll-list">${rowsHtml}</div>
       <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Superlative Awards</h3>
       <div class="grid cols-3">${awardsHtml}</div>
     `;

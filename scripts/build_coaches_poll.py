@@ -78,7 +78,7 @@ def build_rankings(season: int, responses: pd.DataFrame) -> tuple[pd.DataFrame, 
     return df, n_candidates
 
 
-def build_awards(season: int, responses: pd.DataFrame, descriptions: dict) -> pd.DataFrame:
+def build_awards(season: int, responses: pd.DataFrame, meta: pd.DataFrame) -> pd.DataFrame:
     candidate_cols = {c for c in responses.columns if c.startswith(CANDIDATE_PREFIX)}
     award_cols = [c for c in responses.columns if c not in candidate_cols and c not in NON_AWARD_COLUMNS]
     rows = []
@@ -89,25 +89,31 @@ def build_awards(season: int, responses: pd.DataFrame, descriptions: dict) -> pd
         counts = votes.value_counts()
         top_count = int(counts.max())
         winners = format_tied_names(counts[counts == top_count].index.tolist())
+        runners_up = counts[counts < top_count]
+        runner_up_detail = "; ".join(f"{name} ({n})" for name, n in runners_up.items())
+        info = meta.get(col, {})
         rows.append(
             {
                 "season": season,
                 "award": col,
-                "description": descriptions.get(col, ""),
+                "description": info.get("description", ""),
+                "image_slug": info.get("image_slug", ""),
+                "emoji": info.get("emoji", "🏆"),
                 "winner": winners,
                 "votes": top_count,
                 "total_votes_cast": int(votes.shape[0]),
+                "runner_up_detail": runner_up_detail,
             }
         )
     return pd.DataFrame(rows)
 
 
-def load_descriptions() -> dict:
+def load_award_meta() -> dict:
     path = CONFIG_DIR / "coaches_poll_awards.csv"
     if not path.exists():
         return {}
-    df = pd.read_csv(path)
-    return dict(zip(df["award"], df["description"]))
+    df = pd.read_csv(path).fillna("")
+    return {row["award"]: row.to_dict() for _, row in df.iterrows()}
 
 
 def merge_by_season(path: Path, new_df: pd.DataFrame) -> pd.DataFrame:
@@ -123,7 +129,7 @@ def main() -> None:
     parser.add_argument("xlsx_paths", nargs="+", type=Path)
     args, _unknown = parser.parse_known_args()
 
-    descriptions = load_descriptions()
+    award_meta = load_award_meta()
     all_rankings = []
     all_awards = []
     meta_rows = []
@@ -132,7 +138,7 @@ def main() -> None:
         season = season_from_filename(path)
         responses = pd.read_excel(path, sheet_name="Form Responses 1")
         rankings, n_candidates = build_rankings(season, responses)
-        awards = build_awards(season, responses, descriptions)
+        awards = build_awards(season, responses, award_meta)
         all_rankings.append(rankings)
         all_awards.append(awards)
         meta_rows.append({"season": season, "num_candidates": n_candidates, "num_respondents": len(responses)})

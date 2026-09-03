@@ -10,7 +10,9 @@ Usage:
     python scripts/build_site.py [--output site/dist/solon_site.html]
 """
 import argparse
+import base64
 import json
+import mimetypes
 import sys
 from pathlib import Path
 
@@ -24,6 +26,7 @@ from solon_fantasy import config_io  # noqa: E402
 SITE_DIR = REPO_ROOT / "site"
 PROCESSED_DIR = REPO_ROOT / "data" / "processed"
 CONFIG_DIR = REPO_ROOT / "config"
+COACHES_POLL_IMAGES_DIR = CONFIG_DIR / "coaches_poll_images"
 DEFAULT_OUTPUT = SITE_DIR / "dist" / "solon_site.html"
 
 # rosters.csv is deliberately excluded -- it's ~15x the size of everything
@@ -61,6 +64,26 @@ def _clean_nan(records: list) -> list:
     return records
 
 
+def _load_coaches_poll_images() -> dict:
+    # Award photos are embedded as data URIs rather than referenced by path --
+    # the site is a single self-contained HTML file (also published as a
+    # Claude Artifact, which can't load external images), so there's nowhere
+    # else for them to live.
+    images = {}
+    if not COACHES_POLL_IMAGES_DIR.exists():
+        return images
+    slugs = pd.read_csv(CONFIG_DIR / "coaches_poll_awards.csv")["image_slug"].dropna()
+    for slug in slugs:
+        matches = [p for p in COACHES_POLL_IMAGES_DIR.glob(f"{slug}.*") if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}]
+        if not matches:
+            continue
+        path = matches[0]
+        mime = mimetypes.guess_type(path.name)[0] or "image/jpeg"
+        b64 = base64.b64encode(path.read_bytes()).decode("ascii")
+        images[slug] = f"data:{mime};base64,{b64}"
+    return images
+
+
 def build_data_json() -> str:
     owner_lookup = config_io.load_owner_map(CONFIG_DIR / "owner_map.csv")
     data = {}
@@ -69,6 +92,7 @@ def build_data_json() -> str:
         if name in NEEDS_OWNER_COLUMN:
             df["owner"] = df["team_name"].map(owner_lookup).fillna(df["team_name"])
         data[name] = _clean_nan(df.to_dict(orient="records"))
+    data["coaches_poll_images"] = _load_coaches_poll_images()
     return json.dumps(data, separators=(",", ":"))
 
 

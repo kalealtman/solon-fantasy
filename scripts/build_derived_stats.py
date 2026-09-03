@@ -52,6 +52,8 @@ def build_owner_career(standings: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for owner, grp in standings.groupby("owner"):
         championships = int((grp["rank"] == 1).sum())
+        second_places = int((grp["rank"] == 2).sum())
+        third_places = int((grp["rank"] == 3).sum())
         rows.append(
             {
                 "owner": owner,
@@ -65,6 +67,10 @@ def build_owner_career(standings: pd.DataFrame) -> pd.DataFrame:
                 "career_points_for": round(grp["points_for"].sum(), 2),
                 "career_points_against": round(grp["points_against"].sum(), 2),
                 "championships": championships,
+                "second_places": second_places,
+                "third_places": third_places,
+                "podiums": championships + second_places + third_places,
+                "avg_finish": round(grp["rank"].mean(), 2),
                 "best_finish": int(grp["rank"].min()),
                 "worst_finish": int(grp["rank"].max()),
             }

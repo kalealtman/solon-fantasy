@@ -52,6 +52,51 @@
     <span><b>${transactions.length.toLocaleString()}</b> transactions</span>
   `;
 
+  // ---------- owner hover tooltip (used on the career table and chart) ----------
+  const tooltipEl = document.getElementById('owner-tooltip');
+  const ownerByName = Object.fromEntries(owner_career.map((o) => [o.owner, o]));
+
+  function ownerTooltipHTML(owner) {
+    const o = ownerByName[owner];
+    if (!o) return '';
+    const stat = (label, val) => `<div class="ot-stat"><span class="ot-label">${label}</span><span class="ot-val">${val}</span></div>`;
+    return `
+      <div class="ot-name">${o.owner}</div>
+      <div class="ot-grid">
+        ${stat('Seasons', o.seasons_played)}
+        ${stat('Win%', pct(o.win_pct))}
+        ${stat('🥇 1st', o.championships)}
+        ${stat('🥈 2nd', o.second_places)}
+        ${stat('🥉 3rd', o.third_places)}
+        ${stat('Podiums', o.podiums)}
+        ${stat('Avg Finish', o.avg_finish.toFixed(2))}
+        ${stat('Best / Worst', `${o.best_finish} / ${o.worst_finish}`)}
+      </div>
+    `;
+  }
+
+  function positionTooltip(evt) {
+    const pad = 16;
+    const w = tooltipEl.offsetWidth || 210;
+    const h = tooltipEl.offsetHeight || 170;
+    let x = evt.clientX + pad;
+    let y = evt.clientY + pad;
+    if (x + w > window.innerWidth) x = evt.clientX - w - pad;
+    if (y + h > window.innerHeight) y = evt.clientY - h - pad;
+    tooltipEl.style.left = x + 'px';
+    tooltipEl.style.top = y + 'px';
+  }
+
+  function attachOwnerHover(el, owner) {
+    el.addEventListener('mouseenter', (e) => {
+      tooltipEl.innerHTML = ownerTooltipHTML(owner);
+      tooltipEl.classList.add('visible');
+      positionTooltip(e);
+    });
+    el.addEventListener('mousemove', positionTooltip);
+    el.addEventListener('mouseleave', () => tooltipEl.classList.remove('visible'));
+  }
+
   function statTile(value, label, sub, accent) {
     return `<div class="card stat-tile"><div class="value${accent ? ' accent' : ''}">${value}</div><div class="label">${label}</div>${sub ? `<div class="sub">${sub}</div>` : ''}</div>`;
   }
@@ -83,7 +128,7 @@
         ${statTile(seasons.length, 'Seasons Played', `${Math.min(...seasons)}&ndash;${Math.max(...seasons)}`)}
         ${statTile(owner_career.length, 'All-Time Owners')}
         ${statTile(topChampCount, 'Most Championships', champLeaders, true)}
-        ${statTile(transactions.length.toLocaleString(), 'Career Transactions')}
+        ${statTile(fmt(standings.reduce((sum, s) => sum + s.points_for, 0), 0), 'Points Scored, All-Time')}
       </div>
       <h2 class="section-title">Trophy Case Preview</h2>
       <div class="grid cols-3">${trophy_case.slice(0, 3).map(factCard).join('')}</div>
@@ -100,34 +145,71 @@
     { key: 'career_points_for', label: 'PF', num: true, fmt: (v) => fmt(v, 0) },
     { key: 'career_points_against', label: 'PA', num: true, fmt: (v) => fmt(v, 0) },
     { key: 'championships', label: 'Titles', num: true },
+    { key: 'podiums', label: 'Podiums', num: true },
+    { key: 'avg_finish', label: 'Avg Finish', num: true, fmt: (v) => v.toFixed(2) },
     { key: 'best_finish', label: 'Best', num: true },
     { key: 'worst_finish', label: 'Worst', num: true },
   ];
 
+  const CHART_METRICS = [
+    { key: 'championships', label: 'Championships' },
+    { key: 'podiums', label: 'Podiums (top 3 finishes)' },
+    { key: 'career_wins', label: 'Career Wins' },
+    { key: 'career_losses', label: 'Career Losses', invert: true },
+    { key: 'win_pct', label: 'Win %', fmt: pct },
+    { key: 'career_points_for', label: 'Points For', fmt: (v) => fmt(v, 0) },
+    { key: 'career_points_against', label: 'Points Against', invert: true, fmt: (v) => fmt(v, 0) },
+    { key: 'avg_finish', label: 'Avg Finish (lower is better)', invert: true, fmt: (v) => v.toFixed(2) },
+    { key: 'seasons_played', label: 'Seasons Played' },
+  ];
+  let chartMetric = 'championships';
+
   function renderStandings() {
     document.getElementById('view-standings').innerHTML = `
-      <h2 class="section-title">Championships by Owner</h2>
-      <div class="chart-wrap" style="margin-bottom:28px" id="champ-chart"></div>
+      <h2 class="section-title">Owner Comparison</h2>
+      <div class="controls">
+        <label class="field-label" for="chart-metric">Metric</label>
+        <select id="chart-metric">${CHART_METRICS.map((m) => `<option value="${m.key}">${m.label}</option>`).join('')}</select>
+      </div>
+      <div class="chart-wrap" style="margin-bottom:28px" id="career-chart"></div>
       <h2 class="section-title">All-Time Owner Records</h2>
-      <div class="section-sub">Click a column header to sort.</div>
+      <div class="section-sub">Click a column header to sort. Hover a name for a quick stat card.</div>
       <div class="table-wrap"><table id="career-table"></table></div>
     `;
-    renderChampChart();
+    const metricSel = document.getElementById('chart-metric');
+    metricSel.value = chartMetric;
+    metricSel.addEventListener('change', () => {
+      chartMetric = metricSel.value;
+      renderCareerChart();
+    });
+    renderCareerChart();
     renderCareerTable();
   }
 
-  function renderChampChart() {
-    const rows = [...owner_career].filter((o) => o.championships > 0).sort((a, b) => b.championships - a.championships);
-    const max = Math.max(...rows.map((r) => r.championships));
-    document.getElementById('champ-chart').innerHTML = rows
-      .map(
-        (r) => `
+  function renderCareerChart() {
+    const metric = CHART_METRICS.find((m) => m.key === chartMetric);
+    const rows = [...owner_career].sort((a, b) => (metric.invert ? a[metric.key] - b[metric.key] : b[metric.key] - a[metric.key]));
+    const values = rows.map((r) => r[metric.key]);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = max - min || 1;
+    document.getElementById('career-chart').innerHTML = rows
+      .map((r) => {
+        const v = r[metric.key];
+        const pctWidth = Math.max(((metric.invert ? max - v : v - min) / range) * 100, 3);
+        const shown = metric.fmt ? metric.fmt(v) : v;
+        const outside = pctWidth < 20;
+        return `
       <div class="bar-row">
-        <div class="bar-label">${r.owner}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${(r.championships / max) * 100}%"><span class="bar-value">${r.championships}</span></div></div>
-      </div>`
-      )
+        <div class="bar-label owner-hover" data-owner="${r.owner}">${r.owner}</div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${pctWidth}%">${outside ? '' : `<span class="bar-value">${shown}</span>`}</div>
+          ${outside ? `<span class="bar-value outside" style="position:absolute;left:${pctWidth}%;top:0;line-height:20px">${shown}</span>` : ''}
+        </div>
+      </div>`;
+      })
       .join('');
+    document.querySelectorAll('#career-chart .owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
   }
 
   function renderCareerTable() {
@@ -139,7 +221,7 @@
         .map(
           (r) => `<tr>${CAREER_COLS.map((c) => {
             if (c.key === 'owner') {
-              return `<td>${r.championships > 0 ? `<span class="rank-badge accent" style="margin-right:8px">${r.championships}</span>` : ''}${r.owner}</td>`;
+              return `<td>${r.championships > 0 ? `<span class="rank-badge medal" style="margin-right:8px">${r.championships}</span>` : ''}<span class="owner-hover" data-owner="${r.owner}">${r.owner}</span></td>`;
             }
             const v = c.fmt ? c.fmt(r[c.key]) : r[c.key];
             return `<td class="${c.num ? 'num' : ''}">${v}</td>`;
@@ -155,6 +237,7 @@
         renderCareerTable();
       });
     });
+    table.querySelectorAll('.owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
   }
 
   function renderTrophies() {
@@ -232,7 +315,7 @@
         <thead><tr><th class="num">#</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">T</th><th class="num">PF</th><th class="num">PA</th></tr></thead>
         <tbody>${rows
           .map(
-            (r) => `<tr><td class="num"><span class="rank-badge${r.rank === 1 ? ' accent' : ''}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
+            (r) => `<tr><td class="num"><span class="rank-badge${r.rank === 1 ? ' medal' : ''}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
           )
           .join('')}</tbody>
       </table></div>

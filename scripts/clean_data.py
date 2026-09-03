@@ -40,7 +40,9 @@ def main() -> None:
         for col in df.select_dtypes(include="object").columns:
             before = df[col].copy()
             df[col] = df[col].map(normalize)
-            changed += int((before != df[col]).sum())
+            # NaN != NaN in pandas, so a plain != comparison overcounts every
+            # empty cell as "changed" -- exclude cells that are still NaN.
+            changed += int(((before != df[col]) & df[col].notna()).sum())
         df.to_csv(path, index=False)
         print(f"{path.name}: normalized {changed} cell(s)")
 

@@ -68,9 +68,11 @@ def parse_standings(html: str) -> List[dict]:
         )
         wlt = cells[2].get_text(strip=True)
         wins, losses, ties = (wlt.split("-") + ["0"])[:3]
+        rank_text = tr.find("td", class_="Tst-rank").get_text(strip=True)
         rows.append(
             {
-                "rank": re.sub(r"\D", "", cells[0].get_text(strip=True)),
+                "rank": re.sub(r"\D", "", rank_text),
+                "made_playoffs": rank_text.startswith("*"),
                 "team_id": _team_id_from_href(team_link["href"] if team_link else None),
                 "team_name": team_link.get_text(strip=True) if team_link else "",
                 "wins": int(wins),

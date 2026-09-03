@@ -56,6 +56,7 @@
   // ---------- owner hover tooltip (used on the career table and chart) ----------
   const tooltipEl = document.getElementById('owner-tooltip');
   const ownerByName = Object.fromEntries(owner_career.map((o) => [o.owner, o]));
+  const madePlayoffsByTeam = Object.fromEntries(standings.map((s) => [s.season + '|' + s.team_name, s.made_playoffs]));
 
   function ownerTooltipHTML(owner) {
     const o = ownerByName[owner];
@@ -65,6 +66,7 @@
       <div class="ot-name">${o.owner}</div>
       <div class="ot-grid">
         ${stat('Seasons', o.seasons_played)}
+        ${stat('Playoffs', `${o.playoff_appearances}/${o.seasons_played}`)}
         ${stat('Win%', pct(o.win_pct))}
         ${stat('🥇 1st', o.championships)}
         ${stat('🥈 2nd', o.second_places)}
@@ -157,6 +159,7 @@
     career_points_against: { label: 'Points Against', invert: true, fmt: (v) => fmt(v, 0) },
     pf_per_season: { label: 'Points For / Season', fmt: (v) => fmt(v, 1) },
     pa_per_season: { label: 'Points Against / Season', invert: true, fmt: (v) => fmt(v, 1) },
+    playoff_appearances: { label: 'Playoff Appearances' },
     championships: { label: 'Championships' },
     podiums: { label: 'Podiums (Top 3)' },
     avg_finish: { label: 'Avg Finish', invert: true, fmt: (v) => v.toFixed(2) },
@@ -203,6 +206,9 @@
         const a = grp[i];
         const b = grp[i + 1];
         if (a.owner === b.owner) continue;
+        const aIn = madePlayoffsByTeam[a.season + '|' + a.team_name];
+        const bIn = madePlayoffsByTeam[b.season + '|' + b.team_name];
+        if (!aIn || !bIn) continue; // consolation bracket, not the real playoffs
         [
           [a.owner, a.score, b.score],
           [b.owner, b.score, a.score],
@@ -238,6 +244,7 @@
       const championships = rows.filter((r) => r.rank === 1).length;
       const seconds = rows.filter((r) => r.rank === 2).length;
       const thirds = rows.filter((r) => r.rank === 3).length;
+      const playoffAppearances = rows.filter((r) => r.made_playoffs).length;
       const ownerTxns = txnsInRange.filter((t) => t.owner === owner);
       const adds = ownerTxns.filter((t) => t.action === 'add').length;
       const drops = ownerTxns.filter((t) => t.action === 'drop').length;
@@ -266,6 +273,7 @@
         career_points_against: pa,
         pf_per_season: pf / seasonsPlayed,
         pa_per_season: pa / seasonsPlayed,
+        playoff_appearances: playoffAppearances,
         championships,
         second_places: seconds,
         third_places: thirds,
@@ -458,9 +466,9 @@
     document.getElementById('view-h2h').innerHTML = `
       <h2 class="section-title">Head-to-Head</h2>
       <div class="h2h-picker">
-        <select id="h2h-a">${owners.map((o) => `<option>${o}</option>`).join('')}</select>
+        <select id="h2h-a"><option value="">Select team</option>${owners.map((o) => `<option>${o}</option>`).join('')}</select>
         <span class="h2h-vs">VS</span>
-        <select id="h2h-b">${owners.map((o, i) => `<option ${i === 1 ? 'selected' : ''}>${o}</option>`).join('')}</select>
+        <select id="h2h-b"><option value="">Select team</option>${owners.map((o) => `<option>${o}</option>`).join('')}</select>
       </div>
       <div id="h2h-result" class="card h2h-card"></div>
       <div id="h2h-games"></div>
@@ -476,6 +484,11 @@
       const b = bSel.value;
       const resEl = document.getElementById('h2h-result');
       const gamesEl = document.getElementById('h2h-games');
+      if (!a || !b) {
+        resEl.innerHTML = `<p style="color:var(--ink-muted);margin:0">Pick two teams to see their head-to-head record.</p>`;
+        gamesEl.innerHTML = '';
+        return;
+      }
       if (a === b) {
         resEl.innerHTML = `<p style="color:var(--ink-muted);margin:0">Pick two different owners.</p>`;
         gamesEl.innerHTML = '';
@@ -535,21 +548,68 @@
     renderSeasonContent(latestSeason);
   }
 
+  function medalClass(rank) {
+    return rank === 1 ? ' medal' : rank === 2 ? ' silver' : rank === 3 ? ' bronze' : '';
+  }
+
   function renderSeasonContent(season) {
     const rows = standings.filter((s) => s.season === season).sort((a, b) => a.rank - b.rank);
     const picks = draft.filter((d) => d.season === season && d.round === 1).sort((a, b) => a.pick - b.pick);
+    const seasonMatchups = matchups.filter((m) => m.season === season);
+
+    let highest = null;
+    let lowest = null;
+    const byWeek = {};
+    seasonMatchups.forEach((m) => {
+      (byWeek[m.week] = byWeek[m.week] || []).push(m);
+      if (!highest || m.score > highest.score) highest = m;
+      if (!lowest || m.score < lowest.score) lowest = m;
+    });
+    let biggestBlowout = null;
+    let closestGame = null;
+    Object.values(byWeek).forEach((grp) => {
+      for (let i = 0; i < grp.length - 1; i += 2) {
+        const a = grp[i];
+        const b = grp[i + 1];
+        const margin = Math.abs(a.score - b.score);
+        const game = { week: a.week, a, b, margin };
+        if (!biggestBlowout || margin > biggestBlowout.margin) biggestBlowout = game;
+        if (!closestGame || margin < closestGame.margin) closestGame = game;
+      }
+    });
+
+    const highlightCards = [
+      highest && statTile(fmt(highest.score, 1), 'Highest Weekly Score', `${highest.owner} &middot; week ${highest.week}`),
+      lowest && statTile(fmt(lowest.score, 1), 'Lowest Weekly Score', `${lowest.owner} &middot; week ${lowest.week}`),
+      biggestBlowout && statTile(fmt(biggestBlowout.margin, 1), 'Biggest Blowout', `${biggestBlowout.a.owner} vs ${biggestBlowout.b.owner} &middot; week ${biggestBlowout.week}`),
+      closestGame && statTile(fmt(closestGame.margin, 1), 'Closest Game', `${closestGame.a.owner} vs ${closestGame.b.owner} &middot; week ${closestGame.week}`),
+    ]
+      .filter(Boolean)
+      .join('');
+
     document.getElementById('season-content').innerHTML = `
-      <h3 style="font-family:var(--font-display);font-size:18px;margin:20px 0 10px">Final Standings</h3>
+      <div class="grid cols-4" style="margin:20px 0">${highlightCards}</div>
+      <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Final Standings</h3>
       <div class="table-wrap"><table>
         <thead><tr><th class="num">#</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">T</th><th class="num">PF</th><th class="num">PA</th></tr></thead>
         <tbody>${rows
           .map(
-            (r) => `<tr><td class="num"><span class="rank-badge${r.rank === 1 ? ' medal' : ''}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
+            (r) => `<tr><td class="num"><span class="rank-badge${medalClass(r.rank)}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
           )
           .join('')}</tbody>
       </table></div>
       <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Round 1 Draft</h3>
-      <div class="draft-pick-list">${picks.map((p) => `<div class="draft-pick"><span class="pn">${p.pick}. ${p.player_name}</span><span class="pt">${p.team_name}</span></div>`).join('')}</div>
+      <div class="draft-board">${picks
+        .map(
+          (p) => `<div class="draft-board-slot">
+            <div class="draft-board-pick">1.${String(p.pick).padStart(2, '0')}</div>
+            <div class="draft-board-card">
+              <div class="draft-board-name">${p.player_name}</div>
+              <div class="draft-board-team">${p.team_name}</div>
+            </div>
+          </div>`
+        )
+        .join('')}</div>
     `;
   }
 

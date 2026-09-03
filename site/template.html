@@ -168,6 +168,8 @@
     background: var(--surface-2); color: var(--ink-muted);
   }
   .rank-badge.medal { background: var(--medal-gold); color: #14181C; }
+  .rank-badge.silver { background: #C0C4C8; color: #14181C; }
+  .rank-badge.bronze { background: #B0793A; color: #FBF7F0; }
 
   .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
   select, .btn {
@@ -215,10 +217,18 @@
 
   .draft-round { margin-bottom: 4px; }
   .draft-round-label { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin: 14px 0 6px; }
-  .draft-pick-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 4px; }
-  .draft-pick { font-size: 12.5px; padding: 4px 8px; border-radius: 3px; background: var(--surface-2); display: flex; justify-content: space-between; gap: 6px; }
-  .draft-pick .pn { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .draft-pick .pt { color: var(--ink-faint); font-family: var(--font-mono); font-size: 11px; }
+  .draft-board { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; }
+  .draft-board-slot { flex: 1 0 108px; min-width: 108px; }
+  .draft-board-pick {
+    font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: center;
+    margin-bottom: 5px; letter-spacing: 0.02em;
+  }
+  .draft-board-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 10px 8px; text-align: center;
+  }
+  .draft-board-name { font-size: 12.5px; font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .draft-board-team { font-size: 10.5px; color: var(--ink-muted); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
   .txn-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: baseline; flex-wrap: wrap; }
   .txn-row:last-child { border-bottom: none; }

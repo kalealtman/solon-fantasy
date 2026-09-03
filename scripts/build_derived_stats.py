@@ -76,6 +76,7 @@ def build_owner_career(
         championships = int((grp["rank"] == 1).sum())
         second_places = int((grp["rank"] == 2).sum())
         third_places = int((grp["rank"] == 3).sum())
+        playoff_appearances = int(grp["made_playoffs"].sum())
         seasons_played = grp["season"].nunique()
         adds = int(txn_counts["add"].get(owner, 0)) if "add" in txn_counts.columns else 0
         drops = int(txn_counts["drop"].get(owner, 0)) if "drop" in txn_counts.columns else 0
@@ -98,6 +99,7 @@ def build_owner_career(
                 "career_points_against": round(grp["points_against"].sum(), 2),
                 "pf_per_season": round(grp["points_for"].sum() / seasons_played, 1),
                 "pa_per_season": round(grp["points_against"].sum() / seasons_played, 1),
+                "playoff_appearances": playoff_appearances,
                 "championships": championships,
                 "second_places": second_places,
                 "third_places": third_places,
@@ -168,11 +170,17 @@ def is_postseason(season: int, week: int) -> bool:
     return week in ((14, 15, 16) if season <= 2020 else (15, 16, 17))
 
 
-def build_postseason_records(matchups: pd.DataFrame) -> pd.DataFrame:
-    """One row per (owner, season): that season's postseason W-L-T. Needed
-    both for career postseason record (sum across rows for one owner) and
-    single-season best/worst postseason record facts -- a plain career
-    total would hide e.g. someone going 3-0 one year and 0-3 another."""
+def build_postseason_records(matchups: pd.DataFrame, standings: pd.DataFrame) -> pd.DataFrame:
+    """One row per (owner, season): that season's CHAMPIONSHIP-BRACKET-ONLY
+    postseason W-L-T. Yahoo runs a consolation bracket in parallel with the
+    real playoffs during the same weeks, for teams that didn't make the
+    playoffs -- without restricting to standings.made_playoffs, this would
+    count consolation-bracket wins/losses as if they were real postseason
+    games. Also needed for single-season best/worst postseason facts -- a
+    plain career total would hide e.g. someone going 3-0 one year and 0-3
+    another."""
+    made_playoffs = {(row["season"], row["team_name"]): row["made_playoffs"] for _, row in standings.iterrows()}
+
     postseason = matchups[matchups.apply(lambda r: is_postseason(r["season"], r["week"]), axis=1)]
     records: dict = {}
     for (season, _week), grp in postseason.groupby(["season", "week"]):
@@ -181,6 +189,8 @@ def build_postseason_records(matchups: pd.DataFrame) -> pd.DataFrame:
             a, b = grp.iloc[i], grp.iloc[i + 1]
             if a["owner"] == b["owner"]:
                 continue
+            if not (made_playoffs.get((season, a["team_name"])) and made_playoffs.get((season, b["team_name"]))):
+                continue  # at least one side is in the consolation bracket, not the real playoffs
             for owner, own_score, opp_score in ((a["owner"], a["score"], b["score"]), (b["owner"], b["score"], a["score"])):
                 key = (owner, season)
                 records.setdefault(key, {"wins": 0, "losses": 0, "ties": 0})
@@ -247,26 +257,26 @@ def build_trophy_case(
         add_fact(category, "Lowest Single-Week Score", str(low["score"]), low["owner"], f"season {low['season']}, week {low['week']}")
 
     if len(postseason_records):
-        pr = postseason_records.copy()
-        pr["win_pct"] = pr["wins"] / pr[["wins", "losses"]].sum(axis=1).clip(lower=1)
+        # Cumulative (career) record, not single-season -- with only 2-3
+        # games a postseason, *someone* goes 3-0 and *someone* goes 0-3
+        # basically every year, which makes the single-season version of
+        # this fact meaningless (it never highlights anything unusual).
+        career_pr = postseason_records.groupby("owner")[["wins", "losses"]].sum().reset_index()
+        career_pr["win_pct"] = career_pr["wins"] / career_pr[["wins", "losses"]].sum(axis=1).clip(lower=1)
 
         def record_fact(label, ascending):
-            ranked = pr.sort_values(["win_pct", "wins"], ascending=ascending)
+            ranked = career_pr.sort_values(["win_pct", "wins"], ascending=ascending)
             top = ranked.iloc[0]
-            # Group ties by the exact W-L, not just win% -- 2-0 and 3-0 both
-            # read as 100%, but they're different records and shouldn't be
-            # credited to each other.
-            tied = pr[(pr["wins"] == top["wins"]) & (pr["losses"] == top["losses"])]
+            tied = career_pr[(career_pr["wins"] == top["wins"]) & (career_pr["losses"] == top["losses"])]
             add_fact(
                 "postseason",
                 label,
                 f"{int(top['wins'])}-{int(top['losses'])}",
-                format_tied_names(tied["owner"].unique().tolist()),
-                ", ".join(str(s) for s in sorted(tied["season"].unique().tolist())),
+                format_tied_names(tied["owner"].tolist()),
             )
 
-        record_fact("Best Postseason Record", ascending=False)
-        record_fact("Worst Postseason Record", ascending=True)
+        record_fact("Best Career Postseason Record", ascending=False)
+        record_fact("Worst Career Postseason Record", ascending=True)
 
     add_counts = transactions[transactions["action"] == "add"]["owner"].value_counts()
     if len(add_counts):
@@ -300,7 +310,7 @@ def main() -> None:
     trades_path = PROCESSED_DIR / "trades.csv"
     trades = add_owner_column(pd.read_csv(trades_path), owner_lookup) if trades_path.exists() else None
 
-    postseason_records = build_postseason_records(matchups)
+    postseason_records = build_postseason_records(matchups, standings)
 
     owner_career = build_owner_career(standings, transactions, draft, postseason_records, trades)
     owner_career.to_csv(PROCESSED_DIR / "owner_career.csv", index=False)

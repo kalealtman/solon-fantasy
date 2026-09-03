@@ -118,12 +118,22 @@ def is_postseason(season: int, week: int) -> bool:
     return week in ((14, 15, 16) if season <= 2020 else (15, 16, 17))
 
 
+def format_tied_names(names) -> str:
+    """'A' / 'A & B' / 'A, B & C' -- never silently pick a winner out of a tie."""
+    names = sorted(names)
+    if len(names) == 1:
+        return names[0]
+    return ", ".join(names[:-1]) + " & " + names[-1]
+
+
 def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transactions: pd.DataFrame) -> pd.DataFrame:
     facts = []
 
     champs_per_owner = standings[standings["rank"] == 1]["owner"].value_counts()
     if len(champs_per_owner):
-        facts.append(("Most championships", f"{champs_per_owner.index[0]} ({champs_per_owner.iloc[0]})"))
+        top_count = champs_per_owner.iloc[0]
+        leaders = format_tied_names(champs_per_owner[champs_per_owner == top_count].index.tolist())
+        facts.append(("Most championships", f"{leaders} ({top_count})"))
 
     postseason_mask = matchups.apply(lambda r: is_postseason(r["season"], r["week"]), axis=1)
     regular = matchups[~postseason_mask]

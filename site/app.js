@@ -4,6 +4,8 @@
 
   const fmt = (n, d = 0) => Number(n).toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
   const pct = (n) => (n * 100).toFixed(1) + '%';
+  // 'A' / 'A & B' / 'A, B & C' -- never silently pick a winner out of a tie.
+  const joinNames = (names) => (names.length <= 1 ? names.join('') : names.slice(0, -1).join(', ') + ' & ' + names[names.length - 1]);
   const seasons = [...new Set(standings.map((s) => s.season))].sort((a, b) => b - a);
   const latestSeason = seasons[0];
 
@@ -61,7 +63,12 @@
 
   function renderOverview() {
     const champRow = standings.find((s) => s.season === latestSeason && s.rank === 1);
-    const mostChamps = [...owner_career].sort((a, b) => b.championships - a.championships)[0];
+    const topChampCount = Math.max(...owner_career.map((o) => o.championships));
+    const champNames = owner_career
+      .filter((o) => o.championships === topChampCount)
+      .map((o) => o.owner)
+      .sort();
+    const champLeaders = joinNames(champNames);
     document.getElementById('view-overview').innerHTML = `
       <div class="card champ-callout" style="margin-bottom:24px">
         <div class="trophy">🏆</div>
@@ -75,7 +82,7 @@
       <div class="grid cols-4" style="margin-bottom:8px">
         ${statTile(seasons.length, 'Seasons Played', `${Math.min(...seasons)}&ndash;${Math.max(...seasons)}`)}
         ${statTile(owner_career.length, 'All-Time Owners')}
-        ${statTile(mostChamps.championships, 'Most Championships', mostChamps.owner, true)}
+        ${statTile(topChampCount, 'Most Championships', champLeaders, true)}
         ${statTile(transactions.length.toLocaleString(), 'Career Transactions')}
       </div>
       <h2 class="section-title">Trophy Case Preview</h2>

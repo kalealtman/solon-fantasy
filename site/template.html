@@ -78,7 +78,7 @@
   }
   .site-header__top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
   .site-title-row { display: flex; align-items: center; gap: 14px; }
-  .helmet-badge { width: clamp(38px, 5vw, 52px); height: clamp(38px, 5vw, 52px); flex-shrink: 0; }
+  .trophy-badge { width: clamp(38px, 5vw, 52px); height: clamp(38px, 5vw, 52px); flex-shrink: 0; }
   .site-title { font-size: clamp(28px, 4vw, 40px); line-height: 1; color: var(--ink); }
   .site-title .accent { color: var(--accent); }
   .site-tagline { color: var(--ink-muted); font-size: 13px; margin-top: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
@@ -211,10 +211,20 @@
 <header class="site-header">
   <div class="site-header__top">
     <div class="site-title-row">
-      <svg class="helmet-badge" viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M 15,84 Q 4,82 5,66 Q 3,48 16,33 Q 27,10 52,8 Q 79,6 90,27 Q 98,44 87,57 Q 93,68 81,75 Q 84,85 68,85 Q 58,91 48,82 Q 33,92 15,84 Z" fill="var(--accent)"/>
-        <path d="M 18,30 Q 40,9 55,8 Q 74,7 89,26" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>
-        <path d="M 27,46 L 39,45 L 34,58 Z" fill="var(--ink)"/>
+      <svg class="trophy-badge" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="30" y="86" width="40" height="7" rx="1.5" fill="var(--accent)"/>
+        <rect x="38" y="78" width="24" height="9" fill="var(--accent)"/>
+        <rect x="44" y="61" width="12" height="18" fill="var(--accent)"/>
+        <polygon points="34,61 66,61 60,33 40,33" fill="var(--accent)"/>
+        <path d="M 34,39 C 18,39 14,57 30,61" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M 66,39 C 82,39 86,57 70,61" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+        <g transform="rotate(-18 50 23)">
+          <ellipse cx="50" cy="23" rx="14" ry="9.5" fill="var(--ink)"/>
+          <line x1="39" y1="23" x2="61" y2="23" stroke="var(--accent)" stroke-width="1.5"/>
+          <line x1="45" y1="19" x2="45" y2="27" stroke="var(--accent)" stroke-width="1.5"/>
+          <line x1="50" y1="18" x2="50" y2="28" stroke="var(--accent)" stroke-width="1.5"/>
+          <line x1="55" y1="19" x2="55" y2="27" stroke="var(--accent)" stroke-width="1.5"/>
+        </g>
       </svg>
       <div>
         <h1 class="site-title">Solon <span class="accent">Fantasy Football</span></h1>

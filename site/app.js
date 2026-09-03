@@ -180,6 +180,7 @@
         <div>
           <div class="fact-label">Reigning Champion &mdash; ${latestSeason}</div>
           <div class="name">${champRow.team_name}</div>
+          <div class="team-owner">${champRow.owner}</div>
           <div class="record">${champRow.wins}-${champRow.losses}${champRow.ties ? '-' + champRow.ties : ''} &middot; ${fmt(champRow.points_for, 1)} PF</div>
         </div>
       </div>
@@ -854,7 +855,7 @@
     return `
       <div class="txn-row">
         <div class="txn-event-players">${parts.join('')}</div>
-        <span style="color:var(--ink-muted)">${e.team_name}</span>
+        <div class="txn-team"><span>${e.team_name}</span><div class="team-owner">${e.owner}</div></div>
         <span class="txn-meta">${e.timestamp || ''} &middot; ${e.season}</span>
       </div>`;
   }

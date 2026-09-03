@@ -1,6 +1,6 @@
 (function () {
   const DATA = JSON.parse(document.getElementById('league-data').textContent);
-  const { standings, draft, matchups, transactions, trades, owner_career, head_to_head, trophy_case } = DATA;
+  const { standings, draft, matchups, transactions, trades, owner_career, head_to_head, trophy_case, coaches_poll_rankings, coaches_poll_awards, coaches_poll_meta } = DATA;
   const isPostseason = (season, week) => (season <= 2020 ? [14, 15, 16] : [15, 16, 17]).includes(week);
   const SHOTGUN_START_SEASON = 2023;
 
@@ -31,6 +31,7 @@
 
   const TABS = [
     { id: 'overview', label: 'Overview' },
+    { id: 'coachespoll', label: "Coaches' Poll" },
     { id: 'standings', label: 'All-Time' },
     { id: 'recordbook', label: 'Record Book' },
     { id: 'h2h', label: 'Head-to-Head' },
@@ -694,9 +695,21 @@
   function renderDraftBoardForSeason(season) {
     const picks = draft.filter((d) => d.season === season);
     const rounds = [...new Set(picks.map((p) => p.round))].sort((a, b) => a - b);
+    // Snake drafts reverse pick order every other round, so raw pick position
+    // alone would put a different team in "column 1" each round. A real draft
+    // board keeps one team per column for the whole draft, so column position
+    // is pinned to each team's round-1 slot instead of the round's own pick order.
+    const round1Order = picks
+      .filter((p) => p.round === 1)
+      .sort((a, b) => a.pick - b.pick)
+      .map((p) => p.team_name);
+    const slotIndex = (teamName) => {
+      const idx = round1Order.indexOf(teamName);
+      return idx === -1 ? Infinity : idx;
+    };
     document.getElementById('draft-board-content').innerHTML = rounds
       .map((round) => {
-        const roundPicks = picks.filter((p) => p.round === round).sort((a, b) => a.pick - b.pick);
+        const roundPicks = picks.filter((p) => p.round === round).sort((a, b) => slotIndex(a.team_name) - slotIndex(b.team_name));
         return `
           <div class="draft-round-label">Round ${round}</div>
           <div class="draft-board" style="--cols:${roundPicks.length}">${roundPicks
@@ -862,8 +875,81 @@
         : '');
   }
 
+  function renderCoachesPollForSeason(season) {
+    const rankings = coaches_poll_rankings.filter((r) => r.season === season).sort((a, b) => a.rank - b.rank);
+    const awards = coaches_poll_awards.filter((a) => a.season === season);
+    const meta = coaches_poll_meta.find((m) => m.season === season);
+    const rankCounts = {};
+    rankings.forEach((r) => (rankCounts[r.rank] = (rankCounts[r.rank] || 0) + 1));
+
+    const rowsHtml = rankings
+      .map((r) => {
+        const tied = rankCounts[r.rank] > 1;
+        return `<tr>
+          <td class="num"><span class="rank-badge${medalClass(r.rank)}">${tied ? 'T-' : ''}${r.rank}</span></td>
+          <td><span class="owner-hover" data-owner="${r.owner}">${r.owner}</span></td>
+          <td class="num">${fmt(r.points)}</td>
+          <td class="num">${r.avg_rank.toFixed(2)}</td>
+          <td class="num">${r.first_place_votes}</td>
+          <td class="num">${r.highest_rank} / ${r.lowest_rank}</td>
+        </tr>`;
+      })
+      .join('');
+
+    const awardsHtml = awards
+      .map(
+        (a) => `
+      <div class="card poll-award-card">
+        <div class="award-name">${a.award}</div>
+        <div class="award-desc">${a.description}</div>
+        <div class="award-winner">${a.winner}</div>
+        <div class="award-votes">${a.votes} of ${a.total_votes_cast} votes</div>
+      </div>`
+      )
+      .join('');
+
+    document.getElementById('coaches-poll-content').innerHTML = `
+      <div class="card" style="margin-bottom:20px">
+        <div class="fact-label">${season} Coaches' Poll</div>
+        <p style="margin:8px 0 0;color:var(--ink-muted);font-size:13.5px;line-height:1.5">
+          ${meta.num_respondents} of ${meta.num_candidates} managers anonymously ranked every other GM, 1 (best) to ${
+      meta.num_candidates - 1
+    } (worst), on overall GM skill &mdash; drafting, waivers, trading, in-season management, and long-term consistency. Individual ballots are never shown, only these aggregates.
+        </p>
+      </div>
+      <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Overall Ranking</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th class="num">#</th><th>Manager</th><th class="num">Points</th><th class="num">Avg Rank</th><th class="num">1st Place Votes</th><th class="num">Best / Worst</th></tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table></div>
+      <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Superlative Awards</h3>
+      <div class="grid cols-3">${awardsHtml}</div>
+    `;
+    document.querySelectorAll('#coaches-poll-content .owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
+  }
+
+  function renderCoachesPoll() {
+    const pollSeasons = [...new Set(coaches_poll_rankings.map((r) => r.season))].sort((a, b) => b - a);
+    document.getElementById('view-coachespoll').innerHTML = `
+      <h2 class="section-title">GM Coaches' Poll</h2>
+      ${
+        pollSeasons.length > 1
+          ? `<div class="controls"><label class="field-label">Season</label><select id="poll-season-picker">${pollSeasons
+              .map((s) => `<option value="${s}">${s}</option>`)
+              .join('')}</select></div>`
+          : ''
+      }
+      <div id="coaches-poll-content"></div>
+    `;
+    if (pollSeasons.length > 1) {
+      document.getElementById('poll-season-picker').addEventListener('change', (e) => renderCoachesPollForSeason(Number(e.target.value)));
+    }
+    renderCoachesPollForSeason(pollSeasons[0]);
+  }
+
   const RENDERERS = {
     overview: renderOverview,
+    coachespoll: renderCoachesPoll,
     standings: renderStandings,
     recordbook: renderRecordBook,
     h2h: renderH2H,

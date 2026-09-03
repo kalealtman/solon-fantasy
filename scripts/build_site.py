@@ -28,7 +28,19 @@ DEFAULT_OUTPUT = SITE_DIR / "dist" / "solon_site.html"
 
 # rosters.csv is deliberately excluded -- it's ~15x the size of everything
 # else combined and the site doesn't have a per-player view yet.
-DATASETS = ["standings", "draft", "matchups", "transactions", "trades", "owner_career", "head_to_head", "trophy_case"]
+DATASETS = [
+    "standings",
+    "draft",
+    "matchups",
+    "transactions",
+    "trades",
+    "owner_career",
+    "head_to_head",
+    "trophy_case",
+    "coaches_poll_rankings",
+    "coaches_poll_awards",
+    "coaches_poll_meta",
+]
 # These get an "owner" field added (team_name -> owner) so the client-side
 # season-range slicer can recompute career stats for an arbitrary range
 # without a round trip -- owner_career.csv only covers the full history.

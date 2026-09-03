@@ -24,3 +24,9 @@ site/dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Coaches Poll raw form export -- the form promises anonymous responses not
+# tied to results, so raw per-voter ballots never get committed. Only the
+# aggregated data/processed/coaches_poll_*.csv (built by
+# scripts/build_coaches_poll.py) is checked in.
+*Coaches Poll*.xlsx

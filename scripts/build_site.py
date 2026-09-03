@@ -11,38 +11,52 @@ Usage:
 """
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT / "src"))
+
+from solon_fantasy import config_io  # noqa: E402
+
 SITE_DIR = REPO_ROOT / "site"
 PROCESSED_DIR = REPO_ROOT / "data" / "processed"
+CONFIG_DIR = REPO_ROOT / "config"
 DEFAULT_OUTPUT = SITE_DIR / "dist" / "solon_site.html"
 
 # rosters.csv is deliberately excluded -- it's ~15x the size of everything
 # else combined and the site doesn't have a per-player view yet.
 DATASETS = ["standings", "draft", "matchups", "transactions", "owner_career", "head_to_head", "trophy_case"]
+# These get an "owner" field added (team_name -> owner) so the client-side
+# season-range slicer can recompute career stats for an arbitrary range
+# without a round trip -- owner_career.csv only covers the full history.
+NEEDS_OWNER_COLUMN = {"standings", "transactions", "draft"}
+
+
+def _clean_nan(records: list) -> list:
+    # df.where(notnull, None) doesn't work on numeric columns -- a float64
+    # column can't hold Python None, it silently reverts to NaN. json.dumps
+    # then emits a bare `NaN` token (a Python extension, not valid JSON),
+    # which JS's strict JSON.parse() rejects outright, crashing the whole
+    # script before it renders anything. Records (plain Python floats, not
+    # dtype-constrained) can actually hold None, so clean there instead.
+    for row in records:
+        for key, value in row.items():
+            if isinstance(value, float) and value != value:  # NaN != NaN
+                row[key] = None
+    return records
 
 
 def build_data_json() -> str:
+    owner_lookup = config_io.load_owner_map(CONFIG_DIR / "owner_map.csv")
     data = {}
     for name in DATASETS:
         df = pd.read_csv(PROCESSED_DIR / f"{name}.csv")
-        # df.where(notnull, None) doesn't actually work on numeric columns --
-        # a float64 column can't hold Python None, it silently reverts to
-        # NaN. json.dumps then happily emits a bare `NaN` token (a Python
-        # extension, not valid JSON), which JS's strict JSON.parse() rejects
-        # outright -- crashing the whole script before it renders anything.
-        # Converting to records first and cleaning NaN -> None there (where
-        # the values are plain Python floats, not constrained by a column
-        # dtype) actually works.
-        records = df.to_dict(orient="records")
-        for row in records:
-            for key, value in row.items():
-                if isinstance(value, float) and value != value:  # NaN != NaN
-                    row[key] = None
-        data[name] = records
+        if name in NEEDS_OWNER_COLUMN:
+            df["owner"] = df["team_name"].map(owner_lookup).fillna(df["team_name"])
+        data[name] = _clean_nan(df.to_dict(orient="records"))
     return json.dumps(data, separators=(",", ":"))
 
 

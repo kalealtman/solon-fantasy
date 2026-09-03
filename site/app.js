@@ -12,7 +12,7 @@
   const TABS = [
     { id: 'overview', label: 'Overview' },
     { id: 'standings', label: 'All-Time' },
-    { id: 'trophies', label: 'Trophy Case' },
+    { id: 'recordbook', label: 'Record Book' },
     { id: 'h2h', label: 'Head-to-Head' },
     { id: 'seasons', label: 'Seasons' },
     { id: 'transactions', label: 'Transactions' },
@@ -72,6 +72,7 @@
         ${stat('Avg Finish', o.avg_finish.toFixed(2))}
         ${stat('Best / Worst', `${o.best_finish} / ${o.worst_finish}`)}
       </div>
+      ${o.most_drafted_player ? `<div class="ot-drafted">Drafted most: <b>${o.most_drafted_player}</b> (${o.most_drafted_player_count}&times;)</div>` : ''}
     `;
   }
 
@@ -102,8 +103,13 @@
   }
 
   function factCard(f) {
-    const parts = f.value.split(' -- ');
-    return `<div class="card fact-card"><div class="fact-label">${f.fact}</div><div class="fact-value">${parts[0]}</div>${parts[1] ? `<div class="fact-detail">${parts[1]}</div>` : ''}</div>`;
+    return `
+      <div class="card fact-card">
+        <div class="fact-label">${f.fact}</div>
+        <div class="fact-number">${f.number}</div>
+        <div class="fact-name">${f.name}</div>
+        ${f.detail ? `<div class="fact-detail">${f.detail}</div>` : ''}
+      </div>`;
   }
 
   function renderOverview() {
@@ -135,67 +141,164 @@
     `;
   }
 
-  let sortState = { key: 'championships', dir: -1 };
-  const CAREER_COLS = [
-    { key: 'owner', label: 'Owner' },
-    { key: 'seasons_played', label: 'Seasons', num: true },
-    { key: 'career_wins', label: 'W', num: true },
-    { key: 'career_losses', label: 'L', num: true },
-    { key: 'win_pct', label: 'Win%', num: true, fmt: pct },
-    { key: 'career_points_for', label: 'PF', num: true, fmt: (v) => fmt(v, 0) },
-    { key: 'career_points_against', label: 'PA', num: true, fmt: (v) => fmt(v, 0) },
-    { key: 'championships', label: 'Titles', num: true },
-    { key: 'podiums', label: 'Podiums', num: true },
-    { key: 'avg_finish', label: 'Avg Finish', num: true, fmt: (v) => v.toFixed(2) },
-    { key: 'best_finish', label: 'Best', num: true },
-    { key: 'worst_finish', label: 'Worst', num: true },
+  // Single source of truth for every sortable/chartable owner-level field --
+  // used to build both the table columns and the chart's metric picker, and
+  // to keep them in sync (sorting the table by a metric re-charts it, and
+  // vice versa) instead of tracking two independent, driftable states.
+  const METRICS = {
+    seasons_played: { label: 'Seasons Played' },
+    career_wins: { label: 'Career Wins' },
+    career_losses: { label: 'Career Losses', invert: true },
+    win_pct: { label: 'Win %', fmt: pct },
+    career_points_for: { label: 'Points For', fmt: (v) => fmt(v, 0) },
+    career_points_against: { label: 'Points Against', invert: true, fmt: (v) => fmt(v, 0) },
+    pf_per_season: { label: 'Points For / Season', fmt: (v) => fmt(v, 1) },
+    pa_per_season: { label: 'Points Against / Season', invert: true, fmt: (v) => fmt(v, 1) },
+    championships: { label: 'Championships' },
+    podiums: { label: 'Podiums (Top 3)' },
+    avg_finish: { label: 'Avg Finish', invert: true, fmt: (v) => v.toFixed(2) },
+    career_transactions: { label: 'Total Transactions' },
+    transactions_per_season: { label: 'Transactions / Season', fmt: (v) => fmt(v, 1) },
+    career_adds: { label: 'Waiver/FA Adds' },
+    career_drops: { label: 'Drops' },
+    best_finish: { label: 'Best Finish', invert: true, chartable: false },
+    worst_finish: { label: 'Worst Finish', invert: true, chartable: false },
+  };
+  // Curated subset shown as table columns -- the rest are chart-only so the
+  // table doesn't get overwhelming. All of them are still one click away
+  // via the chart's metric picker.
+  const TABLE_COLUMN_KEYS = [
+    'seasons_played', 'career_wins', 'career_losses', 'win_pct', 'career_points_for',
+    'career_points_against', 'pf_per_season', 'championships', 'podiums', 'avg_finish',
+    'transactions_per_season', 'best_finish', 'worst_finish',
   ];
 
-  const CHART_METRICS = [
-    { key: 'championships', label: 'Championships' },
-    { key: 'podiums', label: 'Podiums (top 3 finishes)' },
-    { key: 'career_wins', label: 'Career Wins' },
-    { key: 'career_losses', label: 'Career Losses', invert: true },
-    { key: 'win_pct', label: 'Win %', fmt: pct },
-    { key: 'career_points_for', label: 'Points For', fmt: (v) => fmt(v, 0) },
-    { key: 'career_points_against', label: 'Points Against', invert: true, fmt: (v) => fmt(v, 0) },
-    { key: 'avg_finish', label: 'Avg Finish (lower is better)', invert: true, fmt: (v) => v.toFixed(2) },
-    { key: 'seasons_played', label: 'Seasons Played' },
-  ];
-  let chartMetric = 'championships';
+  let chartKey = 'championships'; // always a real metric -- drives the chart
+  let focusKey = 'championships'; // drives table sort -- can be 'owner', which has no chart form
+  let focusDir = -1; // -1 = best/highest first, 1 = worst/lowest first
+  let seasonRange = { min: Math.min(...seasons), max: Math.max(...seasons) };
+
+  function computeOwnerStats(minSeason, maxSeason) {
+    const inRange = (s) => s >= minSeason && s <= maxSeason;
+    const rowsByOwner = {};
+    standings.filter((s) => inRange(s.season)).forEach((s) => {
+      (rowsByOwner[s.owner] = rowsByOwner[s.owner] || []).push(s);
+    });
+    const txnsInRange = transactions.filter((t) => inRange(t.season));
+    const draftInRange = draft.filter((d) => inRange(d.season));
+
+    return Object.entries(rowsByOwner).map(([owner, rows]) => {
+      const seasonsPlayed = new Set(rows.map((r) => r.season)).size;
+      const wins = rows.reduce((s, r) => s + r.wins, 0);
+      const losses = rows.reduce((s, r) => s + r.losses, 0);
+      const ties = rows.reduce((s, r) => s + r.ties, 0);
+      const pf = rows.reduce((s, r) => s + r.points_for, 0);
+      const pa = rows.reduce((s, r) => s + r.points_against, 0);
+      const championships = rows.filter((r) => r.rank === 1).length;
+      const seconds = rows.filter((r) => r.rank === 2).length;
+      const thirds = rows.filter((r) => r.rank === 3).length;
+      const ownerTxns = txnsInRange.filter((t) => t.owner === owner);
+      const adds = ownerTxns.filter((t) => t.action === 'add').length;
+      const drops = ownerTxns.filter((t) => t.action === 'drop').length;
+      const pickCounts = {};
+      draftInRange
+        .filter((d) => d.owner === owner)
+        .forEach((d) => (pickCounts[d.player_name] = (pickCounts[d.player_name] || 0) + 1));
+      let topPlayer = '';
+      let topCount = 0;
+      Object.keys(pickCounts).sort().forEach((name) => {
+        if (pickCounts[name] > topCount) {
+          topCount = pickCounts[name];
+          topPlayer = name;
+        }
+      });
+      return {
+        owner,
+        seasons_played: seasonsPlayed,
+        career_wins: wins,
+        career_losses: losses,
+        career_ties: ties,
+        win_pct: wins / Math.max(wins + losses, 1),
+        career_points_for: pf,
+        career_points_against: pa,
+        pf_per_season: pf / seasonsPlayed,
+        pa_per_season: pa / seasonsPlayed,
+        championships,
+        second_places: seconds,
+        third_places: thirds,
+        podiums: championships + seconds + thirds,
+        avg_finish: rows.reduce((s, r) => s + r.rank, 0) / rows.length,
+        best_finish: Math.min(...rows.map((r) => r.rank)),
+        worst_finish: Math.max(...rows.map((r) => r.rank)),
+        career_adds: adds,
+        career_drops: drops,
+        career_transactions: adds + drops,
+        transactions_per_season: (adds + drops) / seasonsPlayed,
+        most_drafted_player: topPlayer,
+        most_drafted_player_count: topCount,
+      };
+    });
+  }
 
   function renderStandings() {
+    const chartableKeys = Object.keys(METRICS).filter((k) => METRICS[k].chartable !== false);
     document.getElementById('view-standings').innerHTML = `
       <h2 class="section-title">Owner Comparison</h2>
       <div class="controls">
         <label class="field-label" for="chart-metric">Metric</label>
-        <select id="chart-metric">${CHART_METRICS.map((m) => `<option value="${m.key}">${m.label}</option>`).join('')}</select>
+        <select id="chart-metric">${chartableKeys.map((k) => `<option value="${k}">${METRICS[k].label}</option>`).join('')}</select>
+        <label class="field-label" for="range-from" style="margin-left:14px">Seasons</label>
+        <select id="range-from">${seasons.map((s) => `<option value="${s}">${s}</option>`).join('')}</select>
+        <span style="color:var(--ink-faint)">&ndash;</span>
+        <select id="range-to">${seasons.map((s) => `<option value="${s}">${s}</option>`).join('')}</select>
       </div>
       <div class="chart-wrap" style="margin-bottom:28px" id="career-chart"></div>
       <h2 class="section-title">All-Time Owner Records</h2>
-      <div class="section-sub">Click a column header to sort. Hover a name for a quick stat card.</div>
+      <div class="section-sub">Click a column header to sort (also updates the chart). Hover a name for a quick stat card.</div>
       <div class="table-wrap"><table id="career-table"></table></div>
     `;
     const metricSel = document.getElementById('chart-metric');
-    metricSel.value = chartMetric;
+    const fromSel = document.getElementById('range-from');
+    const toSel = document.getElementById('range-to');
+    metricSel.value = chartKey;
+    fromSel.value = seasonRange.min;
+    toSel.value = seasonRange.max;
+
     metricSel.addEventListener('change', () => {
-      chartMetric = metricSel.value;
-      renderCareerChart();
+      chartKey = metricSel.value;
+      focusKey = chartKey;
+      focusDir = METRICS[chartKey].invert ? 1 : -1;
+      renderAllTimeViews();
     });
-    renderCareerChart();
-    renderCareerTable();
+    const onRangeChange = () => {
+      let min = Number(fromSel.value);
+      let max = Number(toSel.value);
+      if (min > max) [min, max] = [max, min]; // tolerate the two selects crossing
+      seasonRange = { min, max };
+      renderAllTimeViews();
+    };
+    fromSel.addEventListener('change', onRangeChange);
+    toSel.addEventListener('change', onRangeChange);
+
+    renderAllTimeViews();
   }
 
-  function renderCareerChart() {
-    const metric = CHART_METRICS.find((m) => m.key === chartMetric);
-    const rows = [...owner_career].sort((a, b) => (metric.invert ? a[metric.key] - b[metric.key] : b[metric.key] - a[metric.key]));
-    const values = rows.map((r) => r[metric.key]);
+  function renderAllTimeViews() {
+    const rows = computeOwnerStats(seasonRange.min, seasonRange.max);
+    renderCareerChart(rows);
+    renderCareerTable(rows);
+  }
+
+  function renderCareerChart(rows) {
+    const metric = METRICS[chartKey];
+    const sorted = [...rows].sort((a, b) => (metric.invert ? a[chartKey] - b[chartKey] : b[chartKey] - a[chartKey]));
+    const values = sorted.map((r) => r[chartKey]);
     const min = Math.min(...values);
     const max = Math.max(...values);
     const range = max - min || 1;
-    document.getElementById('career-chart').innerHTML = rows
+    document.getElementById('career-chart').innerHTML = sorted
       .map((r) => {
-        const v = r[metric.key];
+        const v = r[chartKey];
         const pctWidth = Math.max(((metric.invert ? max - v : v - min) / range) * 100, 3);
         const shown = metric.fmt ? metric.fmt(v) : v;
         const outside = pctWidth < 20;
@@ -212,39 +315,69 @@
     document.querySelectorAll('#career-chart .owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
   }
 
-  function renderCareerTable() {
-    const rows = [...owner_career].sort((a, b) => (a[sortState.key] > b[sortState.key] ? 1 : a[sortState.key] < b[sortState.key] ? -1 : 0) * sortState.dir);
+  function renderCareerTable(rows) {
+    const sorted = [...rows].sort((a, b) => {
+      const key = focusKey === 'owner' ? 'owner' : focusKey;
+      return (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) * focusDir;
+    });
     const table = document.getElementById('career-table');
+    const cols = [{ key: 'owner', label: 'Owner' }, ...TABLE_COLUMN_KEYS.map((k) => ({ key: k, label: METRICS[k].label, ...METRICS[k] }))];
     table.innerHTML = `
-      <thead><tr>${CAREER_COLS.map((c) => `<th class="${c.num ? 'num' : ''}" data-key="${c.key}">${c.label}${sortState.key === c.key ? `<span class="arrow">${sortState.dir === 1 ? '▲' : '▼'}</span>` : ''}</th>`).join('')}</tr></thead>
-      <tbody>${rows
+      <thead><tr>${cols.map((c) => `<th class="${c.key === 'owner' ? '' : 'num'}" data-key="${c.key}">${c.key === 'owner' ? c.label : abbreviate(c.label)}${focusKey === c.key ? `<span class="arrow">${focusDir === 1 ? '▲' : '▼'}</span>` : ''}</th>`).join('')}</tr></thead>
+      <tbody>${sorted
         .map(
-          (r) => `<tr>${CAREER_COLS.map((c) => {
-            if (c.key === 'owner') {
-              return `<td>${r.championships > 0 ? `<span class="rank-badge medal" style="margin-right:8px">${r.championships}</span>` : ''}<span class="owner-hover" data-owner="${r.owner}">${r.owner}</span></td>`;
-            }
-            const v = c.fmt ? c.fmt(r[c.key]) : r[c.key];
-            return `<td class="${c.num ? 'num' : ''}">${v}</td>`;
-          }).join('')}</tr>`
+          (r) => `<tr>${cols
+            .map((c) => {
+              if (c.key === 'owner') {
+                return `<td>${r.championships > 0 ? `<span class="rank-badge medal" style="margin-right:8px">${r.championships}</span>` : ''}<span class="owner-hover" data-owner="${r.owner}">${r.owner}</span></td>`;
+              }
+              const v = c.fmt ? c.fmt(r[c.key]) : r[c.key];
+              return `<td class="num">${v}</td>`;
+            })
+            .join('')}</tr>`
         )
         .join('')}</tbody>
     `;
     table.querySelectorAll('thead th').forEach((th) => {
       th.addEventListener('click', () => {
         const key = th.dataset.key;
-        sortState.dir = sortState.key === key ? -sortState.dir : -1;
-        sortState.key = key;
-        renderCareerTable();
+        focusDir = focusKey === key ? -focusDir : key === 'owner' ? 1 : METRICS[key].invert ? 1 : -1;
+        focusKey = key;
+        if (key !== 'owner') {
+          chartKey = key;
+          document.getElementById('chart-metric').value = key;
+        }
+        renderAllTimeViews();
       });
     });
     table.querySelectorAll('.owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
   }
 
-  function renderTrophies() {
-    document.getElementById('view-trophies').innerHTML = `
-      <h2 class="section-title">Trophy Case</h2>
-      <div class="section-sub">The records, the blowouts, the shame.</div>
-      <div class="grid cols-3">${trophy_case.map(factCard).join('')}</div>
+  function abbreviate(label) {
+    const short = { 'Career Wins': 'W', 'Career Losses': 'L', 'Win %': 'Win%', 'Points For': 'PF', 'Points Against': 'PA' };
+    return short[label] || label;
+  }
+
+  const RECORD_CATEGORIES = [
+    { key: 'regular_season', label: 'Regular Season' },
+    { key: 'postseason', label: 'Postseason' },
+    { key: 'transactions', label: 'Transactions' },
+  ];
+
+  function renderRecordBook() {
+    const columns = RECORD_CATEGORIES.map(
+      (cat) => `
+      <div class="record-column">
+        <div class="record-column-title">${cat.label}</div>
+        ${trophy_case
+          .filter((f) => f.category === cat.key)
+          .map(factCard)
+          .join('')}
+      </div>`
+    ).join('');
+    document.getElementById('view-recordbook').innerHTML = `
+      <h2 class="section-title">Record Book</h2>
+      <div class="record-columns">${columns}</div>
     `;
   }
 
@@ -370,7 +503,7 @@
   const RENDERERS = {
     overview: renderOverview,
     standings: renderStandings,
-    trophies: renderTrophies,
+    recordbook: renderRecordBook,
     h2h: renderH2H,
     seasons: renderSeasons,
     transactions: renderTransactions,

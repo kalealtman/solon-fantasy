@@ -48,16 +48,33 @@ def add_owner_column(df: pd.DataFrame, owner_lookup: dict, name_col: str = "team
     return df
 
 
-def build_owner_career(standings: pd.DataFrame) -> pd.DataFrame:
+def most_drafted_player(draft: pd.DataFrame, owner: str) -> tuple:
+    picks = draft[draft["owner"] == owner]
+    if picks.empty:
+        return "", 0
+    counts = picks["player_name"].value_counts()
+    top = counts.iloc[0]
+    # Ties broken alphabetically for determinism (never silently pick a "first seen").
+    leaders = sorted(counts[counts == top].index.tolist())
+    return leaders[0], int(top)
+
+
+def build_owner_career(standings: pd.DataFrame, transactions: pd.DataFrame, draft: pd.DataFrame) -> pd.DataFrame:
+    txn_counts = transactions.groupby("owner")["action"].value_counts().unstack(fill_value=0)
+
     rows = []
     for owner, grp in standings.groupby("owner"):
         championships = int((grp["rank"] == 1).sum())
         second_places = int((grp["rank"] == 2).sum())
         third_places = int((grp["rank"] == 3).sum())
+        seasons_played = grp["season"].nunique()
+        adds = int(txn_counts["add"].get(owner, 0)) if "add" in txn_counts.columns else 0
+        drops = int(txn_counts["drop"].get(owner, 0)) if "drop" in txn_counts.columns else 0
+        top_player, top_player_count = most_drafted_player(draft, owner)
         rows.append(
             {
                 "owner": owner,
-                "seasons_played": grp["season"].nunique(),
+                "seasons_played": seasons_played,
                 "first_season": int(grp["season"].min()),
                 "last_season": int(grp["season"].max()),
                 "career_wins": int(grp["wins"].sum()),
@@ -66,6 +83,8 @@ def build_owner_career(standings: pd.DataFrame) -> pd.DataFrame:
                 "win_pct": round(grp["wins"].sum() / max(grp["wins"].sum() + grp["losses"].sum(), 1), 3),
                 "career_points_for": round(grp["points_for"].sum(), 2),
                 "career_points_against": round(grp["points_against"].sum(), 2),
+                "pf_per_season": round(grp["points_for"].sum() / seasons_played, 1),
+                "pa_per_season": round(grp["points_against"].sum() / seasons_played, 1),
                 "championships": championships,
                 "second_places": second_places,
                 "third_places": third_places,
@@ -73,6 +92,12 @@ def build_owner_career(standings: pd.DataFrame) -> pd.DataFrame:
                 "avg_finish": round(grp["rank"].mean(), 2),
                 "best_finish": int(grp["rank"].min()),
                 "worst_finish": int(grp["rank"].max()),
+                "career_adds": adds,
+                "career_drops": drops,
+                "career_transactions": adds + drops,
+                "transactions_per_season": round((adds + drops) / seasons_played, 1),
+                "most_drafted_player": top_player,
+                "most_drafted_player_count": top_player_count,
             }
         )
     return pd.DataFrame(rows).sort_values(["championships", "win_pct"], ascending=False)
@@ -133,36 +158,56 @@ def format_tied_names(names) -> str:
 
 
 def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transactions: pd.DataFrame) -> pd.DataFrame:
-    facts = []
+    """Each record is (category, fact, number, name, detail) -- kept as
+    separate fields, rather than one packed string, specifically so the
+    number can be styled larger/more prominent than the name on the card."""
+    facts = []  # list of dicts: category, fact, number, name, detail
+
+    def add_fact(category, fact, number, name, detail=""):
+        facts.append({"category": category, "fact": fact, "number": number, "name": name, "detail": detail})
 
     champs_per_owner = standings[standings["rank"] == 1]["owner"].value_counts()
     if len(champs_per_owner):
         top_count = champs_per_owner.iloc[0]
         leaders = format_tied_names(champs_per_owner[champs_per_owner == top_count].index.tolist())
-        facts.append(("Most championships", f"{leaders} ({top_count})"))
+        add_fact("regular_season", "Most Championships", str(top_count), leaders)
+
+    best_pf = standings.loc[standings["points_for"].idxmax()]
+    add_fact("regular_season", "Best Single-Season Points Total", str(best_pf["points_for"]), best_pf["owner"], str(best_pf["season"]))
+
+    worst_record = standings.loc[(standings["wins"] / standings[["wins", "losses"]].sum(axis=1)).idxmin()]
+    add_fact(
+        "regular_season",
+        "Worst Single-Season Record",
+        f"{worst_record['wins']}-{worst_record['losses']}",
+        worst_record["owner"],
+        str(worst_record["season"]),
+    )
 
     postseason_mask = matchups.apply(lambda r: is_postseason(r["season"], r["week"]), axis=1)
     regular = matchups[~postseason_mask]
     postseason = matchups[postseason_mask]
 
-    for label, subset in [("regular season", regular), ("postseason", postseason)]:
+    for category, subset in [("regular_season", regular), ("postseason", postseason)]:
         high = subset.loc[subset["score"].idxmax()]
-        facts.append((f"Highest single-week score ({label})", f"{high['owner']} -- {high['score']} (season {high['season']}, week {high['week']})"))
+        add_fact(category, "Highest Single-Week Score", str(high["score"]), high["owner"], f"season {high['season']}, week {high['week']}")
 
         low = subset.loc[subset["score"].idxmin()]
-        facts.append((f"Lowest single-week score ({label})", f"{low['owner']} -- {low['score']} (season {low['season']}, week {low['week']})"))
-
-    best_pf = standings.loc[standings["points_for"].idxmax()]
-    facts.append(("Best single-season points total", f"{best_pf['owner']} -- {best_pf['points_for']} ({best_pf['season']})"))
-
-    worst_record = standings.loc[(standings["wins"] / standings[["wins", "losses"]].sum(axis=1)).idxmin()]
-    facts.append(("Worst single-season record", f"{worst_record['owner']} -- {worst_record['wins']}-{worst_record['losses']} ({worst_record['season']})"))
+        add_fact(category, "Lowest Single-Week Score", str(low["score"]), low["owner"], f"season {low['season']}, week {low['week']}")
 
     add_counts = transactions[transactions["action"] == "add"]["owner"].value_counts()
     if len(add_counts):
-        facts.append(("Most waiver/free-agent adds (career)", f"{add_counts.index[0]} ({add_counts.iloc[0]})"))
+        add_fact("transactions", "Most Waiver/FA Adds (Career)", str(add_counts.iloc[0]), add_counts.index[0])
 
-    return pd.DataFrame(facts, columns=["fact", "value"])
+    drop_counts = transactions[transactions["action"] == "drop"]["owner"].value_counts()
+    if len(drop_counts):
+        add_fact("transactions", "Most Drops (Career)", str(drop_counts.iloc[0]), drop_counts.index[0])
+
+    total_counts = transactions["owner"].value_counts()
+    if len(total_counts):
+        add_fact("transactions", "Most Total Transactions (Career)", str(total_counts.iloc[0]), total_counts.index[0])
+
+    return pd.DataFrame(facts, columns=["category", "fact", "number", "name", "detail"])
 
 
 def main() -> None:
@@ -171,8 +216,9 @@ def main() -> None:
     standings = add_owner_column(pd.read_csv(PROCESSED_DIR / "standings.csv"), owner_lookup)
     matchups = add_owner_column(pd.read_csv(PROCESSED_DIR / "matchups.csv"), owner_lookup)
     transactions = add_owner_column(pd.read_csv(PROCESSED_DIR / "transactions.csv"), owner_lookup)
+    draft = add_owner_column(pd.read_csv(PROCESSED_DIR / "draft.csv"), owner_lookup)
 
-    owner_career = build_owner_career(standings)
+    owner_career = build_owner_career(standings, transactions, draft)
     owner_career.to_csv(PROCESSED_DIR / "owner_career.csv", index=False)
     print(f"wrote owner_career.csv ({len(owner_career)} owners)")
 

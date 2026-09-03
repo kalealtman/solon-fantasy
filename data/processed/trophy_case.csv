@@ -1,9 +1,11 @@
-fact,value
-Most championships,Colton Spillman & Kyle Puettmann (3)
-Highest single-week score (regular season),"Jackson Pipolo -- 203.68 (season 2024, week 14)"
-Lowest single-week score (regular season),"Coal Flansburg -- 38.1 (season 2014, week 10)"
-Highest single-week score (postseason),"Andy DeValk -- 181.92 (season 2024, week 16)"
-Lowest single-week score (postseason),"Andy Brokaw -- 4.4 (season 2019, week 16)"
-Best single-season points total,Kale Altman -- 1935.44 (2023)
-Worst single-season record,Andy Brokaw -- 1-12 (2017)
-Most waiver/free-agent adds (career),Colton Spillman (543)
+category,fact,number,name,detail
+regular_season,Most Championships,3,Colton Spillman & Kyle Puettmann,
+regular_season,Best Single-Season Points Total,1935.44,Kale Altman,2023
+regular_season,Worst Single-Season Record,1-12,Andy Brokaw,2017
+regular_season,Highest Single-Week Score,203.68,Jackson Pipolo,"season 2024, week 14"
+regular_season,Lowest Single-Week Score,38.1,Coal Flansburg,"season 2014, week 10"
+postseason,Highest Single-Week Score,181.92,Andy DeValk,"season 2024, week 16"
+postseason,Lowest Single-Week Score,4.4,Andy Brokaw,"season 2019, week 16"
+transactions,Most Waiver/FA Adds (Career),543,Colton Spillman,
+transactions,Most Drops (Career),537,Colton Spillman,
+transactions,Most Total Transactions (Career),1080,Colton Spillman,

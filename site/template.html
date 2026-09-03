@@ -137,8 +137,17 @@
 
   .fact-card { border-left: 3px solid var(--accent); }
   .fact-card .fact-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-muted); margin-bottom: 8px; }
-  .fact-card .fact-value { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); }
-  .fact-card .fact-detail { font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted); margin-top: 4px; }
+  .fact-card .fact-number { font-family: var(--font-mono); font-size: clamp(26px, 3vw, 32px); font-weight: 600; color: var(--ink); line-height: 1.1; }
+  .fact-card .fact-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--ink); margin-top: 4px; }
+  .fact-card .fact-detail { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); margin-top: 3px; }
+
+  .record-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+  @media (max-width: 820px) { .record-columns { grid-template-columns: 1fr; } }
+  .record-column-title {
+    font-family: var(--font-display); font-size: 18px; text-transform: uppercase; letter-spacing: 0.03em;
+    color: var(--ink-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border);
+  }
+  .record-column .fact-card { margin-bottom: 14px; }
 
   table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
   .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
@@ -198,6 +207,8 @@
   .owner-tooltip .ot-stat { display: flex; justify-content: space-between; gap: 8px; }
   .owner-tooltip .ot-stat .ot-label { color: var(--ink-muted); }
   .owner-tooltip .ot-stat .ot-val { font-family: var(--font-mono); color: var(--ink); }
+  .owner-tooltip .ot-drafted { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--border); color: var(--ink-muted); }
+  .owner-tooltip .ot-drafted b { color: var(--ink); font-weight: 600; }
 
   .draft-round { margin-bottom: 4px; }
   .draft-round-label { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin: 14px 0 6px; }

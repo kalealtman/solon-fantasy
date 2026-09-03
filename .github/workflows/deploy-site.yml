@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pandas
-      - run: python scripts/build_site.py --output _site/index.html
+      - run: python scripts/build_site.py --standalone --output _site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

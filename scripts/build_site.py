@@ -99,6 +99,13 @@ def build_data_json() -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--standalone",
+        action="store_true",
+        help="Wrap in <!DOCTYPE html><html>...</html> for direct hosting (e.g. GitHub Pages). "
+        "Omit this for the Claude Artifact tool, which supplies its own doctype/html wrapper "
+        "and rejects one in the source file.",
+    )
     args = parser.parse_args()
 
     template = (SITE_DIR / "template.html").read_text(encoding="utf-8")
@@ -106,6 +113,8 @@ def main() -> None:
     data_json = build_data_json().replace("</script", "<\\/script")
 
     html = template.replace("__LEAGUE_DATA_JSON__", data_json).replace("__APP_JS__", app_js)
+    if args.standalone:
+        html = f'<!DOCTYPE html>\n<html lang="en">\n{html}\n</html>\n'
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(html, encoding="utf-8")

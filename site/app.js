@@ -576,7 +576,7 @@
       const bWins = rec[b + '_wins'] || 0;
       resEl.innerHTML = `
         <div class="h2h-result">
-          <div><div class="h2h-score" style="color:${aWins >= bWins ? 'var(--green)' : 'var(--ink)'}">${aWins}</div><div class="h2h-name">${a}</div></div>
+          <div><div class="h2h-score" style="color:${aWins > bWins ? 'var(--green)' : 'var(--ink)'}">${aWins}</div><div class="h2h-name">${a}</div></div>
           <div class="h2h-vs">&ndash;</div>
           <div><div class="h2h-score" style="color:${bWins > aWins ? 'var(--green)' : 'var(--ink)'}">${bWins}</div><div class="h2h-name">${b}</div></div>
         </div>

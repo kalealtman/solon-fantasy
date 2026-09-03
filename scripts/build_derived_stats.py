@@ -109,6 +109,15 @@ def build_head_to_head(matchups: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("games", ascending=False)
 
 
+def is_postseason(season: int, week: int) -> bool:
+    """Fantasy playoffs are always the final 3 weeks of the NFL season,
+    skipping the actual final week (that week's games are a dead rubber for
+    playoff seeding, so the league doesn't play a fantasy week on it): weeks
+    14-16 through the 2020 season (16-game/17-week NFL slate), weeks 15-17
+    from 2021 on (17-game/18-week slate)."""
+    return week in ((14, 15, 16) if season <= 2020 else (15, 16, 17))
+
+
 def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transactions: pd.DataFrame) -> pd.DataFrame:
     facts = []
 
@@ -116,11 +125,16 @@ def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transacti
     if len(champs_per_owner):
         facts.append(("Most championships", f"{champs_per_owner.index[0]} ({champs_per_owner.iloc[0]})"))
 
-    high = matchups.loc[matchups["score"].idxmax()]
-    facts.append(("Highest single-week score", f"{high['owner']} -- {high['score']} (season {high['season']}, week {high['week']})"))
+    postseason_mask = matchups.apply(lambda r: is_postseason(r["season"], r["week"]), axis=1)
+    regular = matchups[~postseason_mask]
+    postseason = matchups[postseason_mask]
 
-    low = matchups.loc[matchups["score"].idxmin()]
-    facts.append(("Lowest single-week score", f"{low['owner']} -- {low['score']} (season {low['season']}, week {low['week']})"))
+    for label, subset in [("regular season", regular), ("postseason", postseason)]:
+        high = subset.loc[subset["score"].idxmax()]
+        facts.append((f"Highest single-week score ({label})", f"{high['owner']} -- {high['score']} (season {high['season']}, week {high['week']})"))
+
+        low = subset.loc[subset["score"].idxmin()]
+        facts.append((f"Lowest single-week score ({label})", f"{low['owner']} -- {low['score']} (season {low['season']}, week {low['week']})"))
 
     best_pf = standings.loc[standings["points_for"].idxmax()]
     facts.append(("Best single-season points total", f"{best_pf['owner']} -- {best_pf['points_for']} ({best_pf['season']})"))

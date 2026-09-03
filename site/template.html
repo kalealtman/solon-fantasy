@@ -11,8 +11,8 @@
     --ink: #1D2225;
     --ink-muted: #5B6168;
     --ink-faint: #8B9096;
-    --gold: #9C7A1B;
-    --gold-ink: #6E5713;
+    --accent: #A6540F;
+    --accent-ink: #7A3D0B;
     --blue: #1F5C91;
     --green: #3D8B5C;
     --red: #8B2F1F;
@@ -31,9 +31,9 @@
       --ink: #F0EDE6;
       --ink-muted: #9BA3AC;
       --ink-faint: #6B747C;
-      --gold: #C99A2E;
-      --gold-ink: #E8C468;
-      --blue: #4E9FDB;
+      --accent: #D9731A;
+      --accent-ink: #F0955A;
+      --blue: #2E7FBD;
       --green: #57A87A;
       --red: #C2603F;
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.35);
@@ -47,9 +47,9 @@
     --ink: #F0EDE6;
     --ink-muted: #9BA3AC;
     --ink-faint: #6B747C;
-    --gold: #C99A2E;
-    --gold-ink: #E8C468;
-    --blue: #4E9FDB;
+    --accent: #D9731A;
+    --accent-ink: #F0955A;
+    --blue: #2E7FBD;
     --green: #57A87A;
     --red: #C2603F;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.35);
@@ -65,7 +65,7 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: var(--gold); color: #14181C; }
+  ::selection { background: var(--accent); color: #14181C; }
 
   a { color: var(--blue); }
   h1, h2, h3 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; margin: 0; letter-spacing: 0.01em; }
@@ -76,9 +76,11 @@
     border-bottom: 1px solid var(--border);
     padding: 20px clamp(16px, 4vw, 40px) 0;
   }
-  .site-header__top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .site-header__top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .site-title-row { display: flex; align-items: center; gap: 14px; }
+  .helmet-badge { width: clamp(38px, 5vw, 52px); height: clamp(38px, 5vw, 52px); flex-shrink: 0; }
   .site-title { font-size: clamp(28px, 4vw, 40px); line-height: 1; color: var(--ink); }
-  .site-title .accent { color: var(--gold); }
+  .site-title .accent { color: var(--accent); }
   .site-tagline { color: var(--ink-muted); font-size: 13px; margin-top: 4px; letter-spacing: 0.02em; text-transform: uppercase; }
   .ticker {
     display: flex; gap: clamp(16px, 3vw, 36px); flex-wrap: wrap;
@@ -100,7 +102,7 @@
   }
   .tab:hover { color: var(--ink); }
   .tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-  .tab.active { color: var(--ink); border-bottom-color: var(--gold); }
+  .tab.active { color: var(--ink); border-bottom-color: var(--accent); }
 
   main { max-width: 1180px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 40px) 80px; }
   .view { display: none; }
@@ -127,11 +129,11 @@
 
   .stat-tile { text-align: left; }
   .stat-tile .value { font-family: var(--font-mono); font-size: clamp(26px, 4vw, 34px); font-weight: 600; color: var(--ink); line-height: 1.1; }
-  .stat-tile .value.gold { color: var(--gold-ink, var(--gold)); }
+  .stat-tile .value.accent { color: var(--accent-ink, var(--accent)); }
   .stat-tile .label { color: var(--ink-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 6px; }
   .stat-tile .sub { color: var(--ink-faint); font-size: 12px; margin-top: 2px; }
 
-  .fact-card { border-left: 3px solid var(--gold); }
+  .fact-card { border-left: 3px solid var(--accent); }
   .fact-card .fact-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-muted); margin-bottom: 8px; }
   .fact-card .fact-value { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); }
   .fact-card .fact-detail { font-family: var(--font-mono); font-size: 13px; color: var(--ink-muted); margin-top: 4px; }
@@ -154,7 +156,7 @@
     width: 22px; height: 22px; border-radius: 50%; font-family: var(--font-mono); font-size: 12px; font-weight: 600;
     background: var(--surface-2); color: var(--ink-muted);
   }
-  .rank-badge.gold { background: var(--gold); color: #14181C; }
+  .rank-badge.accent { background: var(--accent); color: #14181C; }
 
   .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
   select, .btn {
@@ -208,9 +210,16 @@
 
 <header class="site-header">
   <div class="site-header__top">
-    <div>
-      <h1 class="site-title">Solon <span class="accent">Fantasy Football</span></h1>
-      <div class="site-tagline">Est. 2014 &middot; The Official Record Book</div>
+    <div class="site-title-row">
+      <svg class="helmet-badge" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M 15,84 Q 4,82 5,66 Q 3,48 16,33 Q 27,10 52,8 Q 79,6 90,27 Q 98,44 87,57 Q 93,68 81,75 Q 84,85 68,85 Q 58,91 48,82 Q 33,92 15,84 Z" fill="var(--accent)"/>
+        <path d="M 18,30 Q 40,9 55,8 Q 74,7 89,26" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M 27,46 L 39,45 L 34,58 Z" fill="var(--ink)"/>
+      </svg>
+      <div>
+        <h1 class="site-title">Solon <span class="accent">Fantasy Football</span></h1>
+        <div class="site-tagline">Est. 2014 &middot; The Official Record Book</div>
+      </div>
     </div>
     <div class="ticker" id="ticker"></div>
   </div>

@@ -50,8 +50,8 @@
     <span><b>${transactions.length.toLocaleString()}</b> transactions</span>
   `;
 
-  function statTile(value, label, sub, gold) {
-    return `<div class="card stat-tile"><div class="value${gold ? ' gold' : ''}">${value}</div><div class="label">${label}</div>${sub ? `<div class="sub">${sub}</div>` : ''}</div>`;
+  function statTile(value, label, sub, accent) {
+    return `<div class="card stat-tile"><div class="value${accent ? ' accent' : ''}">${value}</div><div class="label">${label}</div>${sub ? `<div class="sub">${sub}</div>` : ''}</div>`;
   }
 
   function factCard(f) {
@@ -132,7 +132,7 @@
         .map(
           (r) => `<tr>${CAREER_COLS.map((c) => {
             if (c.key === 'owner') {
-              return `<td>${r.championships > 0 ? `<span class="rank-badge gold" style="margin-right:8px">${r.championships}</span>` : ''}${r.owner}</td>`;
+              return `<td>${r.championships > 0 ? `<span class="rank-badge accent" style="margin-right:8px">${r.championships}</span>` : ''}${r.owner}</td>`;
             }
             const v = c.fmt ? c.fmt(r[c.key]) : r[c.key];
             return `<td class="${c.num ? 'num' : ''}">${v}</td>`;
@@ -225,7 +225,7 @@
         <thead><tr><th class="num">#</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">T</th><th class="num">PF</th><th class="num">PA</th></tr></thead>
         <tbody>${rows
           .map(
-            (r) => `<tr><td class="num"><span class="rank-badge${r.rank === 1 ? ' gold' : ''}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
+            (r) => `<tr><td class="num"><span class="rank-badge${r.rank === 1 ? ' accent' : ''}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
           )
           .join('')}</tbody>
       </table></div>

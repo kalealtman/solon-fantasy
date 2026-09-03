@@ -253,6 +253,22 @@
     box-shadow: var(--shadow); padding: 12px 14px; font-size: 12.5px; min-width: 190px;
   }
   .owner-tooltip.visible { opacity: 1; transform: translateY(0); }
+  .owner-tooltip .ot-close { display: none; }
+  .tooltip-backdrop { position: fixed; inset: 0; background: rgba(10, 12, 14, 0.45); z-index: 49; opacity: 0; pointer-events: none; transition: opacity 0.12s ease; }
+  .tooltip-backdrop.visible { opacity: 1; pointer-events: auto; }
+  @media (max-width: 640px) {
+    .owner-tooltip {
+      left: 50% !important; top: 50% !important; right: auto; bottom: auto;
+      transform: translate(-50%, calc(-50% + 8px)); pointer-events: none;
+      width: min(320px, calc(100vw - 48px)); max-height: 75vh; overflow-y: auto;
+    }
+    .owner-tooltip.visible { transform: translate(-50%, -50%); pointer-events: auto; }
+    .owner-tooltip .ot-close {
+      display: flex; align-items: center; justify-content: center; position: absolute; top: 8px; right: 8px;
+      width: 28px; height: 28px; border-radius: 50%; border: none; background: var(--surface-2);
+      color: var(--ink-muted); font-size: 18px; line-height: 1; cursor: pointer;
+    }
+  }
   .owner-tooltip .ot-name { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 8px; }
   .owner-tooltip .ot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
   .owner-tooltip .ot-stat { display: flex; justify-content: space-between; gap: 8px; }
@@ -333,6 +349,7 @@
 </header>
 
 <main id="main"></main>
+<div class="tooltip-backdrop" id="tooltip-backdrop"></div>
 <div class="owner-tooltip" id="owner-tooltip"></div>
 
 <footer>Built from 12 seasons of scraped Yahoo Fantasy Football data &middot; standings, drafts, matchups, and transactions, 2014&ndash;2025</footer>

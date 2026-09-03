@@ -135,14 +135,51 @@
     tooltipEl.style.top = y + 'px';
   }
 
+  // Below this width there's no real cursor, so a card positioned relative
+  // to a tap point routinely lands half off the edge of the screen -- CSS
+  // centers it instead (see .owner-tooltip's mobile media query), and this
+  // switches the trigger from hover (which touch only half-supports) to a
+  // tap that opens/closes it explicitly, with a backdrop to dismiss.
+  const isMobileTooltip = () => window.matchMedia('(max-width: 640px)').matches;
+  const tooltipBackdropEl = document.getElementById('tooltip-backdrop');
+
+  function showTooltip(owner) {
+    tooltipEl.innerHTML = ownerTooltipHTML(owner) + (isMobileTooltip() ? '<button class="ot-close" aria-label="Close">&times;</button>' : '');
+    tooltipEl.dataset.owner = owner;
+    tooltipEl.classList.add('visible');
+  }
+  function hideTooltip() {
+    tooltipEl.classList.remove('visible');
+    tooltipBackdropEl.classList.remove('visible');
+    delete tooltipEl.dataset.owner;
+  }
+  tooltipEl.addEventListener('click', (e) => {
+    if (e.target.closest('.ot-close')) hideTooltip();
+  });
+  tooltipBackdropEl.addEventListener('click', hideTooltip);
+
   function attachOwnerHover(el, owner) {
     el.addEventListener('mouseenter', (e) => {
-      tooltipEl.innerHTML = ownerTooltipHTML(owner);
-      tooltipEl.classList.add('visible');
+      if (isMobileTooltip()) return;
+      showTooltip(owner);
       positionTooltip(e);
     });
-    el.addEventListener('mousemove', positionTooltip);
-    el.addEventListener('mouseleave', () => tooltipEl.classList.remove('visible'));
+    el.addEventListener('mousemove', (e) => {
+      if (!isMobileTooltip()) positionTooltip(e);
+    });
+    el.addEventListener('mouseleave', () => {
+      if (!isMobileTooltip()) hideTooltip();
+    });
+    el.addEventListener('click', (e) => {
+      if (!isMobileTooltip()) return;
+      e.stopPropagation();
+      if (tooltipEl.dataset.owner === owner && tooltipEl.classList.contains('visible')) {
+        hideTooltip();
+      } else {
+        showTooltip(owner);
+        tooltipBackdropEl.classList.add('visible');
+      }
+    });
   }
 
   function statTile(value, label, sub, accent) {
@@ -721,9 +758,18 @@
       const idx = round1Order.indexOf(teamName);
       return idx === -1 ? Infinity : idx;
     };
+    // The grid layout needs slot order to keep a team in one column, but
+    // below 700px it collapses to a single vertical column (see the mobile
+    // draft-board CSS) where there's no column to align -- there, reading
+    // top to bottom in real chronological pick order (1.01, 1.02, ...) makes
+    // more sense than the grid's slot order, which visually counts backward
+    // through every even round.
+    const useChronologicalOrder = window.matchMedia('(max-width: 700px)').matches;
     document.getElementById('draft-board-content').innerHTML = rounds
       .map((round) => {
-        const roundPicks = picks.filter((p) => p.round === round).sort((a, b) => slotIndex(a.team_name) - slotIndex(b.team_name));
+        const roundPicks = picks
+          .filter((p) => p.round === round)
+          .sort((a, b) => (useChronologicalOrder ? a.pick - b.pick : slotIndex(a.team_name) - slotIndex(b.team_name)));
         return `
           <div class="draft-round-label">Round ${round}</div>
           <div class="draft-board" style="--cols:${roundPicks.length}">${roundPicks

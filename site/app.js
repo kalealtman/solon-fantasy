@@ -16,6 +16,7 @@
     { id: 'recordbook', label: 'Record Book' },
     { id: 'h2h', label: 'Head-to-Head' },
     { id: 'seasons', label: 'Seasons' },
+    { id: 'draft', label: 'Draft' },
     { id: 'transactions', label: 'Transactions' },
   ];
 
@@ -77,7 +78,14 @@
         ${stat('Postseason', `${o.postseason_wins}-${o.postseason_losses} (${pct(o.postseason_win_pct)})`)}
         ${stat('Trades', o.career_trades)}
       </div>
-      ${o.most_drafted_player ? `<div class="ot-drafted">Drafted most: <b>${o.most_drafted_player}</b> (${o.most_drafted_player_count}&times;)</div>` : ''}
+      ${
+        o.top_drafted_players
+          ? `<div class="ot-drafted"><div class="ot-drafted-title">Drafted most</div>${o.top_drafted_players
+              .split('; ')
+              .map((entry) => `<div>${entry.replace(/\((\d+x)\)/, '<b>$1</b>')}</div>`)
+              .join('')}</div>`
+          : ''
+      }
     `;
   }
 
@@ -252,14 +260,11 @@
       draftInRange
         .filter((d) => d.owner === owner)
         .forEach((d) => (pickCounts[d.player_name] = (pickCounts[d.player_name] || 0) + 1));
-      let topPlayer = '';
-      let topCount = 0;
-      Object.keys(pickCounts).sort().forEach((name) => {
-        if (pickCounts[name] > topCount) {
-          topCount = pickCounts[name];
-          topPlayer = name;
-        }
-      });
+      const topPlayers = Object.keys(pickCounts)
+        .sort((n1, n2) => pickCounts[n2] - pickCounts[n1] || n1.localeCompare(n2))
+        .slice(0, 3)
+        .map((name) => `${name} (${pickCounts[name]}x)`)
+        .join('; ');
       const tradeCount = tradesInRange.filter((t) => t.owner === owner).length;
       const ps = postseasonByOwner[owner] || { wins: 0, losses: 0, ties: 0 };
       return {
@@ -285,8 +290,7 @@
         career_drops: drops,
         career_transactions: adds + drops,
         transactions_per_season: (adds + drops) / seasonsPlayed,
-        most_drafted_player: topPlayer,
-        most_drafted_player_count: topCount,
+        top_drafted_players: topPlayers,
         career_trades: tradeCount,
         trades_per_season: tradeCount / seasonsPlayed,
         postseason_wins: ps.wins,
@@ -578,11 +582,17 @@
       }
     });
 
+    const matchupSub = (game) => {
+      const winner = game.a.score >= game.b.score ? game.a : game.b;
+      const loser = winner === game.a ? game.b : game.a;
+      return `<b>${winner.owner}</b> ${fmt(winner.score, 1)} def. ${loser.owner} ${fmt(loser.score, 1)} &middot; week ${game.week}`;
+    };
+
     const highlightCards = [
       highest && statTile(fmt(highest.score, 1), 'Highest Weekly Score', `${highest.owner} &middot; week ${highest.week}`),
       lowest && statTile(fmt(lowest.score, 1), 'Lowest Weekly Score', `${lowest.owner} &middot; week ${lowest.week}`),
-      biggestBlowout && statTile(fmt(biggestBlowout.margin, 1), 'Biggest Blowout', `${biggestBlowout.a.owner} vs ${biggestBlowout.b.owner} &middot; week ${biggestBlowout.week}`),
-      closestGame && statTile(fmt(closestGame.margin, 1), 'Closest Game', `${closestGame.a.owner} vs ${closestGame.b.owner} &middot; week ${closestGame.week}`),
+      biggestBlowout && statTile(fmt(biggestBlowout.margin, 1), 'Biggest Blowout', matchupSub(biggestBlowout)),
+      closestGame && statTile(fmt(closestGame.margin, 1), 'Closest Game', matchupSub(closestGame)),
     ]
       .filter(Boolean)
       .join('');
@@ -594,7 +604,7 @@
         <thead><tr><th class="num">#</th><th>Team</th><th class="num">W</th><th class="num">L</th><th class="num">T</th><th class="num">PF</th><th class="num">PA</th></tr></thead>
         <tbody>${rows
           .map(
-            (r) => `<tr><td class="num"><span class="rank-badge${medalClass(r.rank)}">${r.rank}</span></td><td>${r.team_name}</td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
+            (r) => `<tr><td class="num"><span class="rank-badge${medalClass(r.rank)}">${r.rank}</span></td><td>${r.team_name}<div class="team-owner">${r.owner}</div></td><td class="num">${r.wins}</td><td class="num">${r.losses}</td><td class="num">${r.ties}</td><td class="num">${fmt(r.points_for, 1)}</td><td class="num">${fmt(r.points_against, 1)}</td></tr>`
           )
           .join('')}</tbody>
       </table></div>
@@ -605,7 +615,6 @@
             <div class="draft-board-pick">1.${String(p.pick).padStart(2, '0')}</div>
             <div class="draft-board-card">
               <div class="draft-board-name">${p.player_name}</div>
-              <div class="draft-board-team">${p.team_name}</div>
             </div>
           </div>`
         )
@@ -613,39 +622,189 @@
     `;
   }
 
-  let txnSeason = 'all';
+  function computeDraftOwnerStats() {
+    const byOwner = {};
+    draft.forEach((d) => {
+      (byOwner[d.owner] = byOwner[d.owner] || []).push(d);
+    });
+    return Object.entries(byOwner)
+      .map(([owner, picks]) => ({
+        owner,
+        total_picks: picks.length,
+        avg_pick: picks.reduce((s, p) => s + p.overall_pick, 0) / picks.length,
+        best_pick: Math.min(...picks.map((p) => p.overall_pick)),
+        first_round_picks: picks.filter((p) => p.round === 1).length,
+      }))
+      .sort((a, b) => a.avg_pick - b.avg_pick);
+  }
+
+  function computeTopDraftedLeagueWide(n) {
+    const counts = {};
+    draft.forEach((d) => {
+      counts[d.player_name] = (counts[d.player_name] || 0) + 1;
+    });
+    return Object.keys(counts)
+      .sort((a, b) => counts[b] - counts[a] || a.localeCompare(b))
+      .slice(0, n)
+      .map((name) => ({ player_name: name, count: counts[name] }));
+  }
+
+  function renderDraftPage() {
+    const ownerStats = computeDraftOwnerStats();
+    const topDrafted = computeTopDraftedLeagueWide(10);
+
+    document.getElementById('view-draft').innerHTML = `
+      <h2 class="section-title">Draft Central</h2>
+      <div class="grid cols-2" style="align-items:start;margin-bottom:28px">
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:16px;margin-bottom:10px">Draft Tendencies by Owner</h3>
+          <div class="section-sub">No position data is available from Yahoo's draft results, so this covers pick timing, not positional strategy.</div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Owner</th><th class="num">Picks</th><th class="num">Avg Spot</th><th class="num">Best Pick</th><th class="num">R1 Picks</th></tr></thead>
+            <tbody>${ownerStats
+              .map(
+                (o) => `<tr><td><span class="owner-hover" data-owner="${o.owner}">${o.owner}</span></td><td class="num">${o.total_picks}</td><td class="num">${o.avg_pick.toFixed(1)}</td><td class="num">${o.best_pick}</td><td class="num">${o.first_round_picks}</td></tr>`
+              )
+              .join('')}</tbody>
+          </table></div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:16px;margin-bottom:10px">Most Drafted, League-Wide</h3>
+          <div class="card">${topDrafted
+            .map(
+              (p, i) => `<div class="txn-row"><span class="txn-icon" style="color:var(--ink-faint)">${i + 1}</span><span class="txn-player">${p.player_name}</span><span class="txn-meta">${p.count}&times;</span></div>`
+            )
+            .join('')}</div>
+        </div>
+      </div>
+      <h2 class="section-title">Draft Board</h2>
+      <div class="controls">
+        <label class="field-label">Season</label>
+        <select id="draft-season-picker">${seasons.map((s) => `<option value="${s}">${s}</option>`).join('')}</select>
+      </div>
+      <div id="draft-board-content"></div>
+    `;
+    document.querySelectorAll('#view-draft .owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
+    const picker = document.getElementById('draft-season-picker');
+    picker.addEventListener('change', () => renderDraftBoardForSeason(Number(picker.value)));
+    renderDraftBoardForSeason(latestSeason);
+  }
+
+  function renderDraftBoardForSeason(season) {
+    const picks = draft.filter((d) => d.season === season);
+    const rounds = [...new Set(picks.map((p) => p.round))].sort((a, b) => a - b);
+    document.getElementById('draft-board-content').innerHTML = rounds
+      .map((round) => {
+        const roundPicks = picks.filter((p) => p.round === round).sort((a, b) => a.pick - b.pick);
+        return `
+          <div class="draft-round-label">Round ${round}</div>
+          <div class="draft-board">${roundPicks
+            .map(
+              (p) => `<div class="draft-board-slot">
+                <div class="draft-board-pick">${round}.${String(p.pick).padStart(2, '0')}</div>
+                <div class="draft-board-card">
+                  <div class="draft-board-name">${p.player_name}</div>
+                  <div class="draft-board-owner">${p.owner}</div>
+                </div>
+              </div>`
+            )
+            .join('')}</div>
+        `;
+      })
+      .join('');
+  }
+
+  // Trades live in a separate dataset with a different shape (two sides,
+  // multiple players per side) -- reshape completed trades into the same
+  // one-row-per-player-event form as adds/drops so they can share one feed
+  // and one set of filters instead of being a second, disconnected view.
+  const unifiedTransactions = (() => {
+    const tradeRows = [];
+    trades
+      .filter((t) => t.completed)
+      .forEach((t) => {
+        (t.players_received || '')
+          .split('; ')
+          .filter(Boolean)
+          .forEach((playerName) => {
+            tradeRows.push({
+              action: 'trade',
+              player_name: playerName,
+              note: 'Trade',
+              team_name: t.team_name,
+              owner: t.owner,
+              timestamp: t.timestamp,
+              season: t.season,
+            });
+          });
+      });
+    return [...transactions, ...tradeRows];
+  })();
+
+  let txnFilters = { season: 'all', type: 'all', owner: 'all', player: '' };
+
   function renderTransactions() {
+    const owners = [...new Set(unifiedTransactions.map((t) => t.owner))].sort();
     document.getElementById('view-transactions').innerHTML = `
       <h2 class="section-title">Transaction Feed</h2>
       <div class="controls">
         <label class="field-label">Season</label>
         <select id="txn-season"><option value="all">All seasons</option>${seasons.map((s) => `<option value="${s}">${s}</option>`).join('')}</select>
+        <label class="field-label" style="margin-left:10px">Type</label>
+        <select id="txn-type"><option value="all">All types</option><option value="add">Add</option><option value="drop">Drop</option><option value="trade">Trade</option></select>
+        <label class="field-label" style="margin-left:10px">Owner</label>
+        <select id="txn-owner"><option value="all">All owners</option>${owners.map((o) => `<option>${o}</option>`).join('')}</select>
+        <input id="txn-player" class="btn" type="text" placeholder="Search player&hellip;" style="min-width:160px">
       </div>
       <div class="card" id="txn-list" style="max-height:640px;overflow-y:auto"></div>
     `;
-    const sel = document.getElementById('txn-season');
-    sel.value = txnSeason;
-    sel.addEventListener('change', () => {
-      txnSeason = sel.value;
+    const seasonSel = document.getElementById('txn-season');
+    const typeSel = document.getElementById('txn-type');
+    const ownerSel = document.getElementById('txn-owner');
+    const playerInput = document.getElementById('txn-player');
+    seasonSel.value = txnFilters.season;
+    typeSel.value = txnFilters.type;
+    ownerSel.value = txnFilters.owner;
+    playerInput.value = txnFilters.player;
+
+    seasonSel.addEventListener('change', () => {
+      txnFilters.season = seasonSel.value;
+      renderTxnList();
+    });
+    typeSel.addEventListener('change', () => {
+      txnFilters.type = typeSel.value;
+      renderTxnList();
+    });
+    ownerSel.addEventListener('change', () => {
+      txnFilters.owner = ownerSel.value;
+      renderTxnList();
+    });
+    playerInput.addEventListener('input', () => {
+      txnFilters.player = playerInput.value;
       renderTxnList();
     });
     renderTxnList();
   }
 
   function renderTxnList() {
-    let rows = transactions;
-    if (txnSeason !== 'all') {
-      rows = rows.filter((t) => String(t.season) === txnSeason);
-    } else {
-      rows = [...rows].sort((a, b) => b.season - a.season);
+    let rows = unifiedTransactions;
+    if (txnFilters.season !== 'all') rows = rows.filter((t) => String(t.season) === txnFilters.season);
+    if (txnFilters.type !== 'all') rows = rows.filter((t) => t.action === txnFilters.type);
+    if (txnFilters.owner !== 'all') rows = rows.filter((t) => t.owner === txnFilters.owner);
+    if (txnFilters.player.trim()) {
+      const q = txnFilters.player.trim().toLowerCase();
+      rows = rows.filter((t) => t.player_name.toLowerCase().includes(q));
     }
+    rows = [...rows].sort((a, b) => b.season - a.season);
+
     const shown = rows.slice(0, 300);
+    const icon = { add: '+', drop: '−', trade: '⇄' };
     document.getElementById('txn-list').innerHTML =
       shown
         .map(
           (t) => `
       <div class="txn-row">
-        <span class="txn-icon ${t.action}">${t.action === 'add' ? '+' : '−'}</span>
+        <span class="txn-icon ${t.action}">${icon[t.action] || '?'}</span>
         <span class="txn-player">${t.player_name}</span>
         <span style="color:var(--ink-faint)">${t.note || ''}</span>
         <span style="color:var(--ink-muted)">${t.team_name}</span>
@@ -653,7 +812,11 @@
       </div>`
         )
         .join('') +
-      (rows.length > 300 ? `<p style="color:var(--ink-faint);font-size:12px;margin-top:10px">Showing 300 of ${rows.length.toLocaleString()} &mdash; filter by season to narrow it down.</p>` : '');
+      (rows.length === 0
+        ? `<p style="color:var(--ink-muted);margin:0">No transactions match those filters.</p>`
+        : rows.length > 300
+        ? `<p style="color:var(--ink-faint);font-size:12px;margin-top:10px">Showing 300 of ${rows.length.toLocaleString()} &mdash; narrow the filters to see more.</p>`
+        : '');
   }
 
   const RENDERERS = {
@@ -662,6 +825,7 @@
     recordbook: renderRecordBook,
     h2h: renderH2H,
     seasons: renderSeasons,
+    draft: renderDraftPage,
     transactions: renderTransactions,
   };
 

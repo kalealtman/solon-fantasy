@@ -159,6 +159,7 @@
   }
   thead th:hover { color: var(--ink); }
   thead th .arrow { opacity: 0.4; font-size: 10px; margin-left: 3px; }
+  .team-owner { font-size: 11px; color: var(--ink-faint); font-weight: 400; margin-top: 1px; }
   tbody tr:hover { background: var(--surface-2); }
   tbody tr:last-child td { border-bottom: none; }
   td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
@@ -213,6 +214,7 @@
   .owner-tooltip .ot-stat .ot-label { color: var(--ink-muted); }
   .owner-tooltip .ot-stat .ot-val { font-family: var(--font-mono); color: var(--ink); }
   .owner-tooltip .ot-drafted { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--border); color: var(--ink-muted); }
+  .owner-tooltip .ot-drafted-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 3px; }
   .owner-tooltip .ot-drafted b { color: var(--ink); font-weight: 600; }
 
   .draft-round { margin-bottom: 4px; }
@@ -228,13 +230,14 @@
     box-shadow: var(--shadow); padding: 10px 8px; text-align: center;
   }
   .draft-board-name { font-size: 12.5px; font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .draft-board-team { font-size: 10.5px; color: var(--ink-muted); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .draft-board-owner { font-size: 10.5px; color: var(--ink-muted); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
   .txn-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: baseline; flex-wrap: wrap; }
   .txn-row:last-child { border-bottom: none; }
   .txn-icon { font-family: var(--font-mono); font-weight: 700; width: 16px; flex-shrink: 0; }
   .txn-icon.add { color: var(--green); }
   .txn-icon.drop { color: var(--red); }
+  .txn-icon.trade { color: var(--blue); }
   .txn-player { font-weight: 600; }
   .txn-meta { color: var(--ink-faint); font-size: 12px; margin-left: auto; font-family: var(--font-mono); white-space: nowrap; }
 

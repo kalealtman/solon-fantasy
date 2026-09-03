@@ -48,15 +48,18 @@ def add_owner_column(df: pd.DataFrame, owner_lookup: dict, name_col: str = "team
     return df
 
 
-def most_drafted_player(draft: pd.DataFrame, owner: str) -> tuple:
+def top_drafted_players(draft: pd.DataFrame, owner: str, n: int = 3) -> str:
+    """'Player A (4x); Player B (3x); Player C (2x)' -- count desc, name asc
+    as a deterministic tiebreak. A tie exactly at the n-th spot can expand
+    or shrink the list by one; that's normal/expected for a "top N" cutoff,
+    unlike a single "most drafted" fact where a silent tie-break would be
+    misleading."""
     picks = draft[draft["owner"] == owner]
     if picks.empty:
-        return "", 0
-    counts = picks["player_name"].value_counts()
-    top = counts.iloc[0]
-    # Ties broken alphabetically for determinism (never silently pick a "first seen").
-    leaders = sorted(counts[counts == top].index.tolist())
-    return leaders[0], int(top)
+        return ""
+    counts = picks["player_name"].value_counts().rename_axis("player_name").reset_index(name="count")
+    ranked = counts.sort_values(["count", "player_name"], ascending=[False, True]).head(n)
+    return "; ".join(f"{row.player_name} ({row.count}x)" for row in ranked.itertuples())
 
 
 def build_owner_career(
@@ -80,7 +83,7 @@ def build_owner_career(
         seasons_played = grp["season"].nunique()
         adds = int(txn_counts["add"].get(owner, 0)) if "add" in txn_counts.columns else 0
         drops = int(txn_counts["drop"].get(owner, 0)) if "drop" in txn_counts.columns else 0
-        top_player, top_player_count = most_drafted_player(draft, owner)
+        top_players = top_drafted_players(draft, owner)
         ps_wins = int(postseason_totals["wins"].get(owner, 0)) if postseason_totals is not None else 0
         ps_losses = int(postseason_totals["losses"].get(owner, 0)) if postseason_totals is not None else 0
         ps_ties = int(postseason_totals["ties"].get(owner, 0)) if postseason_totals is not None else 0
@@ -117,8 +120,7 @@ def build_owner_career(
                 "postseason_losses": ps_losses,
                 "postseason_ties": ps_ties,
                 "postseason_win_pct": round(ps_wins / max(ps_wins + ps_losses, 1), 3),
-                "most_drafted_player": top_player,
-                "most_drafted_player_count": top_player_count,
+                "top_drafted_players": top_players,
             }
         )
     return pd.DataFrame(rows).sort_values(["championships", "win_pct"], ascending=False)

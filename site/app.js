@@ -145,6 +145,13 @@
       </div>`;
   }
 
+  function pickOverviewFacts(n) {
+    const shotgunFact = trophy_case.find((f) => f.fact === 'Most Shotguns (Since 2023)');
+    const rest = trophy_case.filter((f) => f !== shotgunFact);
+    const picked = shotgunFact ? [shotgunFact, ...rest] : rest;
+    return picked.slice(0, n);
+  }
+
   function renderOverview() {
     const champRow = standings.find((s) => s.season === latestSeason && s.rank === 1);
     const topChampCount = Math.max(...owner_career.map((o) => o.championships));
@@ -170,7 +177,7 @@
         ${statTile(owner_career.reduce((sum, o) => sum + (o.career_shotguns || 0), 0), 'Total Shotguns', 'Since 2023')}
       </div>
       <h2 class="section-title">Record Book Preview</h2>
-      <div class="grid cols-3">${trophy_case.slice(0, 3).map(factCard).join('')}</div>
+      <div class="grid cols-3">${pickOverviewFacts(6).map(factCard).join('')}</div>
     `;
   }
 
@@ -188,8 +195,8 @@
     pf_per_season: { label: 'Points For / Season', fmt: (v) => fmt(v, 1) },
     pa_per_season: { label: 'Points Against / Season', invert: true, fmt: (v) => fmt(v, 1) },
     playoff_appearances: { label: 'Playoff Appearances' },
-    career_shotguns: { label: 'Shotguns (Since 2023)', invert: true, fmt: (v) => (v === null ? '--' : v), chartFilter: (r) => r.career_shotguns !== null },
-    shotguns_per_season: { label: 'Shotguns / Season', invert: true, fmt: (v) => (v === null ? '--' : v.toFixed(2)), chartFilter: (r) => r.shotguns_per_season !== null },
+    career_shotguns: { label: 'Shotguns (Since 2023)', fmt: (v) => (v === null ? '--' : v), chartFilter: (r) => r.career_shotguns !== null },
+    shotguns_per_season: { label: 'Shotguns / Season', fmt: (v) => (v === null ? '--' : v.toFixed(2)), chartFilter: (r) => r.shotguns_per_season !== null },
     championships: { label: 'Championships' },
     podiums: { label: 'Podiums (Top 3)' },
     avg_finish: { label: 'Avg Finish', invert: true, fmt: (v) => v.toFixed(2) },

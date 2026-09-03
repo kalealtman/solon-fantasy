@@ -167,6 +167,58 @@ def parse_transactions(html: str) -> List[dict]:
     return rows
 
 
+def parse_trades(html: str) -> List[dict]:
+    """Trades render very differently from add/drop rows in the same table:
+    each trade is TWO <tr> (one per side, linked by rowspan="2" on the status
+    icon cell), and Yahoo lists vetoed/rejected proposals right alongside
+    completed ones -- only rows whose icon is specifically "F-trade" (not
+    e.g. "F-negative" for vetoed) represent a trade that actually happened.
+    Returns one row per side (two per trade, sharing the same trade_id), so
+    counting "trades per owner" is a simple groupby, same as adds/drops.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    table = soup.find("table", class_=re.compile("Tst-transaction-table"))
+    if not table:
+        return []
+    all_rows = table.find("tbody").find_all("tr", recursive=False)
+
+    rows = []
+    trade_id = 0
+    i = 0
+    while i < len(all_rows):
+        icon_cell = all_rows[i].find("td", attrs={"rowspan": True})
+        if icon_cell is None or i + 1 >= len(all_rows):
+            i += 1  # not a trade pair (unexpected shape) -- skip defensively
+            continue
+        icon = icon_cell.find("span", class_="F-icon")
+        completed = bool(icon and "F-trade" in icon.get("class", []))
+        trade_id += 1
+
+        for side_row in (all_rows[i], all_rows[i + 1]):
+            players_cell = side_row.find("td", class_="No-pstart")
+            note_cell = side_row.find("td", class_="Fz-xxs")
+            team_cell = side_row.find("td", class_="Ta-end")
+            team_link = next(
+                (a for a in (team_cell.find_all("a", href=re.compile(r"/f1/\d+/\d+$")) if team_cell else []) if a.get_text(strip=True)),
+                None,
+            )
+            timestamp = team_cell.find("span", class_="F-timestamp") if team_cell else None
+            players = [p.find("a").get_text(strip=True) for p in (players_cell.find_all("p") if players_cell else []) if p.find("a")]
+            rows.append(
+                {
+                    "trade_id": trade_id,
+                    "completed": completed,
+                    "note": note_cell.get_text(strip=True) if note_cell else "",
+                    "team_id": _team_id_from_href(team_link.get("href")) if team_link else "",
+                    "team_name": team_link.get_text(strip=True) if team_link else "",
+                    "players_received": "; ".join(players),
+                    "timestamp": timestamp.get_text(strip=True) if timestamp else "",
+                }
+            )
+        i += 2
+    return rows
+
+
 def has_next_transactions_page(html: str) -> bool:
     soup = BeautifulSoup(html, "html.parser")
     next_link = soup.find("a", string=re.compile(r"Next\s+25"))

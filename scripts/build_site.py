@@ -28,11 +28,11 @@ DEFAULT_OUTPUT = SITE_DIR / "dist" / "solon_site.html"
 
 # rosters.csv is deliberately excluded -- it's ~15x the size of everything
 # else combined and the site doesn't have a per-player view yet.
-DATASETS = ["standings", "draft", "matchups", "transactions", "owner_career", "head_to_head", "trophy_case"]
+DATASETS = ["standings", "draft", "matchups", "transactions", "trades", "owner_career", "head_to_head", "trophy_case"]
 # These get an "owner" field added (team_name -> owner) so the client-side
 # season-range slicer can recompute career stats for an arbitrary range
 # without a round trip -- owner_career.csv only covers the full history.
-NEEDS_OWNER_COLUMN = {"standings", "transactions", "draft"}
+NEEDS_OWNER_COLUMN = {"standings", "transactions", "draft", "matchups", "trades"}
 
 
 def _clean_nan(records: list) -> list:

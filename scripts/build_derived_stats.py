@@ -59,8 +59,17 @@ def most_drafted_player(draft: pd.DataFrame, owner: str) -> tuple:
     return leaders[0], int(top)
 
 
-def build_owner_career(standings: pd.DataFrame, transactions: pd.DataFrame, draft: pd.DataFrame) -> pd.DataFrame:
+def build_owner_career(
+    standings: pd.DataFrame,
+    transactions: pd.DataFrame,
+    draft: pd.DataFrame,
+    postseason_records: pd.DataFrame,
+    trades: pd.DataFrame = None,
+) -> pd.DataFrame:
     txn_counts = transactions.groupby("owner")["action"].value_counts().unstack(fill_value=0)
+    postseason_totals = postseason_records.groupby("owner")[["wins", "losses", "ties"]].sum() if len(postseason_records) else None
+    completed_trades = trades[trades["completed"]] if trades is not None and len(trades) else None
+    trade_counts = completed_trades["owner"].value_counts() if completed_trades is not None else None
 
     rows = []
     for owner, grp in standings.groupby("owner"):
@@ -71,6 +80,10 @@ def build_owner_career(standings: pd.DataFrame, transactions: pd.DataFrame, draf
         adds = int(txn_counts["add"].get(owner, 0)) if "add" in txn_counts.columns else 0
         drops = int(txn_counts["drop"].get(owner, 0)) if "drop" in txn_counts.columns else 0
         top_player, top_player_count = most_drafted_player(draft, owner)
+        ps_wins = int(postseason_totals["wins"].get(owner, 0)) if postseason_totals is not None else 0
+        ps_losses = int(postseason_totals["losses"].get(owner, 0)) if postseason_totals is not None else 0
+        ps_ties = int(postseason_totals["ties"].get(owner, 0)) if postseason_totals is not None else 0
+        trades_count = int(trade_counts.get(owner, 0)) if trade_counts is not None else 0
         rows.append(
             {
                 "owner": owner,
@@ -96,6 +109,12 @@ def build_owner_career(standings: pd.DataFrame, transactions: pd.DataFrame, draf
                 "career_drops": drops,
                 "career_transactions": adds + drops,
                 "transactions_per_season": round((adds + drops) / seasons_played, 1),
+                "career_trades": trades_count,
+                "trades_per_season": round(trades_count / seasons_played, 1),
+                "postseason_wins": ps_wins,
+                "postseason_losses": ps_losses,
+                "postseason_ties": ps_ties,
+                "postseason_win_pct": round(ps_wins / max(ps_wins + ps_losses, 1), 3),
                 "most_drafted_player": top_player,
                 "most_drafted_player_count": top_player_count,
             }
@@ -149,6 +168,32 @@ def is_postseason(season: int, week: int) -> bool:
     return week in ((14, 15, 16) if season <= 2020 else (15, 16, 17))
 
 
+def build_postseason_records(matchups: pd.DataFrame) -> pd.DataFrame:
+    """One row per (owner, season): that season's postseason W-L-T. Needed
+    both for career postseason record (sum across rows for one owner) and
+    single-season best/worst postseason record facts -- a plain career
+    total would hide e.g. someone going 3-0 one year and 0-3 another."""
+    postseason = matchups[matchups.apply(lambda r: is_postseason(r["season"], r["week"]), axis=1)]
+    records: dict = {}
+    for (season, _week), grp in postseason.groupby(["season", "week"]):
+        grp = grp.reset_index(drop=True)
+        for i in range(0, len(grp) - 1, 2):
+            a, b = grp.iloc[i], grp.iloc[i + 1]
+            if a["owner"] == b["owner"]:
+                continue
+            for owner, own_score, opp_score in ((a["owner"], a["score"], b["score"]), (b["owner"], b["score"], a["score"])):
+                key = (owner, season)
+                records.setdefault(key, {"wins": 0, "losses": 0, "ties": 0})
+                if own_score > opp_score:
+                    records[key]["wins"] += 1
+                elif own_score < opp_score:
+                    records[key]["losses"] += 1
+                else:
+                    records[key]["ties"] += 1
+    rows = [{"owner": owner, "season": season, **rec} for (owner, season), rec in records.items()]
+    return pd.DataFrame(rows, columns=["owner", "season", "wins", "losses", "ties"])
+
+
 def format_tied_names(names) -> str:
     """'A' / 'A & B' / 'A, B & C' -- never silently pick a winner out of a tie."""
     names = sorted(names)
@@ -157,7 +202,13 @@ def format_tied_names(names) -> str:
     return ", ".join(names[:-1]) + " & " + names[-1]
 
 
-def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transactions: pd.DataFrame) -> pd.DataFrame:
+def build_trophy_case(
+    standings: pd.DataFrame,
+    matchups: pd.DataFrame,
+    transactions: pd.DataFrame,
+    postseason_records: pd.DataFrame,
+    trades: pd.DataFrame = None,
+) -> pd.DataFrame:
     """Each record is (category, fact, number, name, detail) -- kept as
     separate fields, rather than one packed string, specifically so the
     number can be styled larger/more prominent than the name on the card."""
@@ -195,6 +246,28 @@ def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transacti
         low = subset.loc[subset["score"].idxmin()]
         add_fact(category, "Lowest Single-Week Score", str(low["score"]), low["owner"], f"season {low['season']}, week {low['week']}")
 
+    if len(postseason_records):
+        pr = postseason_records.copy()
+        pr["win_pct"] = pr["wins"] / pr[["wins", "losses"]].sum(axis=1).clip(lower=1)
+
+        def record_fact(label, ascending):
+            ranked = pr.sort_values(["win_pct", "wins"], ascending=ascending)
+            top = ranked.iloc[0]
+            # Group ties by the exact W-L, not just win% -- 2-0 and 3-0 both
+            # read as 100%, but they're different records and shouldn't be
+            # credited to each other.
+            tied = pr[(pr["wins"] == top["wins"]) & (pr["losses"] == top["losses"])]
+            add_fact(
+                "postseason",
+                label,
+                f"{int(top['wins'])}-{int(top['losses'])}",
+                format_tied_names(tied["owner"].unique().tolist()),
+                ", ".join(str(s) for s in sorted(tied["season"].unique().tolist())),
+            )
+
+        record_fact("Best Postseason Record", ascending=False)
+        record_fact("Worst Postseason Record", ascending=True)
+
     add_counts = transactions[transactions["action"] == "add"]["owner"].value_counts()
     if len(add_counts):
         add_fact("transactions", "Most Waiver/FA Adds (Career)", str(add_counts.iloc[0]), add_counts.index[0])
@@ -207,6 +280,12 @@ def build_trophy_case(standings: pd.DataFrame, matchups: pd.DataFrame, transacti
     if len(total_counts):
         add_fact("transactions", "Most Total Transactions (Career)", str(total_counts.iloc[0]), total_counts.index[0])
 
+    if trades is not None and len(trades):
+        completed = trades[trades["completed"]]
+        trade_counts = completed["owner"].value_counts()
+        if len(trade_counts):
+            add_fact("transactions", "Most Trades (Career)", str(trade_counts.iloc[0]), trade_counts.index[0])
+
     return pd.DataFrame(facts, columns=["category", "fact", "number", "name", "detail"])
 
 
@@ -218,7 +297,12 @@ def main() -> None:
     transactions = add_owner_column(pd.read_csv(PROCESSED_DIR / "transactions.csv"), owner_lookup)
     draft = add_owner_column(pd.read_csv(PROCESSED_DIR / "draft.csv"), owner_lookup)
 
-    owner_career = build_owner_career(standings, transactions, draft)
+    trades_path = PROCESSED_DIR / "trades.csv"
+    trades = add_owner_column(pd.read_csv(trades_path), owner_lookup) if trades_path.exists() else None
+
+    postseason_records = build_postseason_records(matchups)
+
+    owner_career = build_owner_career(standings, transactions, draft, postseason_records, trades)
     owner_career.to_csv(PROCESSED_DIR / "owner_career.csv", index=False)
     print(f"wrote owner_career.csv ({len(owner_career)} owners)")
 
@@ -226,7 +310,7 @@ def main() -> None:
     head_to_head.to_csv(PROCESSED_DIR / "head_to_head.csv", index=False)
     print(f"wrote head_to_head.csv ({len(head_to_head)} pairs)")
 
-    trophy_case = build_trophy_case(standings, matchups, transactions)
+    trophy_case = build_trophy_case(standings, matchups, transactions, postseason_records, trades)
     trophy_case.to_csv(PROCESSED_DIR / "trophy_case.csv", index=False)
     print(f"wrote trophy_case.csv ({len(trophy_case)} facts)")
     print()

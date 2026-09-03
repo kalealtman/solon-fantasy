@@ -1,6 +1,7 @@
 (function () {
   const DATA = JSON.parse(document.getElementById('league-data').textContent);
-  const { standings, draft, transactions, owner_career, head_to_head, trophy_case } = DATA;
+  const { standings, draft, matchups, transactions, trades, owner_career, head_to_head, trophy_case } = DATA;
+  const isPostseason = (season, week) => (season <= 2020 ? [14, 15, 16] : [15, 16, 17]).includes(week);
 
   const fmt = (n, d = 0) => Number(n).toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
   const pct = (n) => (n * 100).toFixed(1) + '%';
@@ -71,6 +72,8 @@
         ${stat('Podiums', o.podiums)}
         ${stat('Avg Finish', o.avg_finish.toFixed(2))}
         ${stat('Best / Worst', `${o.best_finish} / ${o.worst_finish}`)}
+        ${stat('Postseason', `${o.postseason_wins}-${o.postseason_losses} (${pct(o.postseason_win_pct)})`)}
+        ${stat('Trades', o.career_trades)}
       </div>
       ${o.most_drafted_player ? `<div class="ot-drafted">Drafted most: <b>${o.most_drafted_player}</b> (${o.most_drafted_player_count}&times;)</div>` : ''}
     `;
@@ -136,7 +139,7 @@
         ${statTile(topChampCount, 'Most Championships', champLeaders, true)}
         ${statTile(fmt(standings.reduce((sum, s) => sum + s.points_for, 0), 0), 'Points Scored, All-Time')}
       </div>
-      <h2 class="section-title">Trophy Case Preview</h2>
+      <h2 class="section-title">Record Book Preview</h2>
       <div class="grid cols-3">${trophy_case.slice(0, 3).map(factCard).join('')}</div>
     `;
   }
@@ -161,6 +164,11 @@
     transactions_per_season: { label: 'Transactions / Season', fmt: (v) => fmt(v, 1) },
     career_adds: { label: 'Waiver/FA Adds' },
     career_drops: { label: 'Drops' },
+    career_trades: { label: 'Trades (Completed)' },
+    trades_per_season: { label: 'Trades / Season', fmt: (v) => fmt(v, 1) },
+    postseason_wins: { label: 'Postseason Wins' },
+    postseason_losses: { label: 'Postseason Losses', invert: true },
+    postseason_win_pct: { label: 'Postseason Win %', fmt: pct },
     best_finish: { label: 'Best Finish', invert: true, chartable: false },
     worst_finish: { label: 'Worst Finish', invert: true, chartable: false },
   };
@@ -170,13 +178,44 @@
   const TABLE_COLUMN_KEYS = [
     'seasons_played', 'career_wins', 'career_losses', 'win_pct', 'career_points_for',
     'career_points_against', 'pf_per_season', 'championships', 'podiums', 'avg_finish',
-    'transactions_per_season', 'best_finish', 'worst_finish',
+    'postseason_win_pct', 'transactions_per_season', 'best_finish', 'worst_finish',
   ];
 
   let chartKey = 'championships'; // always a real metric -- drives the chart
   let focusKey = 'championships'; // drives table sort -- can be 'owner', which has no chart form
   let focusDir = -1; // -1 = best/highest first, 1 = worst/lowest first
   let seasonRange = { min: Math.min(...seasons), max: Math.max(...seasons) };
+
+  // Pairs up consecutive rows within each (season, week) group -- parse_matchups()
+  // appends both teams of a game back-to-back, and that order survives the
+  // JSON round-trip, so row i / row i+1 within a group are always one game.
+  function computePostseasonRecords(minSeason, maxSeason) {
+    const records = {}; // owner -> { wins, losses, ties }
+    const grouped = {};
+    matchups
+      .filter((m) => m.season >= minSeason && m.season <= maxSeason && isPostseason(m.season, m.week))
+      .forEach((m) => {
+        const key = m.season + '-' + m.week;
+        (grouped[key] = grouped[key] || []).push(m);
+      });
+    Object.values(grouped).forEach((grp) => {
+      for (let i = 0; i < grp.length - 1; i += 2) {
+        const a = grp[i];
+        const b = grp[i + 1];
+        if (a.owner === b.owner) continue;
+        [
+          [a.owner, a.score, b.score],
+          [b.owner, b.score, a.score],
+        ].forEach(([owner, own, opp]) => {
+          records[owner] = records[owner] || { wins: 0, losses: 0, ties: 0 };
+          if (own > opp) records[owner].wins++;
+          else if (own < opp) records[owner].losses++;
+          else records[owner].ties++;
+        });
+      }
+    });
+    return records;
+  }
 
   function computeOwnerStats(minSeason, maxSeason) {
     const inRange = (s) => s >= minSeason && s <= maxSeason;
@@ -186,6 +225,8 @@
     });
     const txnsInRange = transactions.filter((t) => inRange(t.season));
     const draftInRange = draft.filter((d) => inRange(d.season));
+    const tradesInRange = trades.filter((t) => t.completed && inRange(t.season));
+    const postseasonByOwner = computePostseasonRecords(minSeason, maxSeason);
 
     return Object.entries(rowsByOwner).map(([owner, rows]) => {
       const seasonsPlayed = new Set(rows.map((r) => r.season)).size;
@@ -212,6 +253,8 @@
           topPlayer = name;
         }
       });
+      const tradeCount = tradesInRange.filter((t) => t.owner === owner).length;
+      const ps = postseasonByOwner[owner] || { wins: 0, losses: 0, ties: 0 };
       return {
         owner,
         seasons_played: seasonsPlayed,
@@ -236,6 +279,12 @@
         transactions_per_season: (adds + drops) / seasonsPlayed,
         most_drafted_player: topPlayer,
         most_drafted_player_count: topCount,
+        career_trades: tradeCount,
+        trades_per_season: tradeCount / seasonsPlayed,
+        postseason_wins: ps.wins,
+        postseason_losses: ps.losses,
+        postseason_ties: ps.ties,
+        postseason_win_pct: ps.wins / Math.max(ps.wins + ps.losses, 1),
       };
     });
   }
@@ -354,7 +403,7 @@
   }
 
   function abbreviate(label) {
-    const short = { 'Career Wins': 'W', 'Career Losses': 'L', 'Win %': 'Win%', 'Points For': 'PF', 'Points Against': 'PA' };
+    const short = { 'Career Wins': 'W', 'Career Losses': 'L', 'Win %': 'Win%', 'Points For': 'PF', 'Points Against': 'PA', 'Postseason Win %': 'Post W%' };
     return short[label] || label;
   }
 
@@ -381,6 +430,29 @@
     `;
   }
 
+  // Same pairing trick as computePostseasonRecords -- parse_matchups() keeps
+  // both teams of a game adjacent, and that survives the JSON round-trip.
+  function findGamesBetween(a, b) {
+    const grouped = {};
+    matchups.forEach((m) => {
+      const key = m.season + '-' + m.week;
+      (grouped[key] = grouped[key] || []).push(m);
+    });
+    const games = [];
+    Object.values(grouped).forEach((grp) => {
+      for (let i = 0; i < grp.length - 1; i += 2) {
+        const x = grp[i];
+        const y = grp[i + 1];
+        if ((x.owner === a && y.owner === b) || (x.owner === b && y.owner === a)) {
+          const aRow = x.owner === a ? x : y;
+          const bRow = x.owner === a ? y : x;
+          games.push({ season: aRow.season, week: aRow.week, aScore: aRow.score, bScore: bRow.score });
+        }
+      }
+    });
+    return games.sort((g1, g2) => g1.season - g2.season || g1.week - g2.week);
+  }
+
   function renderH2H() {
     const owners = owner_career.map((o) => o.owner).sort();
     document.getElementById('view-h2h').innerHTML = `
@@ -390,7 +462,8 @@
         <span class="h2h-vs">VS</span>
         <select id="h2h-b">${owners.map((o, i) => `<option ${i === 1 ? 'selected' : ''}>${o}</option>`).join('')}</select>
       </div>
-      <div id="h2h-result" class="card"></div>
+      <div id="h2h-result" class="card h2h-card"></div>
+      <div id="h2h-games"></div>
     `;
     const aSel = document.getElementById('h2h-a');
     const bSel = document.getElementById('h2h-b');
@@ -402,13 +475,16 @@
       const a = aSel.value;
       const b = bSel.value;
       const resEl = document.getElementById('h2h-result');
+      const gamesEl = document.getElementById('h2h-games');
       if (a === b) {
         resEl.innerHTML = `<p style="color:var(--ink-muted);margin:0">Pick two different owners.</p>`;
+        gamesEl.innerHTML = '';
         return;
       }
       const rec = head_to_head.find((r) => (r.owner_a === a && r.owner_b === b) || (r.owner_a === b && r.owner_b === a));
       if (!rec) {
         resEl.innerHTML = `<p style="color:var(--ink-muted);margin:0">${a} and ${b} have never played each other.</p>`;
+        gamesEl.innerHTML = '';
         return;
       }
       const aWins = rec[a + '_wins'] || 0;
@@ -418,9 +494,29 @@
           <div><div class="h2h-score" style="color:${aWins >= bWins ? 'var(--green)' : 'var(--ink)'}">${aWins}</div><div class="h2h-name">${a}</div></div>
           <div class="h2h-vs">&ndash;</div>
           <div><div class="h2h-score" style="color:${bWins > aWins ? 'var(--green)' : 'var(--ink)'}">${bWins}</div><div class="h2h-name">${b}</div></div>
-          ${rec.ties ? `<div style="color:var(--ink-muted);font-family:var(--font-mono)">${rec.ties} tie${rec.ties > 1 ? 's' : ''}</div>` : ''}
-          <div style="color:var(--ink-faint);font-size:12px;margin-left:auto">${rec.games} game${rec.games > 1 ? 's' : ''} all-time</div>
         </div>
+        <div class="h2h-meta">${rec.games} game${rec.games > 1 ? 's' : ''} all-time${rec.ties ? ` &middot; ${rec.ties} tie${rec.ties > 1 ? 's' : ''}` : ''}</div>
+      `;
+
+      const games = findGamesBetween(a, b);
+      gamesEl.innerHTML = `
+        <h3 class="section-title h2h-games-title" style="font-size:18px">Every Matchup</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th class="num">Season</th><th class="num">Week</th><th class="num">${a}</th><th class="num">${b}</th><th>Result</th></tr></thead>
+          <tbody>${games
+            .map((g) => {
+              const post = isPostseason(g.season, g.week);
+              const winner = g.aScore > g.bScore ? a : g.bScore > g.aScore ? b : 'Tie';
+              return `<tr>
+                <td class="num">${g.season}</td>
+                <td class="num">${g.week}${post ? ' <span class="ot-label" style="font-size:10px">(post)</span>' : ''}</td>
+                <td class="num">${fmt(g.aScore, 2)}</td>
+                <td class="num">${fmt(g.bScore, 2)}</td>
+                <td>${winner}</td>
+              </tr>`;
+            })
+            .join('')}</tbody>
+        </table></div>
       `;
     }
   }

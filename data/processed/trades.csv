@@ -1,0 +1,293 @@
+trade_id,completed,note,team_id,team_name,players_received,timestamp,season
+1,False,Vetoed Trade to,1,Shock the Nation,Eddie Lacy,"Oct 9, 8:36 pm",2014
+1,False,Vetoed Trade to,2,The Football Team,Golden Tate,"Oct 9, 8:36 pm",2014
+1,True,Traded to,8,manning bros,Antonio Brown,"Dec 29, 4:47 am",2015
+1,True,Traded to,7,The Roethlisburger s,Martavis Bryant,"Dec 29, 4:47 am",2015
+2,True,Traded to,3,Hyde your wife,James Jones,"Dec 18, 4:04 am",2015
+2,True,Traded to,4,Joe Buck Yourself,Rob Gronkowski,"Dec 18, 4:04 am",2015
+3,False,Vetoed Trade to,8,manning bros,Emmanuel Sanders; Golden Tate; Randall Cobb; Michael Floyd,"Dec 14, 11:06 pm",2015
+3,False,Vetoed Trade to,5,Lambeau Leapers,Amari Cooper,"Dec 14, 11:06 pm",2015
+4,True,Traded to,5,Lambeau Leapers,Marshawn Lynch,"Aug 16, 4:35 pm",2015
+4,True,Traded to,8,manning bros,Eddie Lacy,"Aug 16, 4:35 pm",2015
+1,True,Traded to,1,Hingle McCringlebery,T.Y. Hilton,"Nov 2, 6:20 am",2016
+1,True,Traded to,5,manning bros,Todd Gurley,"Nov 2, 6:20 am",2016
+2,True,Traded to,3,Joe Buck Yourself,C.J. Anderson,"Oct 27, 11:08 am",2016
+2,True,Traded to,4,Lambeau Leapers,Jamaal Charles,"Oct 27, 11:08 am",2016
+3,True,Traded to,6,The Benchwarmers,Golden Tate,"Oct 16, 9:45 am",2016
+3,True,Traded to,7,The Roethlisburger s,Jordy Nelson,"Oct 16, 9:45 am",2016
+4,True,Traded to,7,The Roethlisburger s,Martellus Bennett,"Oct 8, 8:18 pm",2016
+4,True,Traded to,6,The Benchwarmers,Ryan Mathews,"Oct 8, 8:18 pm",2016
+5,True,Traded to,7,The Roethlisburger s,Golden Tate; Ryan Mathews,"Oct 6, 3:05 pm",2016
+5,True,Traded to,6,The Benchwarmers,Martellus Bennett; Jordy Nelson,"Oct 6, 3:05 pm",2016
+1,True,Traded to,5,King of the Hill,Doug Martin,"Dec 7, 10:20 pm",2017
+1,True,Traded to,4,Lambeau Leapers,Jared Cook,"Dec 7, 10:20 pm",2017
+2,True,Traded to,2,Frank The Tank,Carlos Hyde; Alfred Morris,"Dec 7, 10:18 pm",2017
+2,True,Traded to,5,King of the Hill,Jordan Howard,"Dec 7, 10:18 pm",2017
+3,True,Traded to,2,Frank The Tank,Ty Montgomery II,"Dec 7, 10:17 pm",2017
+3,True,Traded to,6,Starting Defense,Justin Tucker,"Dec 7, 10:17 pm",2017
+4,True,Traded to,1,Hingle McCringlebery,,"Dec 6, 9:55 am",2017
+4,True,Traded to,9,Jackson's Team,Ravens; Leonard Fournette; Marshawn Lynch,"Dec 6, 9:55 am",2017
+5,True,Traded to,6,Starting Defense,Greg Zuerlein,"Dec 6, 9:49 am",2017
+5,True,Traded to,1,Hingle McCringlebery,Marshawn Lynch,"Dec 6, 9:49 am",2017
+6,True,Traded to,2,Frank The Tank,,"Dec 5, 7:28 am",2017
+6,True,Traded to,7,The Roethlisburger s,Nelson Agholor; Tevin Coleman,"Dec 5, 7:28 am",2017
+7,True,Traded to,3,Joe Buck Yourself,Alex Collins,"Nov 14, 6:40 am",2017
+7,True,Traded to,10,Talladega Knights,Tyrod Taylor,"Nov 14, 6:40 am",2017
+8,True,Traded to,2,Frank The Tank,Eagles,"Nov 14, 6:40 am",2017
+8,True,Traded to,10,Talladega Knights,Lions,"Nov 14, 6:40 am",2017
+9,True,Traded to,10,Talladega Knights,Alex Collins,"Nov 9, 3:22 pm",2017
+9,True,Traded to,3,Joe Buck Yourself,Tyrod Taylor,"Nov 9, 3:22 pm",2017
+10,True,Traded to,10,Talladega Knights,Austin Seferian-Jenkins; Todd Gurley,"Nov 9, 12:06 pm",2017
+10,True,Traded to,3,Joe Buck Yourself,Travis Kelce; Alex Collins,"Nov 9, 12:06 pm",2017
+11,True,Traded to,3,Joe Buck Yourself,Austin Seferian-Jenkins; Todd Gurley,"Nov 9, 10:55 am",2017
+11,True,Traded to,10,Talladega Knights,Travis Kelce; Alex Collins,"Nov 9, 10:55 am",2017
+12,True,Traded to,1,Hingle McCringlebery,Charles Clay; Adrian Peterson,"Nov 8, 9:45 am",2017
+12,True,Traded to,5,King of the Hill,Hunter Henry; Michael Thomas; Kenyan Drake,"Nov 8, 9:45 am",2017
+13,True,Traded to,2,Frank The Tank,Lions,"Nov 7, 11:32 am",2017
+13,True,Traded to,10,Talladega Knights,Eagles,"Nov 7, 11:32 am",2017
+14,True,Traded to,1,Hingle McCringlebery,A.J. Green,"Nov 3, 3:19 pm",2017
+14,True,Traded to,5,King of the Hill,Latavius Murray,"Nov 3, 3:19 pm",2017
+15,True,Traded to,5,King of the Hill,A.J. Green,"Nov 3, 12:04 pm",2017
+15,True,Traded to,1,Hingle McCringlebery,Latavius Murray,"Nov 3, 12:04 pm",2017
+16,True,Traded to,7,The Roethlisburger s,Marcus Mariota; T.Y. Hilton,"Nov 2, 11:03 pm",2017
+16,True,Traded to,9,Jackson's Team,Keenan Allen; Derrick Henry,"Nov 2, 11:03 pm",2017
+17,True,Traded to,1,Hingle McCringlebery,LeGarrette Blount; Michael Thomas; A.J. Green,"Oct 27, 11:38 am",2017
+17,True,Traded to,8,Thunder Cats,Will Fuller V; Devonta Freeman,"Oct 27, 11:38 am",2017
+18,True,Traded to,10,Talladega Knights,Mohamed Sanu; DeAndre Hopkins; Javorius Allen,"Oct 25, 6:57 pm",2017
+18,True,Traded to,2,Frank The Tank,Jordan Howard; Nelson Agholor,"Oct 25, 6:57 pm",2017
+19,True,Traded to,5,King of the Hill,Emmanuel Sanders; Jay Ajayi,"Oct 25, 6:53 pm",2017
+19,True,Traded to,9,Jackson's Team,T.Y. Hilton,"Oct 25, 6:53 pm",2017
+20,True,Traded to,5,King of the Hill,Jordy Nelson; DeMarco Murray,"Oct 24, 11:12 am",2017
+20,True,Traded to,9,Jackson's Team,Alshon Jeffery,"Oct 24, 11:12 am",2017
+21,True,Traded to,3,Joe Buck Yourself,Rishard Matthews; Melvin Gordon III; Mark Ingram II; Martellus Bennett; Demaryius Thomas,"Oct 24, 7:35 am",2017
+21,True,Traded to,9,Jackson's Team,Emmanuel Sanders; Greg Olsen; Jay Ajayi; Jordy Nelson; DeMarco Murray,"Oct 24, 7:35 am",2017
+22,True,Traded to,10,Talladega Knights,Alvin Kamara,"Oct 24, 6:07 am",2017
+22,True,Traded to,4,Lambeau Leapers,David Johnson,"Oct 24, 6:07 am",2017
+23,True,Traded to,2,Frank The Tank,Kelvin Benjamin,"Oct 22, 10:13 pm",2017
+23,True,Traded to,4,Lambeau Leapers,Carson Wentz,"Oct 22, 10:13 pm",2017
+24,True,Traded to,9,Jackson's Team,Demaryius Thomas; Rishard Matthews; Mark Ingram II; Donte Moncrief,"Oct 20, 1:13 pm",2017
+24,True,Traded to,6,Starting Defense,Julio Jones; LeSean McCoy,"Oct 20, 1:13 pm",2017
+25,True,Traded to,5,King of the Hill,T.Y. Hilton; Carlos Hyde; Tevin Coleman,"Oct 20, 10:40 am",2017
+25,True,Traded to,10,Talladega Knights,Danny Amendola; Todd Gurley,"Oct 20, 10:40 am",2017
+1,True,Traded to,9,Jackson's Team,Melvin Gordon III; Terrelle Pryor Sr.; Jarvis Landry; Chris Thompson,"Oct 18, 10:38 pm",2017
+1,True,Traded to,2,Frank The Tank,C.J. Anderson; DeAndre Hopkins,"Oct 18, 10:38 pm",2017
+2,True,Traded to,1,Hingle McCringlebery,Hunter Henry; Doug Baldwin,"Oct 13, 3:18 pm",2017
+2,True,Traded to,10,Talladega Knights,Austin Seferian-Jenkins; Nelson Agholor; David Johnson,"Oct 13, 3:18 pm",2017
+3,True,Traded to,6,Starting Defense,Donte Moncrief; Dez Bryant,"Oct 11, 11:40 am",2017
+3,True,Traded to,3,Joe Buck Yourself,Sterling Shepard; Duke Johnson,"Oct 11, 11:40 am",2017
+4,True,Traded to,3,Joe Buck Yourself,Dez Bryant; Donte Moncrief,"Oct 6, 4:57 pm",2017
+4,True,Traded to,6,Starting Defense,Sterling Shepard; Duke Johnson,"Oct 6, 4:57 pm",2017
+5,True,Traded to,4,Lambeau Leapers,Doug Martin; Ted Ginn Jr.,"Oct 5, 8:25 pm",2017
+5,True,Traded to,9,Jackson's Team,C.J. Anderson,"Oct 5, 8:25 pm",2017
+6,True,Traded to,10,Talladega Knights,Doug Baldwin; Martellus Bennett; Jordan Howard; Brandon Marshall,"Oct 5, 10:30 am",2017
+6,True,Traded to,7,The Roethlisburger s,DeVante Parker; Bilal Powell; Jimmy Graham; Randall Cobb,"Oct 5, 10:30 am",2017
+7,True,Traded to,1,Hingle McCringlebery,Nelson Agholor; Devonta Freeman,"Oct 5, 9:25 am",2017
+7,True,Traded to,5,King of the Hill,Tyreek Hill; Frank Gore,"Oct 5, 9:25 am",2017
+8,True,Traded to,2,Frank The Tank,Chris Thompson; Golden Tate,"Oct 3, 11:25 am",2017
+8,True,Traded to,8,Thunder Cats,A.J. Green; Kenny Golladay,"Oct 3, 11:25 am",2017
+9,True,Traded to,10,Talladega Knights,Tevin Coleman; Randall Cobb,"Oct 3, 6:20 am",2017
+9,True,Traded to,3,Joe Buck Yourself,Jay Ajayi,"Oct 3, 6:20 am",2017
+10,True,Traded to,8,Thunder Cats,LeGarrette Blount; Larry Fitzgerald,"Oct 3, 6:18 am",2017
+10,True,Traded to,9,Jackson's Team,Julio Jones,"Oct 3, 6:18 am",2017
+11,True,Traded to,5,King of the Hill,Nelson Agholor; Todd Gurley,"Sep 15, 5:04 pm",2017
+11,True,Traded to,3,Joe Buck Yourself,Jordy Nelson; Ameer Abdullah,"Sep 15, 5:04 pm",2017
+12,True,Traded to,1,Hingle McCringlebery,Austin Hooper,"Sep 13, 11:01 am",2017
+12,True,Traded to,3,Joe Buck Yourself,Jordan Reed; Nelson Agholor,"Sep 13, 11:01 am",2017
+13,True,Traded to,3,Joe Buck Yourself,Emmanuel Sanders,"Aug 13, 3:46 pm",2017
+13,True,Traded to,10,Talladega Knights,DeVante Parker,"Aug 13, 3:46 pm",2017
+14,True,Traded to,7,The Roethlisburger s,,"Aug 12, 2:23 pm",2017
+14,True,Traded to,2,Frank The Tank,,"Aug 12, 2:23 pm",2017
+15,True,Traded to,7,The Roethlisburger s,,"Aug 12, 2:22 pm",2017
+15,True,Traded to,2,Frank The Tank,,"Aug 12, 2:22 pm",2017
+16,True,Traded to,5,King of the Hill,Julian Edelman; Adrian Peterson,"Aug 12, 1:07 pm",2017
+16,True,Traded to,4,Lambeau Leapers,Christian McCaffrey,"Aug 12, 1:07 pm",2017
+1,True,Traded to,5,King of the Hill,James White,"Dec 18, 12:55 pm",2018
+1,True,Traded to,3,Hingle Handlers,Marlon Mack,"Dec 18, 12:55 pm",2018
+2,True,Traded to,2,Brokaw's Bums,Kerryon Johnson,"Dec 18, 9:48 am",2018
+2,True,Traded to,3,Hingle Handlers,Chris Carson,"Dec 18, 9:48 am",2018
+3,True,Traded to,4,Joe Buck Yourself,James Conner; Mike Evans; T.Y. Hilton,"Dec 14, 1:55 pm",2018
+3,True,Traded to,3,Hingle Handlers,Antonio Brown; James White,"Dec 14, 1:55 pm",2018
+4,True,Traded to,4,Joe Buck Yourself,Gus Edwards,"Dec 14, 1:49 pm",2018
+4,True,Traded to,8,Talladega Knights,Jalen Richard,"Dec 14, 1:49 pm",2018
+5,True,Traded to,8,Talladega Knights,David Njoku,"Dec 11, 3:49 pm",2018
+5,True,Traded to,2,Brokaw's Bums,Dante Pettis,"Dec 11, 3:49 pm",2018
+6,True,Traded to,5,King of the Hill,Jarvis Landry,"Dec 11, 3:23 pm",2018
+6,True,Traded to,3,Hingle Handlers,James Conner,"Dec 11, 3:23 pm",2018
+7,True,Traded to,2,Brokaw's Bums,David Njoku,"Dec 6, 10:43 am",2018
+7,True,Traded to,8,Talladega Knights,Dante Pettis,"Dec 6, 10:43 am",2018
+8,True,Traded to,5,King of the Hill,Ito Smith,"Dec 5, 9:10 am",2018
+8,True,Traded to,6,Lambeau Leapers,Phillip Lindsay,"Dec 5, 9:10 am",2018
+9,True,Traded to,6,Lambeau Leapers,Cowboys,"Dec 4, 11:32 pm",2018
+9,True,Traded to,3,Hingle Handlers,Lions,"Dec 4, 11:32 pm",2018
+10,True,Traded to,9,The Roethlisburger s,Mark Ingram II; Mike Williams,"Dec 4, 1:38 pm",2018
+10,True,Traded to,10,Thunder Cats,Christian McCaffrey,"Dec 4, 1:38 pm",2018
+11,True,Traded to,3,Hingle Handlers,Cowboys; Greg Olsen; Robbie Gould,"Dec 4, 11:19 am",2018
+11,True,Traded to,6,Lambeau Leapers,Rob Gronkowski; Jake Elliott; Rams,"Dec 4, 11:19 am",2018
+12,True,Traded to,3,Hingle Handlers,Jarvis Landry; Marlon Mack; T.J. Yeldon,"Dec 4, 11:19 am",2018
+12,True,Traded to,10,Thunder Cats,Julio Jones; Brandin Cooks,"Dec 4, 11:19 am",2018
+13,True,Traded to,6,Lambeau Leapers,Davante Adams,"Dec 4, 9:58 am",2018
+13,True,Traded to,8,Talladega Knights,Corey Davis; Devin Funchess,"Dec 4, 9:58 am",2018
+14,True,Traded to,8,Talladega Knights,Gus Edwards,"Dec 4, 9:50 am",2018
+14,True,Traded to,4,Joe Buck Yourself,Spencer Ware,"Dec 4, 9:50 am",2018
+15,True,Traded to,6,Lambeau Leapers,Julian Edelman; Josh Adams,"Dec 4, 9:47 am",2018
+15,True,Traded to,5,King of the Hill,Courtland Sutton; Calvin Ridley; Demaryius Thomas,"Dec 4, 9:47 am",2018
+16,True,Traded to,6,Lambeau Leapers,Joe Mixon,"Dec 4, 9:47 am",2018
+16,True,Traded to,4,Joe Buck Yourself,Tyler Boyd; Peyton Barber,"Dec 4, 9:47 am",2018
+17,True,Traded to,10,Thunder Cats,Marlon Mack; T.J. Yeldon; Jarvis Landry,"Dec 4, 6:56 am",2018
+17,True,Traded to,3,Hingle Handlers,Julio Jones; Brandin Cooks,"Dec 4, 6:56 am",2018
+18,True,Traded to,10,Thunder Cats,Mark Ingram II; Mike Williams,"Dec 4, 6:52 am",2018
+18,True,Traded to,9,The Roethlisburger s,Christian McCaffrey,"Dec 4, 6:52 am",2018
+19,True,Traded to,4,Joe Buck Yourself,Gerald Everett,"Dec 4, 6:23 am",2018
+19,True,Traded to,8,Talladega Knights,Spencer Ware,"Dec 4, 6:23 am",2018
+20,True,Traded to,6,Lambeau Leapers,Robbie Gould,"Dec 1, 11:28 am",2018
+20,True,Traded to,3,Hingle Handlers,Jake Elliott,"Dec 1, 11:28 am",2018
+21,True,Traded to,3,Hingle Handlers,Rams; Rob Gronkowski,"Nov 30, 8:50 pm",2018
+21,True,Traded to,6,Lambeau Leapers,Lions; Greg Olsen,"Nov 30, 8:50 pm",2018
+22,True,Traded to,6,Lambeau Leapers,Ito Smith,"Nov 29, 12:12 pm",2018
+22,True,Traded to,7,Starting Defense,LeSean McCoy,"Nov 29, 12:12 pm",2018
+23,True,Traded to,4,Joe Buck Yourself,Joe Mixon,"Nov 29, 10:23 am",2018
+23,True,Traded to,6,Lambeau Leapers,Tyler Boyd; Peyton Barber,"Nov 29, 10:23 am",2018
+24,True,Traded to,5,King of the Hill,Julian Edelman; Phillip Lindsay; Josh Adams,"Nov 29, 10:22 am",2018
+24,True,Traded to,6,Lambeau Leapers,LeSean McCoy; Courtland Sutton; Calvin Ridley; Demaryius Thomas,"Nov 29, 10:22 am",2018
+25,True,Traded to,6,Lambeau Leapers,Corey Davis; Devin Funchess; John Brown,"Nov 29, 10:20 am",2018
+25,True,Traded to,8,Talladega Knights,Davante Adams,"Nov 29, 10:20 am",2018
+1,True,Traded to,3,Hingle Handlers,Mike Evans; Jordan Howard,"Nov 8, 2:31 pm",2018
+1,True,Traded to,1,Hingle McCringlebery,Alshon Jeffery; Leonard Fournette,"Nov 8, 2:31 pm",2018
+2,True,Traded to,5,King of the Hill,Demaryius Thomas,"Nov 8, 9:50 am",2018
+2,True,Traded to,6,Lambeau Leapers,Phillip Lindsay,"Nov 8, 9:50 am",2018
+3,True,Traded to,4,Joe Buck Yourself,Antonio Brown,"Nov 8, 9:31 am",2018
+3,True,Traded to,8,Talladega Knights,Ryan Fitzpatrick; Stefon Diggs; Dez Bryant; Le'Veon Bell,"Nov 8, 9:31 am",2018
+4,True,Traded to,8,Talladega Knights,David Njoku,"Nov 6, 2:59 pm",2018
+4,True,Traded to,4,Joe Buck Yourself,Ben Roethlisberger,"Nov 6, 2:59 pm",2018
+5,True,Traded to,5,King of the Hill,Keenan Allen; James Conner; Phillip Lindsay,"Nov 6, 2:15 pm",2018
+5,True,Traded to,1,Hingle McCringlebery,Mike Evans; Saquon Barkley,"Nov 6, 2:15 pm",2018
+6,True,Traded to,4,Joe Buck Yourself,Michael Crabtree; David Njoku; Stefon Diggs; Isaiah Crowell,"Nov 6, 6:40 am",2018
+6,True,Traded to,5,King of the Hill,Nick Chubb; Calvin Ridley; Courtland Sutton,"Nov 6, 6:40 am",2018
+7,True,Traded to,7,Starting Defense,Aaron Jones Sr.,"Oct 23, 9:47 am",2018
+7,True,Traded to,3,Hingle Handlers,Kenyan Drake,"Oct 23, 9:47 am",2018
+8,True,Traded to,3,Hingle Handlers,Aaron Jones Sr.,"Oct 20, 11:49 pm",2018
+8,True,Traded to,7,Starting Defense,Kenyan Drake,"Oct 20, 11:49 pm",2018
+9,True,Traded to,5,King of the Hill,Stefon Diggs; Dalvin Cook; Michael Crabtree,"Oct 16, 1:29 pm",2018
+9,True,Traded to,10,Thunder Cats,Christian McCaffrey; Brandin Cooks,"Oct 16, 1:29 pm",2018
+10,True,Traded to,5,King of the Hill,John Brown,"Oct 3, 1:22 pm",2018
+10,True,Traded to,10,Thunder Cats,Marshawn Lynch,"Oct 3, 1:22 pm",2018
+11,True,Traded to,10,Thunder Cats,John Brown; Robert Woods,"Oct 2, 6:17 am",2018
+11,True,Traded to,3,Hingle Handlers,Leonard Fournette; David Njoku,"Oct 2, 6:17 am",2018
+12,True,Traded to,4,Joe Buck Yourself,DeSean Jackson; Le'Veon Bell,"Sep 20, 10:16 am",2018
+12,True,Traded to,7,Starting Defense,Golden Tate; Chris Thompson,"Sep 20, 10:16 am",2018
+13,True,Traded to,3,Hingle Handlers,Kenyan Drake; Jordy Nelson,"Sep 17, 1:54 pm",2018
+13,True,Traded to,9,The Roethlisburger s,Chris Hogan; Mark Ingram II,"Sep 17, 1:54 pm",2018
+14,True,Traded to,3,Hingle Handlers,T.Y. Hilton; Derrick Henry,"Sep 12, 6:18 pm",2018
+14,True,Traded to,5,King of the Hill,Marshawn Lynch,"Sep 12, 6:18 pm",2018
+15,True,Traded to,5,King of the Hill,Derrick Henry; O.J. Howard; Will Fuller V,"Sep 3, 10:50 pm",2018
+15,True,Traded to,1,Hingle McCringlebery,Jordan Reed; Tyreek Hill,"Sep 3, 10:50 pm",2018
+16,True,Traded to,3,Hingle Handlers,Mark Ingram II,"Sep 2, 11:47 pm",2018
+16,True,Traded to,4,Joe Buck Yourself,Larry Fitzgerald,"Sep 2, 11:47 pm",2018
+17,True,Traded to,8,Talladega Knights,Greg Olsen,"Aug 30, 6:39 pm",2018
+17,True,Traded to,10,Thunder Cats,David Njoku,"Aug 30, 6:39 pm",2018
+18,True,Traded to,8,Talladega Knights,Antonio Brown; Carlos Hyde,"Aug 23, 6:28 pm",2018
+18,True,Traded to,10,Thunder Cats,Julio Jones; Leonard Fournette,"Aug 23, 6:28 pm",2018
+19,True,Traded to,5,King of the Hill,Tyreek Hill; Christian McCaffrey,"Aug 19, 7:45 pm",2018
+19,True,Traded to,8,Talladega Knights,Leonard Fournette,"Aug 19, 7:45 pm",2018
+1,False,Vetoed Trade to,3,Jackson's Team,Larry Fitzgerald,"Dec 9, 9:02 pm",2019
+1,False,Vetoed Trade to,6,Lambeau Leapers,DeAndre Hopkins,"Dec 9, 9:02 pm",2019
+2,True,Traded to,5,Patrick Mahomes,Alvin Kamara; James White; Jarvis Landry,"Oct 17, 7:02 pm",2019
+2,True,Traded to,9,The Roethlisburger s,Tyler Lockett; Marlon Mack; Austin Hooper; Courtland Sutton,"Oct 17, 7:02 pm",2019
+3,True,Traded to,2,Brokaw's Bums,Damien Williams,"Oct 16, 9:18 pm",2019
+3,True,Traded to,1,Hingle McCringlebery,Gerald Everett,"Oct 16, 9:18 pm",2019
+4,True,Traded to,9,The Roethlisburger s,Will Dissly; Jarvis Landry,"Oct 10, 4:22 pm",2019
+4,True,Traded to,7,Starting Defense,Tom Brady,"Oct 10, 4:22 pm",2019
+5,True,Traded to,10,The Cousin Lovers,Leonard Fournette; A.J. Green; Jimmy Graham; O.J. Howard,"Oct 2, 8:01 pm",2019
+5,True,Traded to,4,Joe Buck Yourself,Michael Thomas; Zach Ertz,"Oct 2, 8:01 pm",2019
+6,True,Traded to,3,Jackson's Team,Dalvin Cook; Cam Newton; Calvin Ridley,"Sep 2, 6:49 pm",2019
+6,True,Traded to,5,Patrick Mahomes,Patrick Mahomes; Marlon Mack; Tyler Lockett,"Sep 2, 6:49 pm",2019
+1,False,Vetoed Trade to,6,Lambeau Leapers,Tony Pollard,"Dec 24, 1:15 pm",2020
+1,False,Vetoed Trade to,10,The Cousin Lovers,Allen Lazard,"Dec 24, 1:15 pm",2020
+2,True,Traded to,4,Joe Buck Yourself,Melvin Gordon III; Diontae Johnson; Cam Akers; Clyde Edwards-Helaire,"Dec 16, 7:15 pm",2020
+2,True,Traded to,2,Brokaw's Bums,Antonio Gibson; DeVante Parker; Ty Johnson; Myles Gaskin,"Dec 16, 7:15 pm",2020
+3,True,Traded to,4,Joe Buck Yourself,Browns; Mike Davis,"Dec 16, 4:41 pm",2020
+3,True,Traded to,2,Brokaw's Bums,Panthers; J.D. McKissic,"Dec 16, 4:41 pm",2020
+4,True,Traded to,4,Joe Buck Yourself,Panthers,"Dec 12, 9:08 am",2020
+4,True,Traded to,2,Brokaw's Bums,Packers,"Dec 12, 9:08 am",2020
+5,True,Traded to,2,Brokaw's Bums,Curtis Samuel,"Dec 11, 12:25 pm",2020
+5,True,Traded to,4,Joe Buck Yourself,Kyler Murray,"Dec 11, 12:25 pm",2020
+6,True,Traded to,4,Joe Buck Yourself,Adam Thielen; Tyreek Hill,"Dec 11, 12:19 pm",2020
+6,True,Traded to,2,Brokaw's Bums,Matt Prater; Ryan Tannehill,"Dec 11, 12:19 pm",2020
+7,False,Vetoed Trade to,6,Lambeau Leapers,Adam Thielen; Rob Gronkowski; Tyreek Hill,"Dec 10, 5:27 pm",2020
+7,False,Vetoed Trade to,2,Brokaw's Bums,Latavius Murray; Jared Cook; Allen Lazard,"Dec 10, 5:27 pm",2020
+8,True,Traded to,5,D Hop,Justin Herbert; Allen Robinson,"Nov 24, 11:41 am",2020
+8,True,Traded to,3,Jackson's Team,Robert Woods,"Nov 24, 11:41 am",2020
+9,True,Traded to,4,Joe Buck Yourself,Cole Beasley,"Nov 11, 9:15 am",2020
+9,True,Traded to,3,Jackson's Team,Zack Moss,"Nov 11, 9:15 am",2020
+10,True,Traded to,4,Joe Buck Yourself,Cooper Kupp,"Oct 29, 11:14 am",2020
+10,True,Traded to,9,The Roethlisberger's,Chase Claypool,"Oct 29, 11:14 am",2020
+11,True,Traded to,3,Jackson's Team,Mike Gesicki,"Oct 20, 8:55 am",2020
+11,True,Traded to,4,Joe Buck Yourself,DeVante Parker,"Oct 20, 8:55 am",2020
+12,True,Traded to,4,Joe Buck Yourself,Ryan Tannehill,"Oct 15, 10:37 am",2020
+12,True,Traded to,3,Jackson's Team,DeVante Parker,"Oct 15, 10:37 am",2020
+13,True,Traded to,5,D Hop,Jonathan Taylor; Jonnu Smith; Robert Woods,"Oct 8, 11:58 am",2020
+13,True,Traded to,10,The Cousin Lovers,Zach Ertz; Derrick Henry; Julio Jones,"Oct 8, 11:58 am",2020
+14,True,Traded to,1,Hingle McCringlebery,Justin Jefferson; Travis Kelce,"Oct 7, 3:47 pm",2020
+14,True,Traded to,7,Starting Defense,James Robinson; T.J. Hockenson; Terry McLaurin,"Oct 7, 3:47 pm",2020
+15,True,Traded to,3,Jackson's Team,Joshua Kelley,"Oct 6, 2:19 am",2020
+15,True,Traded to,7,Starting Defense,Justin Jefferson,"Oct 6, 2:19 am",2020
+16,True,Traded to,3,Jackson's Team,James White,"Oct 3, 2:44 pm",2020
+16,True,Traded to,7,Starting Defense,Joshua Kelley,"Oct 3, 2:44 pm",2020
+17,True,Traded to,3,Jackson's Team,Justin Jefferson,"Oct 1, 9:10 pm",2020
+17,True,Traded to,7,Starting Defense,James White,"Oct 1, 9:10 pm",2020
+18,True,Traded to,5,D Hop,Ronald Jones; DeAndre Hopkins,"Sep 29, 8:59 am",2020
+18,True,Traded to,7,Starting Defense,James Conner; Tyler Boyd,"Sep 29, 8:59 am",2020
+19,False,Vetoed Trade to,8,Talladega Knights,Julian Edelman; Le'Veon Bell,"Sep 27, 3:58 pm",2020
+19,False,Vetoed Trade to,4,Joe Buck Yourself,David Montgomery,"Sep 27, 3:58 pm",2020
+1,False,Vetoed Trade to,4,Jackson's Team,Jakobi Meyers; 49ers,"Dec 29, 9:50 pm",2021
+1,False,Vetoed Trade to,5,Joe Buck Yourself,Patriots,"Dec 29, 9:50 pm",2021
+2,False,Vetoed Trade to,4,Jackson's Team,Jakobi Meyers,"Dec 29, 9:47 pm",2021
+2,False,Vetoed Trade to,5,Joe Buck Yourself,Patriots,"Dec 29, 9:47 pm",2021
+3,True,Traded to,8,Talladega Knights,Buccaneers,"Dec 29, 3:57 pm",2021
+3,True,Traded to,2,Brokaw's Bums,Chase Edmonds,"Dec 29, 3:57 pm",2021
+4,False,Vetoed Trade to,4,Jackson's Team,Jakobi Meyers,"Dec 29, 12:53 pm",2021
+4,False,Vetoed Trade to,5,Joe Buck Yourself,Patriots,"Dec 29, 12:53 pm",2021
+5,True,Traded to,8,Talladega Knights,Chase Edmonds,"Dec 29, 11:20 am",2021
+5,True,Traded to,2,Brokaw's Bums,Buccaneers,"Dec 29, 11:20 am",2021
+6,False,Vetoed Trade to,10,The Roethlisberger's,Christian Kirk; Jarvis Landry,"Dec 16, 7:34 pm",2021
+6,False,Vetoed Trade to,8,Talladega Knights,Diontae Johnson,"Dec 16, 7:34 pm",2021
+7,True,Traded to,3,Simps Squad,Rob Gronkowski; Russell Wilson,"Nov 10, 1:16 pm",2021
+7,True,Traded to,5,Joe Buck Yourself,Mark Andrews,"Nov 10, 1:16 pm",2021
+8,True,Traded to,10,The Roethlisberger's,Terry McLaurin; Damien Harris,"Oct 26, 10:04 pm",2021
+8,True,Traded to,2,Brokaw's Bums,Aaron Jones Sr.,"Oct 26, 10:04 pm",2021
+9,True,Traded to,2,Brokaw's Bums,Myles Gaskin; Matthew Stafford,"Sep 29, 10:39 pm",2021
+9,True,Traded to,6,Lambeau Leapers,Aaron Rodgers,"Sep 29, 10:39 pm",2021
+10,True,Traded to,1,Hingle McCringlebery,Justin Jefferson; Christian McCaffrey; JuJu Smith-Schuster,"Sep 28, 7:21 am",2021
+10,True,Traded to,7,Starting Defense,Mike Williams; Clyde Edwards-Helaire; Ja'Marr Chase,"Sep 28, 7:21 am",2021
+1,True,Traded to,1,Hingle McCringlebery,Chris Godwin Jr.; Najee Harris; Kareem Hunt,"Oct 11, 12:26 pm",2022
+1,True,Traded to,2,Joe Buck Yourself,Michael Carter; Dameon Pierce; Deebo Samuel Sr.,"Oct 11, 12:26 pm",2022
+2,True,Traded to,3,Brokaw's Bums,Kyle Pitts Sr.; Drake London; Travis Etienne Jr.; Michael Pittman Jr.,"Sep 29, 4:02 pm",2022
+2,True,Traded to,2,Joe Buck Yourself,Travis Kelce; DJ Moore; James Conner,"Sep 29, 4:02 pm",2022
+1,True,Traded to,5,Joe Buck Yourself,Justin Herbert; Davante Adams; Curtis Samuel,"Nov 7, 6:33 pm",2023
+1,True,Traded to,9,Talladega Knights,Lamar Jackson; DJ Moore; Zay Flowers,"Nov 7, 6:33 pm",2023
+2,True,Traded to,7,Lambeau Leapers,Travis Kelce; D'Andre Swift,"Nov 7, 6:54 am",2023
+2,True,Traded to,5,Joe Buck Yourself,Cooper Kupp; Breece Hall,"Nov 7, 6:54 am",2023
+3,True,Traded to,8,The Cousin Lovers,Kenneth Walker III; Calvin Ridley,"Sep 27, 12:19 pm",2023
+3,True,Traded to,6,Brokaw's Bums,Josh Allen; Stefon Diggs,"Sep 27, 12:19 pm",2023
+4,True,Traded to,8,The Cousin Lovers,Kirk Cousins,"Sep 26, 8:59 pm",2023
+4,True,Traded to,10,Starting Defense,Jordan Addison; Gus Edwards,"Sep 26, 8:59 pm",2023
+5,True,Traded to,5,Joe Buck Yourself,Tyreek Hill,"Sep 26, 6:59 am",2023
+5,True,Traded to,10,Starting Defense,Chris Olave; Kyren Williams,"Sep 26, 6:59 am",2023
+1,True,Traded to,5,Joe Buck Yourself,Justin Jefferson,"Sep 17, 2:13 am",2024
+1,True,Traded to,3,Simps Squad,Kyler Murray; Derrick Henry,"Sep 17, 2:13 am",2024
+1,False,Vetoed Trade to,5,Joe Buck Yourself,Rhamondre Stevenson; Nick Chubb; Ja'Marr Chase,"Nov 20, 9:29 pm",2025
+1,False,Vetoed Trade to,10,Starting Defense,Tyrone Tracy Jr.; Troy Franklin; Nico Collins,"Nov 20, 9:29 pm",2025
+2,True,Traded to,7,Lambeau Leapers,De'Von Achane,"Nov 18, 8:05 pm",2025
+2,True,Traded to,2,Jackson's Team,Breece Hall; A.J. Brown,"Nov 18, 8:05 pm",2025
+3,True,Traded to,2,Jackson's Team,RJ Harvey; Tee Higgins,"Nov 14, 8:57 pm",2025
+3,True,Traded to,3,Simps Squad,Joe Burrow; Emeka Egbuka,"Nov 14, 8:57 pm",2025
+4,True,Traded to,1,Hingle McCringlebery,Chase Brown; CeeDee Lamb,"Nov 6, 3:09 pm",2025
+4,True,Traded to,2,Jackson's Team,Derrick Henry; Keenan Allen,"Nov 6, 3:09 pm",2025
+5,True,Traded to,3,Simps Squad,Bucky Irving; Tee Higgins,"Oct 28, 2:11 pm",2025
+5,True,Traded to,5,Joe Buck Yourself,Nico Collins; Stefon Diggs,"Oct 28, 2:11 pm",2025
+6,True,Traded to,3,Simps Squad,Sam LaPorta; Michael Pittman Jr.,"Oct 1, 8:33 am",2025
+6,True,Traded to,4,The Roethlisberger's,Wan'Dale Robinson; Mike Evans,"Oct 1, 8:33 am",2025
+7,True,Traded to,5,Joe Buck Yourself,Cam Skattebo; Ricky Pearsall; George Pickens,"Sep 30, 5:32 am",2025
+7,True,Traded to,4,The Roethlisberger's,TreVeyon Henderson; Quentin Johnston; Rashee Rice; Matthew Golden,"Sep 30, 5:32 am",2025
+8,True,Traded to,2,Jackson's Team,DeAndre Hopkins,"Sep 9, 8:30 pm",2025
+8,True,Traded to,6,Brokaw's Bums,Jaylen Wright,"Sep 9, 8:30 pm",2025

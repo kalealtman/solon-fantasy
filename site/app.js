@@ -2,6 +2,25 @@
   const DATA = JSON.parse(document.getElementById('league-data').textContent);
   const { standings, draft, matchups, transactions, trades, owner_career, head_to_head, trophy_case } = DATA;
   const isPostseason = (season, week) => (season <= 2020 ? [14, 15, 16] : [15, 16, 17]).includes(week);
+  const SHOTGUN_START_SEASON = 2023;
+
+  // One entry per shotgun: since 2023, whoever has the lowest score in a
+  // given regular-season week has to shotgun a beer on video.
+  function computeShotgunRecords(minSeason, maxSeason) {
+    const byWeek = {};
+    matchups
+      .filter((m) => m.season >= Math.max(minSeason, SHOTGUN_START_SEASON) && m.season <= maxSeason && !isPostseason(m.season, m.week))
+      .forEach((m) => {
+        const key = m.season + '-' + m.week;
+        (byWeek[key] = byWeek[key] || []).push(m);
+      });
+    const records = [];
+    Object.values(byWeek).forEach((grp) => {
+      const minScore = Math.min(...grp.map((m) => m.score));
+      grp.filter((m) => m.score === minScore).forEach((m) => records.push({ owner: m.owner, season: m.season }));
+    });
+    return records;
+  }
 
   const fmt = (n, d = 0) => Number(n).toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
   const pct = (n) => (n * 100).toFixed(1) + '%';
@@ -51,7 +70,7 @@
   document.getElementById('ticker').innerHTML = `
     <span><b>${seasons.length}</b> seasons</span>
     <span><b>${owner_career.length}</b> owners</span>
-    <span><b>${transactions.length.toLocaleString()}</b> transactions</span>
+    <span><b>${owner_career.reduce((sum, o) => sum + (o.career_shotguns || 0), 0)}</b> shotguns since 2023</span>
   `;
 
   // ---------- owner hover tooltip (used on the career table and chart) ----------
@@ -77,6 +96,7 @@
         ${stat('Best / Worst', `${o.best_finish} / ${o.worst_finish}`)}
         ${stat('Postseason', `${o.postseason_wins}-${o.postseason_losses} (${pct(o.postseason_win_pct)})`)}
         ${stat('Trades', o.career_trades)}
+        ${stat('🍺 Shotguns', o.career_shotguns === null ? '--' : o.career_shotguns)}
       </div>
       ${
         o.top_drafted_players
@@ -147,7 +167,7 @@
         ${statTile(seasons.length, 'Seasons Played', `${Math.min(...seasons)}&ndash;${Math.max(...seasons)}`)}
         ${statTile(owner_career.length, 'All-Time Owners')}
         ${statTile(topChampCount, 'Most Championships', champLeaders, true)}
-        ${statTile(fmt(standings.reduce((sum, s) => sum + s.points_for, 0), 0), 'Points Scored, All-Time')}
+        ${statTile(owner_career.reduce((sum, o) => sum + (o.career_shotguns || 0), 0), 'Total Shotguns', 'Since 2023')}
       </div>
       <h2 class="section-title">Record Book Preview</h2>
       <div class="grid cols-3">${trophy_case.slice(0, 3).map(factCard).join('')}</div>
@@ -168,6 +188,8 @@
     pf_per_season: { label: 'Points For / Season', fmt: (v) => fmt(v, 1) },
     pa_per_season: { label: 'Points Against / Season', invert: true, fmt: (v) => fmt(v, 1) },
     playoff_appearances: { label: 'Playoff Appearances' },
+    career_shotguns: { label: 'Shotguns (Since 2023)', invert: true, fmt: (v) => (v === null ? '--' : v), chartFilter: (r) => r.career_shotguns !== null },
+    shotguns_per_season: { label: 'Shotguns / Season', invert: true, fmt: (v) => (v === null ? '--' : v.toFixed(2)), chartFilter: (r) => r.shotguns_per_season !== null },
     championships: { label: 'Championships' },
     podiums: { label: 'Podiums (Top 3)' },
     avg_finish: { label: 'Avg Finish', invert: true, fmt: (v) => v.toFixed(2) },
@@ -189,7 +211,8 @@
   const TABLE_COLUMN_KEYS = [
     'seasons_played', 'career_wins', 'career_losses', 'win_pct', 'career_points_for',
     'career_points_against', 'pf_per_season', 'championships', 'podiums', 'avg_finish',
-    'postseason_win_pct', 'transactions_per_season', 'best_finish', 'worst_finish',
+    'postseason_win_pct', 'transactions_per_season', 'career_shotguns', 'shotguns_per_season',
+    'best_finish', 'worst_finish',
   ];
 
   let chartKey = 'championships'; // always a real metric -- drives the chart
@@ -241,6 +264,7 @@
     const draftInRange = draft.filter((d) => inRange(d.season));
     const tradesInRange = trades.filter((t) => t.completed && inRange(t.season));
     const postseasonByOwner = computePostseasonRecords(minSeason, maxSeason);
+    const shotgunRecords = computeShotgunRecords(minSeason, maxSeason);
 
     return Object.entries(rowsByOwner).map(([owner, rows]) => {
       const seasonsPlayed = new Set(rows.map((r) => r.season)).size;
@@ -267,6 +291,9 @@
         .join('; ');
       const tradeCount = tradesInRange.filter((t) => t.owner === owner).length;
       const ps = postseasonByOwner[owner] || { wins: 0, losses: 0, ties: 0 };
+      const seasonsSinceShotgunRule = rows.filter((r) => r.season >= SHOTGUN_START_SEASON).length;
+      const careerShotguns = seasonsSinceShotgunRule > 0 ? shotgunRecords.filter((s) => s.owner === owner).length : null;
+      const shotgunsPerSeason = seasonsSinceShotgunRule > 0 ? careerShotguns / seasonsSinceShotgunRule : null;
       return {
         owner,
         seasons_played: seasonsPlayed,
@@ -291,6 +318,8 @@
         career_transactions: adds + drops,
         transactions_per_season: (adds + drops) / seasonsPlayed,
         top_drafted_players: topPlayers,
+        career_shotguns: careerShotguns,
+        shotguns_per_season: shotgunsPerSeason,
         career_trades: tradeCount,
         trades_per_season: tradeCount / seasonsPlayed,
         postseason_wins: ps.wins,
@@ -352,7 +381,8 @@
 
   function renderCareerChart(rows) {
     const metric = METRICS[chartKey];
-    const sorted = [...rows].sort((a, b) => (metric.invert ? a[chartKey] - b[chartKey] : b[chartKey] - a[chartKey]));
+    const chartable = metric.chartFilter ? rows.filter(metric.chartFilter) : rows;
+    const sorted = [...chartable].sort((a, b) => (metric.invert ? a[chartKey] - b[chartKey] : b[chartKey] - a[chartKey]));
     const values = sorted.map((r) => r[chartKey]);
     const min = Math.min(...values);
     const max = Math.max(...values);
@@ -379,7 +409,15 @@
   function renderCareerTable(rows) {
     const sorted = [...rows].sort((a, b) => {
       const key = focusKey === 'owner' ? 'owner' : focusKey;
-      return (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0) * focusDir;
+      const av = a[key];
+      const bv = b[key];
+      // Nulls (e.g. shotguns for an owner who left before the rule existed)
+      // always sort last, regardless of ascending/descending -- otherwise
+      // JS's null-as-0 coercion scatters them in with real low values.
+      if (av === null && bv === null) return 0;
+      if (av === null) return 1;
+      if (bv === null) return -1;
+      return (av > bv ? 1 : av < bv ? -1 : 0) * focusDir;
     });
     const table = document.getElementById('career-table');
     const cols = [{ key: 'owner', label: 'Owner' }, ...TABLE_COLUMN_KEYS.map((k) => ({ key: k, label: METRICS[k].label, ...METRICS[k] }))];
@@ -415,7 +453,16 @@
   }
 
   function abbreviate(label) {
-    const short = { 'Career Wins': 'W', 'Career Losses': 'L', 'Win %': 'Win%', 'Points For': 'PF', 'Points Against': 'PA', 'Postseason Win %': 'Post W%' };
+    const short = {
+      'Career Wins': 'W',
+      'Career Losses': 'L',
+      'Win %': 'Win%',
+      'Points For': 'PF',
+      'Points Against': 'PA',
+      'Postseason Win %': 'Post W%',
+      'Shotguns (Since 2023)': 'Shotguns',
+      'Shotguns / Season': 'SG/Yr',
+    };
     return short[label] || label;
   }
 
@@ -609,12 +656,13 @@
           .join('')}</tbody>
       </table></div>
       <h3 style="font-family:var(--font-display);font-size:18px;margin:24px 0 10px">Round 1 Draft</h3>
-      <div class="draft-board">${picks
+      <div class="draft-board" style="--cols:${picks.length}">${picks
         .map(
           (p) => `<div class="draft-board-slot">
             <div class="draft-board-pick">1.${String(p.pick).padStart(2, '0')}</div>
             <div class="draft-board-card">
               <div class="draft-board-name">${p.player_name}</div>
+              <div class="draft-board-owner">${p.owner}</div>
             </div>
           </div>`
         )
@@ -622,61 +670,8 @@
     `;
   }
 
-  function computeDraftOwnerStats() {
-    const byOwner = {};
-    draft.forEach((d) => {
-      (byOwner[d.owner] = byOwner[d.owner] || []).push(d);
-    });
-    return Object.entries(byOwner)
-      .map(([owner, picks]) => ({
-        owner,
-        total_picks: picks.length,
-        avg_pick: picks.reduce((s, p) => s + p.overall_pick, 0) / picks.length,
-        best_pick: Math.min(...picks.map((p) => p.overall_pick)),
-        first_round_picks: picks.filter((p) => p.round === 1).length,
-      }))
-      .sort((a, b) => a.avg_pick - b.avg_pick);
-  }
-
-  function computeTopDraftedLeagueWide(n) {
-    const counts = {};
-    draft.forEach((d) => {
-      counts[d.player_name] = (counts[d.player_name] || 0) + 1;
-    });
-    return Object.keys(counts)
-      .sort((a, b) => counts[b] - counts[a] || a.localeCompare(b))
-      .slice(0, n)
-      .map((name) => ({ player_name: name, count: counts[name] }));
-  }
-
   function renderDraftPage() {
-    const ownerStats = computeDraftOwnerStats();
-    const topDrafted = computeTopDraftedLeagueWide(10);
-
     document.getElementById('view-draft').innerHTML = `
-      <h2 class="section-title">Draft Central</h2>
-      <div class="grid cols-2" style="align-items:start;margin-bottom:28px">
-        <div>
-          <h3 style="font-family:var(--font-display);font-size:16px;margin-bottom:10px">Draft Tendencies by Owner</h3>
-          <div class="section-sub">No position data is available from Yahoo's draft results, so this covers pick timing, not positional strategy.</div>
-          <div class="table-wrap"><table>
-            <thead><tr><th>Owner</th><th class="num">Picks</th><th class="num">Avg Spot</th><th class="num">Best Pick</th><th class="num">R1 Picks</th></tr></thead>
-            <tbody>${ownerStats
-              .map(
-                (o) => `<tr><td><span class="owner-hover" data-owner="${o.owner}">${o.owner}</span></td><td class="num">${o.total_picks}</td><td class="num">${o.avg_pick.toFixed(1)}</td><td class="num">${o.best_pick}</td><td class="num">${o.first_round_picks}</td></tr>`
-              )
-              .join('')}</tbody>
-          </table></div>
-        </div>
-        <div>
-          <h3 style="font-family:var(--font-display);font-size:16px;margin-bottom:10px">Most Drafted, League-Wide</h3>
-          <div class="card">${topDrafted
-            .map(
-              (p, i) => `<div class="txn-row"><span class="txn-icon" style="color:var(--ink-faint)">${i + 1}</span><span class="txn-player">${p.player_name}</span><span class="txn-meta">${p.count}&times;</span></div>`
-            )
-            .join('')}</div>
-        </div>
-      </div>
       <h2 class="section-title">Draft Board</h2>
       <div class="controls">
         <label class="field-label">Season</label>
@@ -684,7 +679,6 @@
       </div>
       <div id="draft-board-content"></div>
     `;
-    document.querySelectorAll('#view-draft .owner-hover').forEach((el) => attachOwnerHover(el, el.dataset.owner));
     const picker = document.getElementById('draft-season-picker');
     picker.addEventListener('change', () => renderDraftBoardForSeason(Number(picker.value)));
     renderDraftBoardForSeason(latestSeason);
@@ -698,7 +692,7 @@
         const roundPicks = picks.filter((p) => p.round === round).sort((a, b) => a.pick - b.pick);
         return `
           <div class="draft-round-label">Round ${round}</div>
-          <div class="draft-board">${roundPicks
+          <div class="draft-board" style="--cols:${roundPicks.length}">${roundPicks
             .map(
               (p) => `<div class="draft-board-slot">
                 <div class="draft-board-pick">${round}.${String(p.pick).padStart(2, '0')}</div>
@@ -718,33 +712,49 @@
   // multiple players per side) -- reshape completed trades into the same
   // one-row-per-player-event form as adds/drops so they can share one feed
   // and one set of filters instead of being a second, disconnected view.
-  const unifiedTransactions = (() => {
-    const tradeRows = [];
+  // Trades and regular adds/drops need to stay grouped as single events (a
+  // trade has two sides with multiple players each; Yahoo's transactions
+  // page also bundles a same-moment add+drop into one visual block) rather
+  // than flattened into disconnected one-player-per-row entries -- that
+  // loses who the trade partner was and which direction a player moved.
+  const unifiedEvents = (() => {
+    const tradeGroups = {};
     trades
       .filter((t) => t.completed)
       .forEach((t) => {
-        (t.players_received || '')
-          .split('; ')
-          .filter(Boolean)
-          .forEach((playerName) => {
-            tradeRows.push({
-              action: 'trade',
-              player_name: playerName,
-              note: 'Trade',
-              team_name: t.team_name,
-              owner: t.owner,
-              timestamp: t.timestamp,
-              season: t.season,
-            });
-          });
+        const key = t.season + '-' + t.trade_id;
+        (tradeGroups[key] = tradeGroups[key] || []).push(t);
       });
-    return [...transactions, ...tradeRows];
+    const tradeEvents = Object.values(tradeGroups)
+      .filter((sides) => sides.length === 2)
+      .map((sides) => ({ type: 'trade', season: sides[0].season, timestamp: sides[0].timestamp, sides }));
+
+    // Yahoo doesn't give adds/drops a shared transaction id the way trades
+    // have trade_id -- (owner, season, timestamp) is the best available
+    // proxy for "these happened as one move" (e.g. a waiver claim that
+    // both added and dropped a player at the same instant).
+    const regularGroups = {};
+    transactions.forEach((t) => {
+      const key = [t.owner, t.season, t.timestamp].join('|');
+      (regularGroups[key] = regularGroups[key] || []).push(t);
+    });
+    const regularEvents = Object.values(regularGroups).map((items) => ({
+      type: 'regular',
+      season: items[0].season,
+      timestamp: items[0].timestamp,
+      owner: items[0].owner,
+      team_name: items[0].team_name,
+      adds: items.filter((i) => i.action === 'add'),
+      drops: items.filter((i) => i.action === 'drop'),
+    }));
+
+    return [...tradeEvents, ...regularEvents];
   })();
 
   let txnFilters = { season: 'all', type: 'all', owner: 'all', player: '' };
 
   function renderTransactions() {
-    const owners = [...new Set(unifiedTransactions.map((t) => t.owner))].sort();
+    const owners = owner_career.map((o) => o.owner).sort();
     document.getElementById('view-transactions').innerHTML = `
       <h2 class="section-title">Transaction Feed</h2>
       <div class="controls">
@@ -786,36 +796,62 @@
     renderTxnList();
   }
 
+  function eventMatchesPlayer(e, q) {
+    if (e.type === 'trade') return e.sides.some((s) => (s.players_received || '').toLowerCase().includes(q));
+    return [...e.adds, ...e.drops].some((i) => i.player_name.toLowerCase().includes(q));
+  }
+
+  function renderEventRow(e) {
+    if (e.type === 'trade') {
+      const [a, b] = e.sides;
+      return `
+        <div class="txn-row txn-trade-row">
+          <span class="txn-icon trade">⇄</span>
+          <div class="txn-trade-body">
+            <div><b>${a.owner}</b> (${a.team_name}) receives: ${a.players_received || 'nothing'} &mdash; from <b>${b.owner}</b></div>
+            <div><b>${b.owner}</b> (${b.team_name}) receives: ${b.players_received || 'nothing'} &mdash; from <b>${a.owner}</b></div>
+          </div>
+          <span class="txn-meta">${e.timestamp || ''} &middot; ${e.season}</span>
+        </div>`;
+    }
+    const parts = [
+      ...e.adds.map((i) => `<span class="txn-icon add">+</span>${i.player_name}`),
+      ...e.drops.map((i) => `<span class="txn-icon drop">&minus;</span>${i.player_name}`),
+    ];
+    return `
+      <div class="txn-row">
+        <div class="txn-event-players">${parts.join('')}</div>
+        <span style="color:var(--ink-muted)">${e.team_name}</span>
+        <span class="txn-meta">${e.timestamp || ''} &middot; ${e.season}</span>
+      </div>`;
+  }
+
   function renderTxnList() {
-    let rows = unifiedTransactions;
-    if (txnFilters.season !== 'all') rows = rows.filter((t) => String(t.season) === txnFilters.season);
-    if (txnFilters.type !== 'all') rows = rows.filter((t) => t.action === txnFilters.type);
-    if (txnFilters.owner !== 'all') rows = rows.filter((t) => t.owner === txnFilters.owner);
+    let events = unifiedEvents;
+    if (txnFilters.season !== 'all') events = events.filter((e) => String(e.season) === txnFilters.season);
+    if (txnFilters.type !== 'all') {
+      events = events.filter((e) => {
+        if (txnFilters.type === 'trade') return e.type === 'trade';
+        if (e.type !== 'regular') return false;
+        return txnFilters.type === 'add' ? e.adds.length > 0 : e.drops.length > 0;
+      });
+    }
+    if (txnFilters.owner !== 'all') {
+      events = events.filter((e) => (e.type === 'trade' ? e.sides.some((s) => s.owner === txnFilters.owner) : e.owner === txnFilters.owner));
+    }
     if (txnFilters.player.trim()) {
       const q = txnFilters.player.trim().toLowerCase();
-      rows = rows.filter((t) => t.player_name.toLowerCase().includes(q));
+      events = events.filter((e) => eventMatchesPlayer(e, q));
     }
-    rows = [...rows].sort((a, b) => b.season - a.season);
+    events = [...events].sort((a, b) => b.season - a.season);
 
-    const shown = rows.slice(0, 300);
-    const icon = { add: '+', drop: '−', trade: '⇄' };
+    const shown = events.slice(0, 300);
     document.getElementById('txn-list').innerHTML =
-      shown
-        .map(
-          (t) => `
-      <div class="txn-row">
-        <span class="txn-icon ${t.action}">${icon[t.action] || '?'}</span>
-        <span class="txn-player">${t.player_name}</span>
-        <span style="color:var(--ink-faint)">${t.note || ''}</span>
-        <span style="color:var(--ink-muted)">${t.team_name}</span>
-        <span class="txn-meta">${t.timestamp || ''} &middot; ${t.season}</span>
-      </div>`
-        )
-        .join('') +
-      (rows.length === 0
+      shown.map(renderEventRow).join('') +
+      (events.length === 0
         ? `<p style="color:var(--ink-muted);margin:0">No transactions match those filters.</p>`
-        : rows.length > 300
-        ? `<p style="color:var(--ink-faint);font-size:12px;margin-top:10px">Showing 300 of ${rows.length.toLocaleString()} &mdash; narrow the filters to see more.</p>`
+        : events.length > 300
+        ? `<p style="color:var(--ink-faint);font-size:12px;margin-top:10px">Showing 300 of ${events.length.toLocaleString()} &mdash; narrow the filters to see more.</p>`
         : '');
   }
 

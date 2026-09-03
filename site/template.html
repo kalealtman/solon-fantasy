@@ -219,18 +219,20 @@
 
   .draft-round { margin-bottom: 4px; }
   .draft-round-label { font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-transform: uppercase; margin: 14px 0 6px; }
-  .draft-board { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; }
-  .draft-board-slot { flex: 1 0 108px; min-width: 108px; }
+  /* Grid with a per-row column count (--cols, set inline per round) instead
+     of a fixed card width -- cards shrink to fit the row exactly rather
+     than overflowing into a horizontal scrollbar for a 10-team league. */
+  .draft-board { display: grid; grid-template-columns: repeat(var(--cols, 10), 1fr); gap: 5px; margin-bottom: 6px; }
   .draft-board-pick {
-    font-family: var(--font-mono); font-size: 11px; color: var(--ink-faint); text-align: center;
-    margin-bottom: 5px; letter-spacing: 0.02em;
+    font-family: var(--font-mono); font-size: 10px; color: var(--ink-faint); text-align: center;
+    margin-bottom: 4px; letter-spacing: 0.02em;
   }
   .draft-board-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    box-shadow: var(--shadow); padding: 10px 8px; text-align: center;
+    box-shadow: var(--shadow); padding: 8px 4px; text-align: center;
   }
-  .draft-board-name { font-size: 12.5px; font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .draft-board-owner { font-size: 10.5px; color: var(--ink-muted); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .draft-board-name { font-size: 11.5px; font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .draft-board-owner { font-size: 10px; color: var(--ink-muted); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
   .txn-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: baseline; flex-wrap: wrap; }
   .txn-row:last-child { border-bottom: none; }
@@ -240,6 +242,11 @@
   .txn-icon.trade { color: var(--blue); }
   .txn-player { font-weight: 600; }
   .txn-meta { color: var(--ink-faint); font-size: 12px; margin-left: auto; font-family: var(--font-mono); white-space: nowrap; }
+  .txn-event-players { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .txn-event-players span.txn-icon { margin-right: 2px; }
+  .txn-trade-row { align-items: flex-start; }
+  .txn-trade-body { display: flex; flex-direction: column; gap: 3px; }
+  .txn-trade-body b { color: var(--ink); }
 
   .champ-callout { display: flex; align-items: center; gap: 18px; background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%); }
   .champ-callout .trophy { font-size: 40px; line-height: 1; }

@@ -67,12 +67,14 @@ def build_owner_career(
     transactions: pd.DataFrame,
     draft: pd.DataFrame,
     postseason_records: pd.DataFrame,
+    shotgun_records: pd.DataFrame,
     trades: pd.DataFrame = None,
 ) -> pd.DataFrame:
     txn_counts = transactions.groupby("owner")["action"].value_counts().unstack(fill_value=0)
     postseason_totals = postseason_records.groupby("owner")[["wins", "losses", "ties"]].sum() if len(postseason_records) else None
     completed_trades = trades[trades["completed"]] if trades is not None and len(trades) else None
     trade_counts = completed_trades["owner"].value_counts() if completed_trades is not None else None
+    shotgun_counts = shotgun_records["owner"].value_counts() if len(shotgun_records) else None
 
     rows = []
     for owner, grp in standings.groupby("owner"):
@@ -88,6 +90,16 @@ def build_owner_career(
         ps_losses = int(postseason_totals["losses"].get(owner, 0)) if postseason_totals is not None else 0
         ps_ties = int(postseason_totals["ties"].get(owner, 0)) if postseason_totals is not None else 0
         trades_count = int(trade_counts.get(owner, 0)) if trade_counts is not None else 0
+        # -- / N/A (None, not 0) for anyone who left the league before the
+        # shotgun rule started in 2023 -- 0 would wrongly imply they were
+        # eligible and just got lucky.
+        seasons_since_shotgun_rule = int((grp["season"] >= SHOTGUN_START_SEASON).sum())
+        if seasons_since_shotgun_rule > 0:
+            career_shotguns = int(shotgun_counts.get(owner, 0)) if shotgun_counts is not None else 0
+            shotguns_per_season = round(career_shotguns / seasons_since_shotgun_rule, 2)
+        else:
+            career_shotguns = None
+            shotguns_per_season = None
         rows.append(
             {
                 "owner": owner,
@@ -121,6 +133,8 @@ def build_owner_career(
                 "postseason_ties": ps_ties,
                 "postseason_win_pct": round(ps_wins / max(ps_wins + ps_losses, 1), 3),
                 "top_drafted_players": top_players,
+                "career_shotguns": career_shotguns,
+                "shotguns_per_season": shotguns_per_season,
             }
         )
     return pd.DataFrame(rows).sort_values(["championships", "win_pct"], ascending=False)
@@ -206,6 +220,25 @@ def build_postseason_records(matchups: pd.DataFrame, standings: pd.DataFrame) ->
     return pd.DataFrame(rows, columns=["owner", "season", "wins", "losses", "ties"])
 
 
+SHOTGUN_START_SEASON = 2023
+
+
+def build_shotgun_records(matchups: pd.DataFrame) -> pd.DataFrame:
+    """One row per shotgun: since 2023, whoever has the lowest score in a
+    given regular-season week has to shotgun a beer on video. A genuine tie
+    for lowest (essentially never happens with real player-stat scores, but
+    the rule doesn't say to break it) means everyone tied that week owes one."""
+    regular = matchups[
+        (matchups["season"] >= SHOTGUN_START_SEASON) & ~matchups.apply(lambda r: is_postseason(r["season"], r["week"]), axis=1)
+    ]
+    rows = []
+    for (season, week), grp in regular.groupby(["season", "week"]):
+        min_score = grp["score"].min()
+        for owner in grp[grp["score"] == min_score]["owner"]:
+            rows.append({"owner": owner, "season": season, "week": week})
+    return pd.DataFrame(rows, columns=["owner", "season", "week"])
+
+
 def format_tied_names(names) -> str:
     """'A' / 'A & B' / 'A, B & C' -- never silently pick a winner out of a tie."""
     names = sorted(names)
@@ -219,6 +252,7 @@ def build_trophy_case(
     matchups: pd.DataFrame,
     transactions: pd.DataFrame,
     postseason_records: pd.DataFrame,
+    shotgun_records: pd.DataFrame,
     trades: pd.DataFrame = None,
 ) -> pd.DataFrame:
     """Each record is (category, fact, number, name, detail) -- kept as
@@ -280,6 +314,12 @@ def build_trophy_case(
         record_fact("Best Career Postseason Record", ascending=False)
         record_fact("Worst Career Postseason Record", ascending=True)
 
+    if len(shotgun_records):
+        shotgun_counts = shotgun_records["owner"].value_counts()
+        top_count = shotgun_counts.iloc[0]
+        leaders = format_tied_names(shotgun_counts[shotgun_counts == top_count].index.tolist())
+        add_fact("regular_season", "Most Shotguns (Since 2023)", str(top_count), leaders)
+
     add_counts = transactions[transactions["action"] == "add"]["owner"].value_counts()
     if len(add_counts):
         add_fact("transactions", "Most Waiver/FA Adds (Career)", str(add_counts.iloc[0]), add_counts.index[0])
@@ -313,8 +353,9 @@ def main() -> None:
     trades = add_owner_column(pd.read_csv(trades_path), owner_lookup) if trades_path.exists() else None
 
     postseason_records = build_postseason_records(matchups, standings)
+    shotgun_records = build_shotgun_records(matchups)
 
-    owner_career = build_owner_career(standings, transactions, draft, postseason_records, trades)
+    owner_career = build_owner_career(standings, transactions, draft, postseason_records, shotgun_records, trades)
     owner_career.to_csv(PROCESSED_DIR / "owner_career.csv", index=False)
     print(f"wrote owner_career.csv ({len(owner_career)} owners)")
 
@@ -322,7 +363,7 @@ def main() -> None:
     head_to_head.to_csv(PROCESSED_DIR / "head_to_head.csv", index=False)
     print(f"wrote head_to_head.csv ({len(head_to_head)} pairs)")
 
-    trophy_case = build_trophy_case(standings, matchups, transactions, postseason_records, trades)
+    trophy_case = build_trophy_case(standings, matchups, transactions, postseason_records, shotgun_records, trades)
     trophy_case.to_csv(PROCESSED_DIR / "trophy_case.csv", index=False)
     print(f"wrote trophy_case.csv ({len(trophy_case)} facts)")
     print()
